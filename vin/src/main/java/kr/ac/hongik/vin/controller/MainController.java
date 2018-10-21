@@ -43,7 +43,7 @@ public class MainController {
 
 	@Autowired
 	WineService wineService;
-	
+
 	@Autowired
 	WineDao wineDao;
 
@@ -135,7 +135,12 @@ public class MainController {
 		out.close();
 	}
 
-	@GetMapping(path = "/wine") 
+	////////////////// 여기까지가 API 기능을 하는 logic을 처리하는 controller의 mapping 정보이고 아래부터는 웹
+	////////////////// 어플리케이션의 controller의 기능
+	// 그래서 위에는 dao를 직접 사용하고, 아래는 service를 호출하여 사용한다. 나중에 시간 될 때, controller를 분리하여
+	////////////////// 관리할 수 있도록 수정 필요.
+
+	@GetMapping(path = "/wineSearch")
 	public String list(@RequestParam(name = "start", required = false, defaultValue = "0") int start, ModelMap model) {
 		// start로 시작하는 방명록 목록 구하기
 		List<WineSearchList> list = wineService.getWineSearchList(start);
@@ -158,6 +163,13 @@ public class MainController {
 		model.addAttribute("list", list);
 		model.addAttribute("count", count);
 		model.addAttribute("pageStartList", pageStartList);
+		
+		
+		int i = 0;
+		while (i < list.size()) {
+			System.out.println(list.get(i));
+			i++;
+		}
 
 		return "wine/wineList"; // views 디렉토리 밑의 jsp 파일의 파일명, 여기선 main/webapp/WEB-INF/views/tab/notify.jsp가 열린다.
 	}
