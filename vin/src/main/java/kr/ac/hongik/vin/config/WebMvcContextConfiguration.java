@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages= {"kr.ac.hongik.vin.controller"})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	@Override
+	// Resource들을 handling하는 핸들러를 선언 및 세팅
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/").setCachePeriod(31556926);
         registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/").setCachePeriod(31556926);
@@ -24,7 +25,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     }
 	
     // default servlet handler를 사용하게 합니다.
-    @Override
+    @Override	// 아무런 핸들러가 정해지지 않았을 때, 사용하는 default servlet handler의 설정
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
