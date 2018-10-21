@@ -1,10 +1,6 @@
 package kr.ac.hongik.vin.wine.service.impl;
 
-import static kr.ac.hongik.vin.wine.dao.WineDaoSqls.SELECT_PAGING;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

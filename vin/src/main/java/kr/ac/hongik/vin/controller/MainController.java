@@ -93,11 +93,11 @@ public class MainController {
 		model.addAttribute("pageStartList", pageStartList);
 		
 		
-		int i = 0;
-		while (i < list.size()) {
-			System.out.println(list.get(i));	// 읽어온 WineSearchList 클래스를 출력해봄.
-			i++;
-		}
+//		int i = 0;
+//		while (i < list.size()) {
+//			System.out.println(list.get(i));	// 읽어온 WineSearchList 클래스를 출력해봄.
+//			i++;
+//		}
 
 		return "wine/wineList";
 	}

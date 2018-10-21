@@ -24,6 +24,6 @@
 		}
 	%>
 	<br>
-	<a href="wineSearch"><h3>와인 검색 화면으로</h3></a>
+	<h3><a href="wineSearch">와인 검색 화면으로</a></h3>
 </body>
 </html>
