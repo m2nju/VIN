@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.hongik.vin.wine.dto.Wine;
 import kr.ac.hongik.vin.wine.dto.WineCodeAndNames;
+import kr.ac.hongik.vin.wine.dto.WineSearchList;
 
 @Repository
 public class WineDao {
@@ -24,7 +25,8 @@ public class WineDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private SimpleJdbcInsert insertAction;
 	private RowMapper<Wine> rowMapper = BeanPropertyRowMapper.newInstance(Wine.class);
-	private RowMapper<WineCodeAndNames> rowMapper_WinecodeAndNames = BeanPropertyRowMapper.newInstance(WineCodeAndNames.class);
+	private RowMapper<WineCodeAndNames> rowMapper_WineCodeAndNames = BeanPropertyRowMapper.newInstance(WineCodeAndNames.class);
+	private RowMapper<WineSearchList> rowMapper_WineSearchList = BeanPropertyRowMapper.newInstance(WineSearchList.class);
 
 	public WineDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -44,6 +46,17 @@ public class WineDao {
 	
 	public List<WineCodeAndNames> selectWineCodeAndNames() {
 		Map<String, Integer> params = new HashMap<>();
-		return jdbc.query(SELECT_WINE_CODE_AND_NAMES, params, rowMapper_WinecodeAndNames);
+		return jdbc.query(SELECT_WINE_CODE_AND_NAMES, params, rowMapper_WineCodeAndNames);
+	}
+	
+	public List<WineSearchList> selectWinesSearchList(Integer start, Integer limit) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("start", start);
+		params.put("limit", limit);
+		return jdbc.query(SELECT_PAGING, params, rowMapper_WineSearchList);
+	}
+	
+	public int selectCount() {
+		return jdbc.queryForObject(SELECT_COUNT, Collections.emptyMap(), Integer.class);
 	}
 }

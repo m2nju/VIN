@@ -32,6 +32,8 @@ import kr.ac.hongik.vin.user.service.UserService;
 import kr.ac.hongik.vin.wine.dao.WineDao;
 import kr.ac.hongik.vin.wine.dto.Wine;
 import kr.ac.hongik.vin.wine.dto.WineCodeAndNames;
+import kr.ac.hongik.vin.wine.dto.WineSearchList;
+import kr.ac.hongik.vin.wine.service.WineService;
 
 @Controller
 public class MainController {
@@ -39,6 +41,9 @@ public class MainController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	WineService wineService;
+	
 	@Autowired
 	WineDao wineDao;
 
@@ -84,11 +89,10 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/wines")
-	public void wines(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	public void wines(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
-		
+
 		List<Wine> list = wineDao.selectAll();
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -98,13 +102,13 @@ public class MainController {
 		out.println(json);
 		out.close();
 	}
-	
+
 	@RequestMapping(value = "/wineCodeAndNames")
-	public void wineCodeAndNames(HttpServletRequest request, HttpServletResponse response) 
+	public void wineCodeAndNames(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
-		
+
 		List<WineCodeAndNames> list = wineDao.selectWineCodeAndNames();
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -114,13 +118,13 @@ public class MainController {
 		out.println(json);
 		out.close();
 	}
-	
+
 	@RequestMapping(value = "/getWineByCode")
-	public void getWineByCode(@RequestParam(name = "wine21Code", required = false, defaultValue = "0") int wine21Code, HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	public void getWineByCode(@RequestParam(name = "wine21Code", required = false, defaultValue = "0") int wine21Code,
+			HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
-		
+
 		Wine wine = wineDao.selectWine(wine21Code);
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -129,5 +133,32 @@ public class MainController {
 		PrintWriter out = response.getWriter();
 		out.println(json);
 		out.close();
+	}
+
+	@GetMapping(path = "/wine") 
+	public String list(@RequestParam(name = "start", required = false, defaultValue = "0") int start, ModelMap model) {
+		// start로 시작하는 방명록 목록 구하기
+		List<WineSearchList> list = wineService.getWineSearchList(start);
+
+// 전체 페이지수 구하기
+		int count = wineService.getCount();
+		int pageCount = count / WineService.LIMIT;
+		if (count % wineService.LIMIT > 0)
+			pageCount++;
+
+// 페이지 수만큼 start의 값을 리스트로 저장
+// 예를 들면 페이지수가 3이면
+// 0, 5, 10 이렇게 저장된다.
+// list?start=0 , list?start=5, list?start=10 으로 링크가 걸린다.
+		List<Integer> pageStartList = new ArrayList<>();
+		for (int i = 0; i < pageCount; i++) {
+			pageStartList.add(i * wineService.LIMIT);
+		}
+
+		model.addAttribute("list", list);
+		model.addAttribute("count", count);
+		model.addAttribute("pageStartList", pageStartList);
+
+		return "wine/wineList"; // views 디렉토리 밑의 jsp 파일의 파일명, 여기선 main/webapp/WEB-INF/views/tab/notify.jsp가 열린다.
 	}
 }
