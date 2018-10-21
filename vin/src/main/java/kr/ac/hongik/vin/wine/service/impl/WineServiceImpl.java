@@ -1,16 +1,13 @@
 package kr.ac.hongik.vin.wine.service.impl;
 
-import static kr.ac.hongik.vin.wine.dao.WineDaoSqls.SELECT_PAGING;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hongik.vin.wine.dao.WineDao;
+import kr.ac.hongik.vin.wine.dto.Wine;
 import kr.ac.hongik.vin.wine.dto.WineSearchList;
 import kr.ac.hongik.vin.wine.service.WineService;
 
@@ -29,5 +26,10 @@ public class WineServiceImpl implements WineService {
 	@Override
 	public int getCount() {
 		return wineDao.selectCount();
+	}
+	
+	@Override
+	public Wine getWine(Integer wine21Code) {
+		return wineDao.selectWine(wine21Code);
 	}
 }

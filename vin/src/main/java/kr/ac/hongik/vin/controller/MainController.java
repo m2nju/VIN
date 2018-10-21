@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.ac.hongik.vin.user.dto.User;
 import kr.ac.hongik.vin.user.service.UserService;
+import kr.ac.hongik.vin.wine.dto.Wine;
 import kr.ac.hongik.vin.wine.dto.WineSearchList;
 import kr.ac.hongik.vin.wine.service.WineService;
 
@@ -92,13 +93,15 @@ public class MainController {
 		model.addAttribute("count", count);
 		model.addAttribute("pageStartList", pageStartList);
 		
-		
-		int i = 0;
-		while (i < list.size()) {
-			System.out.println(list.get(i));	// 읽어온 WineSearchList 클래스를 출력해봄.
-			i++;
-		}
-
 		return "wine/wineList";
+	}
+	
+	@GetMapping(path = "/wineSearch/viewDetails") // 공지사항상세보기
+	public String viewWine(@RequestParam(name = "wine21Code", required = false, defaultValue = "0") Integer wine21Code, ModelMap model) {
+		Wine wine = wineService.getWine(wine21Code);
+		System.out.println(wine);
+		model.addAttribute("wine", wine);
+
+		return "wine/wineDetails";
 	}
 }
