@@ -20,12 +20,12 @@ import org.springframework.stereotype.Repository;
 import kr.ac.hongik.vin.user.dto.User;
 
 @Repository
-public class UserDao {
-	private NamedParameterJdbcTemplate jdbc;
+public class UserDao {	// UserDao는 데이터베이스에 연결해서 User에 관한 데이터를 access하는 class.
+	private NamedParameterJdbcTemplate jdbc;	
 	private SimpleJdbcInsert insertAction;
 	private RowMapper<User> rowMapper = BeanPropertyRowMapper.newInstance(User.class);
 
-	public UserDao(DataSource dataSource) {
+	public UserDao(DataSource dataSource) {	
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("user").usingGeneratedKeyColumns("user_id");
 	}

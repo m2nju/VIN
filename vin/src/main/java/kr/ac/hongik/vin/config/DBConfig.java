@@ -22,13 +22,14 @@ public class DBConfig implements TransactionManagementConfigurer {
 	private String password = "vinpassword";
 
 	@Bean
-	public DataSource dataSource() {
+	public DataSource dataSource() {	// DataSource의 생성자에 DB에 관한 정보들을 초기화 하는 코드를 넣음.
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(driverClassName);
 		dataSource.setUrl(url);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
 		
+		// 아래는 Connection pool을 통한 DB연결 시간을 단축하기 위한 코드들.
 		// 초기에 생성되는 커넥션의 개수 설정
 		dataSource.setInitialSize(5);
 
