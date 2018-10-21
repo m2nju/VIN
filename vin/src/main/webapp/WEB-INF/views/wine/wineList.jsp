@@ -14,6 +14,7 @@
 			style="text-align: center; border: 1px solid #dddddd;">
 			<thead>
 				<tr>
+					<th style="background-color: #eeeeee; text-align: center;">와인코드</th>
 					<th style="background-color: #eeeeee; text-align: center;">한글이름</th>
 					<th style="background-color: #eeeeee; text-align: center;">영어이름</th>
 					<th style="background-color: #eeeeee; text-align: center;">와이너리</th>
@@ -28,6 +29,7 @@
 			<tbody>
 				<c:forEach items="${list}" var="wine">
 					<tr>
+						<td>${wine.wine21Code }</td>
 						<td>${wine.koreanName }</td>
 						<td>${wine.englishName }</td>
 						<td>${wine.winary }</td>
