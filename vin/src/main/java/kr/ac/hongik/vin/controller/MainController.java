@@ -113,10 +113,10 @@ public class MainController {
 		
 		int i = 0;
 		while (i < list.size()) {
-			System.out.println(list.get(i));
+			System.out.println(list.get(i));	// 읽어온 WineSearchList 클래스를 출력해봄.
 			i++;
 		}
 
-		return "wine/wineList"; // views 디렉토리 밑의 jsp 파일의 파일명, 여기선 main/webapp/WEB-INF/views/tab/notify.jsp가 열린다.
+		return "wine/wineList";
 	}
 }

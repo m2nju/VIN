@@ -24,7 +24,7 @@ public class ApiController {
 	WineDao wineDao;
 	
 	
-	@RequestMapping(value = "/wines")
+	@RequestMapping(value = "/wines")	// 전체 와인의 전체 데이터를 json형태로 제공하는 api의 기능을 하는 컨트롤러
 	public void wines(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -39,7 +39,7 @@ public class ApiController {
 		out.close();
 	}
 
-	@RequestMapping(value = "/wineCodeAndNames")
+	@RequestMapping(value = "/wineCodeAndNames")	// 검색을 위해, 코드, 한글이름명, 와인이름명의 쌍을 json의 형태로 제공하는 api
 	public void wineCodeAndNames(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
@@ -55,7 +55,7 @@ public class ApiController {
 		out.close();
 	}
 
-	@RequestMapping(value = "/getWineByCode")
+	@RequestMapping(value = "/getWineByCode")		// 특정 와인의 전체 정보를 json의 형태로 제공하는 api
 	public void getWineByCode(@RequestParam(name = "wine21Code", required = false, defaultValue = "0") int wine21Code,
 			HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
