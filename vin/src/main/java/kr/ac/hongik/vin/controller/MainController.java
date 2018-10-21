@@ -1,19 +1,9 @@
 package kr.ac.hongik.vin.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import kr.ac.hongik.vin.user.dto.User;
 import kr.ac.hongik.vin.user.service.UserService;
-import kr.ac.hongik.vin.wine.dao.WineDao;
-import kr.ac.hongik.vin.wine.dto.Wine;
-import kr.ac.hongik.vin.wine.dto.WineCodeAndNames;
 import kr.ac.hongik.vin.wine.dto.WineSearchList;
 import kr.ac.hongik.vin.wine.service.WineService;
 
@@ -44,8 +28,22 @@ public class MainController {
 	@Autowired
 	WineService wineService;
 
+	@RequestMapping(value = "/naverLogin")	// 네이버 로그인
+	public String naverLogin(HttpSession session) {
+		return "naver/naverlogin";
+	}
 
-	@RequestMapping(path = "/registUser")
+	@RequestMapping(value = "/callBack")	// 콜백
+	public String callBack(HttpServletRequest request) throws Exception {
+		return "naver/callback";
+	}
+
+	@RequestMapping(value = "/userInfo")	// 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
+	public String userInformation(HttpServletRequest request) throws Exception {
+		return "naver/userinfo";
+	}
+
+	@RequestMapping(path = "/registUser")	// 요청받은 정보를 User 객체에 담아 DB에 저장
 	public String write(@ModelAttribute User user, HttpServletRequest request) {
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
@@ -53,24 +51,8 @@ public class MainController {
 
 		return "redirect:/"; // 해당 path로 리다이렉트 한다.
 	}
-
-	@RequestMapping(value = "/naverLogin")
-	public String naverLogin(HttpSession session) {
-		return "naver/naverlogin";
-	}
-
-	@RequestMapping(value = "/callBack")
-	public String callBack(HttpServletRequest request) throws Exception {
-		// System.out.println("Controller에서 callBack 호출");
-		return "naver/callback";
-	}
-
-	@RequestMapping(value = "/userInfo")
-	public String userInformation(HttpServletRequest request) throws Exception {
-		return "naver/userinfo";
-	}
-
-	@RequestMapping(value = "/logout")
+	
+	@RequestMapping(value = "/logout")		// 로그아웃
 	public String logout(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 
@@ -86,9 +68,9 @@ public class MainController {
 		return "naver/logout";
 	}
 
-	@GetMapping(path = "/wineSearch")
+	@GetMapping(path = "/wineSearch")	// 와인 검색
 	public String list(@RequestParam(name = "start", required = false, defaultValue = "0") int start, ModelMap model) {
-		// start로 시작하는 방명록 목록 구하기
+		// start로 시작하는 와인 목록 구하기
 		List<WineSearchList> list = wineService.getWineSearchList(start);
 
 		// 전체 페이지수 구하기
