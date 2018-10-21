@@ -37,8 +37,10 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Bean	// 기본 경로는 src/main/webapp/WEB-INF/views 디렉토리이다.
     public InternalResourceViewResolver getInternalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
+        //resolver.setPrefix("/WEB-INF/views/");
+        //resolver.setSuffix(".jsp");
+        resolver.setPrefix("frontend/");
+        resolver.setSuffix(".html");
         return resolver;
     } 
 }
