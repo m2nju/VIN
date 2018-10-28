@@ -18,10 +18,10 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	// Resource들을 handling하는 핸들러를 선언 및 세팅
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/").setCachePeriod(31556926);
-        registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/").setCachePeriod(31556926);
-        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/").setCachePeriod(31556926);
-        registry.addResourceHandler("/txt/**").addResourceLocations("/resources/txt/").setCachePeriod(31556926);
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/static/static/css/").setCachePeriod(31556926);
+        registry.addResourceHandler("/img/**").addResourceLocations("/resources/static/static/img/").setCachePeriod(31556926);
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/static/static/js/").setCachePeriod(31556926);
+        registry.addResourceHandler("/txt/**").addResourceLocations("/resources/static/static/txt/").setCachePeriod(31556926);
     }
 	
     // default servlet handler를 사용하게 합니다.
@@ -38,8 +38,8 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Bean	// 기본 경로는 src/main/webapp/WEB-INF/views 디렉토리이다.
     public InternalResourceViewResolver getInternalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
+        resolver.setPrefix("/resources/static/");
+        resolver.setSuffix(".html");
         return resolver;
     } 
 }
