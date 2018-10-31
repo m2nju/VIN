@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -69,7 +70,7 @@ public class MainController {
 		return "naver/logout";
 	}
 
-	@GetMapping(path = "/wineSearch")	// 와인 검색
+	@GetMapping(path = "/wine/search")	// 와인 검색
 	public String list(@RequestParam(name = "start", required = false, defaultValue = "0") int start, ModelMap model) {
 		// start로 시작하는 와인 목록 구하기
 		List<WineSearchList> list = wineService.getWineSearchList(start);
@@ -96,8 +97,8 @@ public class MainController {
 		return "wine/wineList";
 	}
 	
-	@GetMapping(path = "/wineSearch/viewDetails") // 공지사항상세보기
-	public String viewWine(@RequestParam(name = "wine21Code", required = false, defaultValue = "0") Integer wine21Code, ModelMap model) {
+	@GetMapping(path = "/wine/details/{wine21Code}") // 와인 정보 상세보기
+	public String viewWine(@PathVariable("wine21Code") int wine21Code, ModelMap model) {
 		Wine wine = wineService.getWine(wine21Code);
 		System.out.println(wine);
 		model.addAttribute("wine", wine);

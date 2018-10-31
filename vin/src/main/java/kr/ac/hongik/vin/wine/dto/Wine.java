@@ -22,6 +22,7 @@ public class Wine {
 	private String importer;
 	private String type;
 	private String makerNote;
+	private int price;
 	
 	
 	public String getWine21Code() {
@@ -150,7 +151,12 @@ public class Wine {
 	public void setMakerNote(String makerNote) {
 		this.makerNote = makerNote;
 	}
-	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	@Override
 	public String toString() {
 		return "Wine [wine21Code=" + wine21Code + ", koreanName=" + koreanName + ", englishName=" + englishName
@@ -159,7 +165,35 @@ public class Wine {
 				+ drinkingTemperature + ", sweetness=" + sweetness + ", acidity=" + acidity + ", body=" + body
 				+ ", tanin=" + tanin + ", pairing=" + pairing + ", otherInformation=" + otherInformation + ", vintage="
 				+ vintage + ", capacity=" + capacity + ", importer=" + importer + ", type=" + type + ", makerNote="
-				+ makerNote + "]";
+				+ makerNote + ", price=" + price + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + acidity;
+		result = prime * result + alcohol;
+		result = prime * result + body;
+		result = prime * result + capacity;
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((drinkingTemperature == null) ? 0 : drinkingTemperature.hashCode());
+		result = prime * result + ((englishName == null) ? 0 : englishName.hashCode());
+		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
+		result = prime * result + ((grapeVariety == null) ? 0 : grapeVariety.hashCode());
+		result = prime * result + ((importer == null) ? 0 : importer.hashCode());
+		result = prime * result + ((koreanName == null) ? 0 : koreanName.hashCode());
+		result = prime * result + ((makerNote == null) ? 0 : makerNote.hashCode());
+		result = prime * result + ((otherInformation == null) ? 0 : otherInformation.hashCode());
+		result = prime * result + ((pairing == null) ? 0 : pairing.hashCode());
+		result = prime * result + price;
+		result = prime * result + ((region == null) ? 0 : region.hashCode());
+		result = prime * result + sweetness;
+		result = prime * result + tanin;
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((vintage == null) ? 0 : vintage.hashCode());
+		result = prime * result + ((winary == null) ? 0 : winary.hashCode());
+		result = prime * result + ((wine21Code == null) ? 0 : wine21Code.hashCode());
+		return result;
 	}
 	
 	@Override
@@ -229,6 +263,8 @@ public class Wine {
 				return false;
 		} else if (!pairing.equals(other.pairing))
 			return false;
+		if (price != other.price)
+			return false;
 		if (region == null) {
 			if (other.region != null)
 				return false;
@@ -260,6 +296,7 @@ public class Wine {
 			return false;
 		return true;
 	}
+	
 
 
 	

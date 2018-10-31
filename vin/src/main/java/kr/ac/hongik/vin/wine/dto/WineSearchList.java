@@ -11,6 +11,7 @@ public class WineSearchList {
 	private String vintage;
 	private int capacity;
 	private String type;
+	private int price;
 	
 	public String getWine21Code() {
 		return wine21Code;
@@ -72,11 +73,18 @@ public class WineSearchList {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	@Override
 	public String toString() {
 		return "WineSearchList [wine21Code=" + wine21Code + ", koreanName=" + koreanName + ", englishName="
 				+ englishName + ", winary=" + winary + ", country=" + country + ", region=" + region + ", grapeVariety="
-				+ grapeVariety + ", vintage=" + vintage + ", capacity=" + capacity + ", type=" + type + "]";
+				+ grapeVariety + ", vintage=" + vintage + ", capacity=" + capacity + ", type=" + type + ", price="
+				+ price + "]";
 	}
 	
 	

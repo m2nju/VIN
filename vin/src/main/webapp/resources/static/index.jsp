@@ -3,7 +3,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>frontend2</title>
+<title>frontend3</title>
 <link href=css/app.032ab04a0a9486c313d9884150bee592.css
 	rel=stylesheet>
 </head>

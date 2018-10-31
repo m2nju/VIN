@@ -39,7 +39,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver getInternalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/resources/static/");
-        resolver.setSuffix(".html");
+        resolver.setSuffix(".jsp");
         return resolver;
     } 
 }
