@@ -10,6 +10,10 @@
 <body>
 	<br>
 	<div>
+		<input type="text" placeholder="검색어 입력">
+		<button>검색</button>
+	</div>
+	<div>
 		<table class="table table-striped"
 			style="text-align: center; border: 1px solid #dddddd;">
 			<thead>
@@ -29,9 +33,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				
 				<c:forEach items="${list}" var="wine">
-					
 					<tr>
 						<td>${wine.wine21Code }</td>
 						<td><img src ="https://s3.ap-northeast-2.amazonaws.com/vin-image/${wine.wine21Code}.jpg" width="175"></td>
