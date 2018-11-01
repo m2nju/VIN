@@ -48,9 +48,7 @@
 						<td>${wine.type }</td>
 						<td>${wine.price }</td>
 					</tr>
-					
 				</c:forEach>
-				
 			</tbody>
 		</table>
 		<c:forEach items="${pageStartList}" var="pageIndex" varStatus="status">
