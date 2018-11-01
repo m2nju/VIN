@@ -94,6 +94,7 @@ public class MainController {
 		model.addAttribute("count", count);
 		model.addAttribute("pageStartList", pageStartList);
 		
+		System.out.println("wineList");
 		return "wine/wineList";
 	}
 	
