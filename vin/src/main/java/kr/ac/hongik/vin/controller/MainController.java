@@ -30,22 +30,22 @@ public class MainController {
 	@Autowired
 	WineService wineService;
 
-	@RequestMapping(value = "/naverLogin")	// 네이버 로그인
+	@RequestMapping(value = "/naverLogin") // 네이버 로그인
 	public String naverLogin(HttpSession session) {
 		return "naver/naverlogin";
 	}
 
-	@RequestMapping(value = "/callBack")	// 콜백
+	@RequestMapping(value = "/callBack") // 콜백
 	public String callBack(HttpServletRequest request) throws Exception {
 		return "naver/callback";
 	}
 
-	@RequestMapping(value = "/userInfo")	// 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
+	@RequestMapping(value = "/userInfo") // 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
 	public String userInformation(HttpServletRequest request) throws Exception {
 		return "naver/userinfo";
 	}
 
-	@RequestMapping(path = "/registUser")	// 요청받은 정보를 User 객체에 담아 DB에 저장
+	@RequestMapping(path = "/registUser") // 요청받은 정보를 User 객체에 담아 DB에 저장
 	public String write(@ModelAttribute User user, HttpServletRequest request) {
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
@@ -53,8 +53,8 @@ public class MainController {
 
 		return "redirect:/"; // 해당 path로 리다이렉트 한다.
 	}
-	
-	@RequestMapping(value = "/logout")		// 로그아웃
+
+	@RequestMapping(value = "/logout") // 로그아웃
 	public String logout(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 
@@ -70,34 +70,47 @@ public class MainController {
 		return "naver/logout";
 	}
 
-	@GetMapping(path = "/wine/search")	// 와인 검색
-	public String list(@RequestParam(name = "start", required = false, defaultValue = "0") int start, ModelMap model) {
-		// start로 시작하는 와인 목록 구하기
-		List<WineSearchList> list = wineService.getWineSearchList(start);
-
+	@GetMapping(path = "/wine/search") // 와인 검색
+	public String list(@RequestParam(name = "page", required = false, defaultValue = "1") int page, ModelMap model) {
 		// 전체 페이지수 구하기
-		int count = wineService.getCount();
-		int pageCount = count / WineService.LIMIT;
-		if (count % wineService.LIMIT > 0)
-			pageCount++;
+		int count = wineService.getCount(); // 와인 전체 데이터의 수
+		int pageCount = count / wineService.LIMIT; // 와인 데이터를 LIMIT(15)갯수 만큼 보여줬을 때의 페이지 수 ( 실제 페이지 수보다 1만큼 작게 나옴, 페이지
+													// 수는 1부터 시작하기 때문에 )
+		if (count >= wineService.LIMIT) // 페이지가 2개 이상 생성 된다면
+			pageCount += 1;
 
-		// 페이지 수만큼 start의 값을 리스트로 저장
-		// 예를 들어 LIMIT가 15, 페이지수가 3이면
-		// 0, 15, 30 이렇게 저장된다.
-		// wineSearch?start=0 , wineSearch?start=5, wineSearch?start=10 으로 링크가 걸린다.
-		List<Integer> pageStartList = new ArrayList<>();
-		for (int i = 0; i < pageCount; i++) {
-			pageStartList.add(i * wineService.LIMIT);
+		if (page < 1) {
+			page = 1;
+		} else if (page > pageCount) {
+			page = pageCount;
 		}
 
+		// start로 시작하는 와인 목록 구하기
+		int start = (page - 1) * wineService.LIMIT;
+		// System.out.println("start : " + start);
+		List<WineSearchList> list = wineService.getWineSearchList(start);
+
+		int startPage = 1;
+		int endPage = 9;
+		if (page >= 5) {
+			startPage = page - 4;
+			endPage = page + 4;
+		}
+
+		if (page > pageCount - 4) {
+			startPage = pageCount - 8;
+			endPage = pageCount;
+		}
+
+		model.addAttribute("page", page);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 		model.addAttribute("list", list);
-		model.addAttribute("count", count);
-		model.addAttribute("pageStartList", pageStartList);
-		
-		System.out.println("wineList");
+		model.addAttribute("pageCount", pageCount);
+
 		return "wine/wineList";
 	}
-	
+
 	@GetMapping(path = "/wine/details/{wine21Code}") // 와인 정보 상세보기
 	public String viewWine(@PathVariable("wine21Code") int wine21Code, ModelMap model) {
 		Wine wine = wineService.getWine(wine21Code);

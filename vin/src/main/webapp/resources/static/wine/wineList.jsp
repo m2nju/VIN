@@ -51,9 +51,16 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<c:forEach items="${pageStartList}" var="pageIndex" varStatus="status">
-			<a href="search?start=${pageIndex}">${status.index +1 }</a>&nbsp;&nbsp; 
+		<%-- <c:forEach var="i" begin="${page/ 10}" end="${(page / 10) + 9} " step="1"> --%>
+		<c:if test="${page >= 5}">
+			<a href="search?page=${page - 10}"> &lt; </a>&nbsp;&nbsp;
+		</c:if>
+		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+			<a href="search?page=${i}">${i}</a>&nbsp;&nbsp;
 		</c:forEach>
+		<c:if test="${page <= pageCount - 4}">
+			<a href="search?page=${page + 10}"> &gt; </a>&nbsp;&nbsp;
+		</c:if>
 
 	</div>
 </body>
