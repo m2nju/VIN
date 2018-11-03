@@ -72,6 +72,8 @@ public class MainController {
 
 	@GetMapping(path = "/wine/search") // 와인 검색
 	public String list(@RequestParam(name = "page", required = false, defaultValue = "1") int page, ModelMap model) {
+		
+				
 		// 전체 페이지수 구하기
 		int count = wineService.getCount(); // 와인 전체 데이터의 수
 		int pageCount = count / wineService.LIMIT; // 와인 데이터를 LIMIT(15)갯수 만큼 보여줬을 때의 페이지 수 ( 실제 페이지 수보다 1만큼 작게 나옴, 페이지
@@ -80,15 +82,15 @@ public class MainController {
 			pageCount += 1;
 
 		if (page < 1) {
-			page = 1;
+			page = 1;	// page가 1 보다 작다면 1page를 보고 있는 것으로 간주
 		} else if (page > pageCount) {
 			page = pageCount;
-		}
+		}	//	page가 전체 page를 넘어간 경우에는 끝 page를 보고 있는 것으로 간주
 
-		// start로 시작하는 와인 목록 구하기
+		// page에 해당하는 와인들 목록 구하기
 		int start = (page - 1) * wineService.LIMIT;
-		// System.out.println("start : " + start);
 		List<WineSearchList> list = wineService.getWineSearchList(start);
+		int resultCount = list.size();
 
 		int startPage = 1;
 		int endPage = 9;
