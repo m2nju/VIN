@@ -86,16 +86,23 @@ public class ApiController {
 			@RequestParam(name = "countries", required = false, defaultValue = "") List<String> countries,
 			@RequestParam(name = "alcohol", required = false, defaultValue = "") List<Integer> alcohol,	// 이 것부터  아래의 파라미터는 최소값, 최대값 10도 이상 15도 이하면 [10, 15]
 			@RequestParam(name = "sweetness", required = false, defaultValue = "") List<Integer> sweetness,		// 4 이하면 [0,4]
-			@RequestParam(name = "acidity", required = false, defaultValue = "") List<Integer> acidity	,		// 2 이상이면 [2]
+			@RequestParam(name = "acidity", required = false, defaultValue = "") List<Integer> acidity,			// 2 이상이면 [2]
 			@RequestParam(name = "body", required = false, defaultValue = "") List<Integer> body,	
 			@RequestParam(name = "tanin", required = false, defaultValue = "") List<Integer> tanin,
 			@RequestParam(name = "price", required = false, defaultValue = "") List<Integer> price,
 			ModelMap model) {
-		
 				
 	
-		System.out.println("types : " + types + ", typelength : " + types.size());
+		System.out.println("types : " + types + ", typeslength : " + types.size());
+		System.out.println("countries : " + countries + ", countrieslength : " + countries.size());
+		System.out.println("alcohol : " + alcohol + ", alcohollength : " + alcohol.size());
+		System.out.println("sweetness : " + sweetness + ", sweetnesslength : " + sweetness.size());
+		System.out.println("acidity : " + acidity + ", aciditylength : " + acidity.size());
+		System.out.println("body : " + body + ", bodylength : " + body.size());
+		System.out.println("tanin : " + tanin + ", taninlength : " + tanin.size());
 		System.out.println("price : " + price + ", pricelength : " + price.size());
+		
+		
 		// 전체 페이지수 구하기
 		int count = wineService.getCount(); // 와인 전체 데이터의 수
 		int pageCount = count / wineService.LIMIT; // 와인 데이터를 LIMIT(15)갯수 만큼 보여줬을 때의 페이지 수 ( 실제 페이지 수보다 1만큼 작게 나옴, 페이지
@@ -111,7 +118,7 @@ public class ApiController {
 
 		// page에 해당하는 와인들 목록 구하기
 		int start = (page - 1) * wineService.LIMIT;
-		List<WineSearchList> list = wineService.getWineSearchList(start);
+		List<WineSearchList> list = wineService.getWineSearchListByCondition(start, types, countries, alcohol, sweetness, acidity, body, tanin, price);
 		int resultCount = list.size();
 
 		int startPage = 1;
@@ -128,6 +135,16 @@ public class ApiController {
 		}
 
 		model.addAttribute("page", page);
+		
+		model.addAttribute("page", types);
+		model.addAttribute("page", countries);
+		model.addAttribute("page", alcohol);
+		model.addAttribute("page", sweetness);
+		model.addAttribute("page", acidity);
+		model.addAttribute("page", body);
+		model.addAttribute("page", tanin);
+		model.addAttribute("page", price);
+		
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("list", list);

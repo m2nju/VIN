@@ -27,7 +27,7 @@ public class WineDao {
 	private RowMapper<Wine> rowMapper = BeanPropertyRowMapper.newInstance(Wine.class);
 	private RowMapper<WineCodeAndNames> rowMapper_WineCodeAndNames = BeanPropertyRowMapper.newInstance(WineCodeAndNames.class);
 	private RowMapper<WineSearchList> rowMapper_WineSearchList = BeanPropertyRowMapper.newInstance(WineSearchList.class);
-
+	
 	public WineDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("notify").usingGeneratedKeyColumns("id");
@@ -58,5 +58,59 @@ public class WineDao {
 	
 	public int selectCount() {
 		return jdbc.queryForObject(SELECT_COUNT, Collections.emptyMap(), Integer.class);
+	}
+	
+	public List<WineSearchList> selectWinesSearchListByConditions(Integer start, Integer limit,
+			List<String> types,
+			List<String> countries,
+			List<Integer> alcohol,
+			List<Integer> sweetness,
+			List<Integer> acidity,
+			List<Integer> body,
+			List<Integer> tanin,
+			List<Integer> price)
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(SELECT_CONDITION);	// 기본 조건
+		
+		if(types.size() != 0) {	// type에 관한 쿼리 추가
+			stringBuilder.append(SPACE);
+			stringBuilder.append(WHERE);
+			stringBuilder.append(SPACE);
+			stringBuilder.append("type IN (");
+			for (int i = 0; i < types.size(); i++) {
+				stringBuilder.append("'");
+				if(types.get(i).equals("red")) {
+					System.out.println("레드입니다.");
+					stringBuilder.append("레드");
+				}else if(types.get(i).equals("white")) {
+					System.out.println("화이트입니다.");
+					stringBuilder.append("화이트");
+				}else if(types.get(i).equals("sparkling")) {
+					System.out.println("스파클링입니다.");
+					stringBuilder.append("스파클링");
+				}else if(types.get(i).equals("rose")) {
+					System.out.println("로제입니다.");
+					stringBuilder.append("로제");
+				}else if(types.get(i).equals("etc")) {
+					System.out.println("기타입니다.");
+					stringBuilder.append("기타");
+				}
+				stringBuilder.append("'");
+				stringBuilder.append(",");
+			}
+			stringBuilder.setLength(stringBuilder.length() - 1);
+			stringBuilder.append(")");
+		}	// 여기까지 type에 관한 쿼리 추가.
+		
+		
+		stringBuilder.append(SPACE);
+		stringBuilder.append(ORDER_BY_COUNT);
+		String queryStatement = stringBuilder.toString();
+		Map<String, Integer> params = new HashMap<>();
+		params.put("start", start);
+		params.put("limit", limit);
+		System.out.println(queryStatement);
+		return jdbc.query(queryStatement, params, rowMapper_WineSearchList);
 	}
 }

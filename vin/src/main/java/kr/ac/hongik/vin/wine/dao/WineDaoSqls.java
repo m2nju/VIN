@@ -10,6 +10,8 @@ public class WineDaoSqls {
 	public static final String SELECT_CONDITION = "SELECT wine21_code, korean_name, english_name, country, region, winary, grape_variety, vintage, capacity, type, price FROM wine";	// 여기 뒤에 WHERE 와 함꼐 조건들을 붙여보자.
 	public static final String AND = "AND";
 	public static final String OR = "OR";
+	public static final String WHERE = "WHERE";
+	public static final String SPACE = " ";
 	public static final String TYPE_CONDITION = "type IN :type_list";
 	public static final String COUNTRY_CONDITION = "country IN :country_list";
 	public static final String TASTE_CONDITION = "taste IN :taste_list";
