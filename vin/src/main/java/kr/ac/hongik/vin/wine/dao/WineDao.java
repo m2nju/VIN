@@ -94,7 +94,8 @@ public class WineDao {
 					stringBuilder.append("로제");
 				}else if(types.get(i).equals("etc")) {
 					System.out.println("기타입니다.");
-					stringBuilder.append("기타");
+					
+					stringBuilder.append("고도주','주정강화','기타");
 				}
 				stringBuilder.append("'");
 				stringBuilder.append(",");

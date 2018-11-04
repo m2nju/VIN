@@ -81,7 +81,7 @@ public class ApiController {
 	}
 	
 	@GetMapping(path = "/api/wine/search") // 와인 검색
-	public String list(@RequestParam(name = "page", required = false, defaultValue = "1") int page, 
+	public void list(@RequestParam(name = "page", required = false, defaultValue = "1") int page, 
 			@RequestParam(name = "types", required = false, defaultValue = "") List<String> types,
 			@RequestParam(name = "countries", required = false, defaultValue = "") List<String> countries,
 			@RequestParam(name = "alcohol", required = false, defaultValue = "") List<Integer> alcohol,	// 이 것부터  아래의 파라미터는 최소값, 최대값 10도 이상 15도 이하면 [10, 15]
@@ -90,8 +90,10 @@ public class ApiController {
 			@RequestParam(name = "body", required = false, defaultValue = "") List<Integer> body,	
 			@RequestParam(name = "tanin", required = false, defaultValue = "") List<Integer> tanin,
 			@RequestParam(name = "price", required = false, defaultValue = "") List<Integer> price,
-			ModelMap model) {
-				
+			ModelMap model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
 	
 		System.out.println("types : " + types + ", typeslength : " + types.size());
 		System.out.println("countries : " + countries + ", countrieslength : " + countries.size());
@@ -119,38 +121,45 @@ public class ApiController {
 		// page에 해당하는 와인들 목록 구하기
 		int start = (page - 1) * wineService.LIMIT;
 		List<WineSearchList> list = wineService.getWineSearchListByCondition(start, types, countries, alcohol, sweetness, acidity, body, tanin, price);
-		int resultCount = list.size();
 
-		int startPage = 1;
-		
-		int endPage = 9;
-		if (page >= 5) {
-			startPage = page - 4;
-			endPage = page + 4;
-		}
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(list);
 
-		if (page > pageCount - 4) {
-			startPage = pageCount - 8;
-			endPage = pageCount;
-		}
-
-		model.addAttribute("page", page);
-		
-		model.addAttribute("page", types);
-		model.addAttribute("page", countries);
-		model.addAttribute("page", alcohol);
-		model.addAttribute("page", sweetness);
-		model.addAttribute("page", acidity);
-		model.addAttribute("page", body);
-		model.addAttribute("page", tanin);
-		model.addAttribute("page", price);
-		
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("list", list);
-		model.addAttribute("pageCount", pageCount);
-
-		return "wine/wineList";
+		PrintWriter out = response.getWriter();
+		out.println(json);
+		out.close();
+//		int resultCount = list.size();
+//
+//		int startPage = 1;
+//		
+//		int endPage = 9;
+//		if (page >= 5) {
+//			startPage = page - 4;
+//			endPage = page + 4;
+//		}
+//
+//		if (page > pageCount - 4) {
+//			startPage = pageCount - 8;
+//			endPage = pageCount;
+//		}
+//
+//		model.addAttribute("page", page);
+//		
+//		model.addAttribute("page", types);
+//		model.addAttribute("page", countries);
+//		model.addAttribute("page", alcohol);
+//		model.addAttribute("page", sweetness);
+//		model.addAttribute("page", acidity);
+//		model.addAttribute("page", body);
+//		model.addAttribute("page", tanin);
+//		model.addAttribute("page", price);
+//		
+//		model.addAttribute("startPage", startPage);
+//		model.addAttribute("endPage", endPage);
+//		model.addAttribute("list", list);
+//		model.addAttribute("pageCount", pageCount);
+//		
+//		return "wine/wineList";
 	}
 	
 	
