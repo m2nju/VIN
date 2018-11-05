@@ -65,7 +65,7 @@ public class WineDao {
 	public List<WineSearchList> selectWinesSearchListByConditions(Integer start, Integer limit, List<String> types,
 			List<String> countries, List<Integer> alcohol, List<Integer> sweetness, List<Integer> acidity,
 			List<Integer> body, List<Integer> tanin, List<Integer> price) {
-		boolean isAdded = false;	// 쿼리 조건이 추가되었는지 체크하는 불리언형 변수
+		boolean isAdded = false; // 쿼리 조건이 추가되었는지 체크하는 불리언형 변수
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(SELECT_CONDITION); // 기본 조건
 
@@ -109,10 +109,76 @@ public class WineDao {
 			System.out.println(e);
 		}
 
-		
+		try { // countries에 관한 쿼리 추가
+			if (!countries.isEmpty()) {
+				if (isAdded) {
+					stringBuilder.append(AND);
+					stringBuilder.append(SPACE);
+				}
+				isAdded = true;
+				stringBuilder.append("country IN (");
+				for (int i = 0; i < countries.size(); i++) {
+					stringBuilder.append("'");
+					if (countries.get(i).equals("ZA")) {
+						System.out.println("남아프리카 공화국입니다.");
+						stringBuilder.append("남아프리카(South Africa)");
+					} else if (countries.get(i).equals("NZ")) {
+						System.out.println("뉴질랜드입니다.");
+						stringBuilder.append("뉴질랜드(New Zealand)");
+					} else if (countries.get(i).equals("DE")) {
+						System.out.println("독일입니다.");
+						stringBuilder.append("독일(Germany)");
+					} else if (countries.get(i).equals("US")) {
+						System.out.println("미국입니다.");
+						stringBuilder.append("미국(U.S.A)");
+					} else if (countries.get(i).equals("ES")) {
+						System.out.println("스페인입니다.");
+						stringBuilder.append("스페인(Spain)");
+					} else if (countries.get(i).equals("AR")) {
+						System.out.println("아르헨티나입니다.");
+						stringBuilder.append("아르헨티나(Argentina)");
+					} else if (countries.get(i).equals("AT")) {
+						System.out.println("오스트리아입니다.");
+						stringBuilder.append("오스트리아(Austria)");
+					} else if (countries.get(i).equals("IT")) {
+						System.out.println("이탈리아입니다.");
+						stringBuilder.append("이탈리아(Italia)");
+					} else if (countries.get(i).equals("JP")) {
+						System.out.println("일본입니다.");
+						stringBuilder.append("일본(Japan)");
+					} else if (countries.get(i).equals("CL")) {
+						System.out.println("칠레입니다.");
+						stringBuilder.append("칠레(Chile)");
+					} else if (countries.get(i).equals("CA")) {
+						System.out.println("캐나다입니다.");
+						stringBuilder.append("캐나다(Canada)");
+					} else if (countries.get(i).equals("PT")) {
+						System.out.println("포르투갈입니다.");
+						stringBuilder.append("포르투갈(Portugal)");
+					} else if (countries.get(i).equals("FR")) {
+						System.out.println("프랑스입니다.");
+						stringBuilder.append("프랑스(France)");
+					} else if (countries.get(i).equals("HU")) {
+						System.out.println("헝가리입니다.");
+						stringBuilder.append("헝가리(Hungary)");
+					} else if (countries.get(i).equals("AU")) {
+						System.out.println("호주입니다.");
+						stringBuilder.append("호주(Australia)");
+					}
+					stringBuilder.append("'");
+					stringBuilder.append(",");
+				}
+				stringBuilder.setLength(stringBuilder.length() - 1);
+				stringBuilder.append(")");
+				stringBuilder.append(SPACE);
+			} // 여기까지 countries에 관한 쿼리 추가.
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 		try { // alcohol에 관한 쿼리 추가
 			if (!alcohol.isEmpty()) {
-				if(isAdded) {
+				if (isAdded) {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
@@ -130,7 +196,7 @@ public class WineDao {
 		}
 		try { // sweetness에 관한 쿼리 추가
 			if (!sweetness.isEmpty()) {
-				if(isAdded) {
+				if (isAdded) {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
@@ -148,7 +214,7 @@ public class WineDao {
 		}
 		try { // acidity에 관한 쿼리 추가
 			if (!acidity.isEmpty()) {
-				if(isAdded) {
+				if (isAdded) {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
@@ -164,10 +230,10 @@ public class WineDao {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
 		try { // body에 관한 쿼리 추가
 			if (!body.isEmpty()) {
-				if(isAdded) {
+				if (isAdded) {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
@@ -185,7 +251,7 @@ public class WineDao {
 		}
 		try { // tanin에 관한 쿼리 추가
 			if (!tanin.isEmpty()) {
-				if(isAdded) {
+				if (isAdded) {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
@@ -201,10 +267,10 @@ public class WineDao {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
 		try { // price에 관한 쿼리 추가
 			if (!price.isEmpty()) {
-				if(isAdded) {
+				if (isAdded) {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
