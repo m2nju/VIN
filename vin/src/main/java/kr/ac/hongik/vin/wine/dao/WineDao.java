@@ -109,6 +109,99 @@ public class WineDao {
 			System.out.println(e);
 		}
 
+		
+		try { // alcohol에 관한 쿼리 추가
+			if (!alcohol.isEmpty()) {
+				if(isAdded) {
+					stringBuilder.append(AND);
+					stringBuilder.append(SPACE);
+				}
+				stringBuilder.append("alcohol >= ");
+				stringBuilder.append(alcohol.get(0));
+				stringBuilder.append(SPACE);
+				stringBuilder.append(AND);
+				stringBuilder.append(SPACE);
+				stringBuilder.append("alcohol <= ");
+				stringBuilder.append(alcohol.get(1));
+				stringBuilder.append(SPACE);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		try { // sweetness에 관한 쿼리 추가
+			if (!sweetness.isEmpty()) {
+				if(isAdded) {
+					stringBuilder.append(AND);
+					stringBuilder.append(SPACE);
+				}
+				stringBuilder.append("sweetness >= ");
+				stringBuilder.append(sweetness.get(0));
+				stringBuilder.append(SPACE);
+				stringBuilder.append(AND);
+				stringBuilder.append(SPACE);
+				stringBuilder.append("sweetness <= ");
+				stringBuilder.append(sweetness.get(1));
+				stringBuilder.append(SPACE);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		try { // acidity에 관한 쿼리 추가
+			if (!acidity.isEmpty()) {
+				if(isAdded) {
+					stringBuilder.append(AND);
+					stringBuilder.append(SPACE);
+				}
+				stringBuilder.append("acidity >= ");
+				stringBuilder.append(acidity.get(0));
+				stringBuilder.append(SPACE);
+				stringBuilder.append(AND);
+				stringBuilder.append(SPACE);
+				stringBuilder.append("acidity <= ");
+				stringBuilder.append(acidity.get(1));
+				stringBuilder.append(SPACE);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		try { // body에 관한 쿼리 추가
+			if (!body.isEmpty()) {
+				if(isAdded) {
+					stringBuilder.append(AND);
+					stringBuilder.append(SPACE);
+				}
+				stringBuilder.append("body >= ");
+				stringBuilder.append(body.get(0));
+				stringBuilder.append(SPACE);
+				stringBuilder.append(AND);
+				stringBuilder.append(SPACE);
+				stringBuilder.append("body <= ");
+				stringBuilder.append(body.get(1));
+				stringBuilder.append(SPACE);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		try { // tanin에 관한 쿼리 추가
+			if (!tanin.isEmpty()) {
+				if(isAdded) {
+					stringBuilder.append(AND);
+					stringBuilder.append(SPACE);
+				}
+				stringBuilder.append("tanin >= ");
+				stringBuilder.append(tanin.get(0));
+				stringBuilder.append(SPACE);
+				stringBuilder.append(AND);
+				stringBuilder.append(SPACE);
+				stringBuilder.append("tanin <= ");
+				stringBuilder.append(tanin.get(1));
+				stringBuilder.append(SPACE);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		try { // price에 관한 쿼리 추가
 			if (!price.isEmpty()) {
 				if(isAdded) {
