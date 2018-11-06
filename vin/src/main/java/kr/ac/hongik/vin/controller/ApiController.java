@@ -82,6 +82,7 @@ public class ApiController {
 	
 	@GetMapping(path = "/api/wine/search") // 와인 검색
 	public void list(@RequestParam(name = "page", required = false, defaultValue = "1") int page, 
+			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
 			@RequestParam(name = "types", required = false, defaultValue = "") List<String> types,
 			@RequestParam(name = "countries", required = false, defaultValue = "") List<String> countries,
 			@RequestParam(name = "alcohol", required = false, defaultValue = "") List<Integer> alcohol,	// 이 것부터  아래의 파라미터는 최소값, 최대값 10도 이상 15도 이하면 [10, 15]
@@ -95,6 +96,7 @@ public class ApiController {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
 	
+		System.out.println("keyword : " + keyword);
 		System.out.println("types : " + types + ", typeslength : " + types.size());
 		System.out.println("countries : " + countries + ", countrieslength : " + countries.size());
 		System.out.println("alcohol : " + alcohol + ", alcohollength : " + alcohol.size());
@@ -120,7 +122,7 @@ public class ApiController {
 
 		// page에 해당하는 와인들 목록 구하기
 		int start = (page - 1) * wineService.LIMIT;
-		List<WineSearchList> list = wineService.getWineSearchListByCondition(start, types, countries, alcohol, sweetness, acidity, body, tanin, price);
+		List<WineSearchList> list = wineService.getWineSearchListByCondition(start, keyword, types, countries, alcohol, sweetness, acidity, body, tanin, price);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(list);

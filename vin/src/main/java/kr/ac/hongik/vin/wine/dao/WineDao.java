@@ -62,21 +62,54 @@ public class WineDao {
 		return jdbc.queryForObject(SELECT_COUNT, Collections.emptyMap(), Integer.class);
 	}
 
-	public List<WineSearchList> selectWinesSearchListByConditions(Integer start, Integer limit, List<String> types,
+	public List<WineSearchList> selectWinesSearchListByConditions(Integer start, Integer limit, String keyword, List<String> types,
 			List<String> countries, List<Integer> alcohol, List<Integer> sweetness, List<Integer> acidity,
 			List<Integer> body, List<Integer> tanin, List<Integer> price) {
 		boolean isAdded = false; // 쿼리 조건이 추가되었는지 체크하는 불리언형 변수
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(SELECT_CONDITION); // 기본 조건
 
-		if (!types.isEmpty() || !countries.isEmpty() || !alcohol.isEmpty() || !sweetness.isEmpty() || !acidity.isEmpty()
+		if (!keyword.equals("") || !types.isEmpty() || !countries.isEmpty() || !alcohol.isEmpty() || !sweetness.isEmpty() || !acidity.isEmpty()
 				|| !body.isEmpty() || !tanin.isEmpty() || !price.isEmpty()) {
 			stringBuilder.append(SPACE);
 			stringBuilder.append(WHERE);
 			stringBuilder.append(SPACE);
 		}
+		
+		try { // keyword에 관한 쿼리 추가
+			if (!keyword.equals("")) {
+				isAdded = true;
+				stringBuilder.append(" korean_name LIKE '%");
+				stringBuilder.append(keyword);
+				stringBuilder.append("%' OR english_name LIKE '%");
+				stringBuilder.append(keyword);
+				stringBuilder.append("%' OR winary LIKE '%");
+				stringBuilder.append(keyword);
+				stringBuilder.append("%' OR region LIKE '%");
+				stringBuilder.append(keyword);
+				stringBuilder.append("%' OR grape_variety LIKE '%");
+				stringBuilder.append(keyword);
+				stringBuilder.append("%' OR pairing LIKE '%");
+				stringBuilder.append(keyword);
+				stringBuilder.append("%' OR other_information LIKE '%");
+				stringBuilder.append(keyword);
+				stringBuilder.append("%' OR maker_note LIKE '%");
+				stringBuilder.append(keyword);
+				stringBuilder.append("%'");
+				
+				stringBuilder.append(SPACE);
+			} // 여기까지 type에 관한 쿼리 추가.
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		
 		try { // type에 관한 쿼리 추가
 			if (!types.isEmpty()) {
+				if (isAdded) {
+					stringBuilder.append(AND);
+					stringBuilder.append(SPACE);
+				}
 				isAdded = true;
 				stringBuilder.append("type IN (");
 				for (int i = 0; i < types.size(); i++) {

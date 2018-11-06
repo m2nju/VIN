@@ -25,6 +25,7 @@ public class WineServiceImpl implements WineService {
 	@Override
 	@Transactional
 	public List<WineSearchList> getWineSearchListByCondition(Integer start, 
+			String keyword,
 			List<String> types,
 			List<String> countries,
 			List<Integer> alcohol,
@@ -34,7 +35,7 @@ public class WineServiceImpl implements WineService {
 			List<Integer> tanin,
 			List<Integer> price){
 		System.out.println("service");
-		List<WineSearchList> list = wineDao.selectWinesSearchListByConditions(start, WineService.LIMIT, types, countries, alcohol, sweetness, acidity, body, tanin, price);
+		List<WineSearchList> list = wineDao.selectWinesSearchListByConditions(start, WineService.LIMIT, keyword, types, countries, alcohol, sweetness, acidity, body, tanin, price);
 		return list;
 	}
 	

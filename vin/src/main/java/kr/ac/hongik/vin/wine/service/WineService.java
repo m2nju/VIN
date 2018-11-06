@@ -10,6 +10,7 @@ public interface WineService {
 	public static final Integer LIMIT = 15;
 	public List<WineSearchList> getWineSearchList(Integer start);
 	public List<WineSearchList> getWineSearchListByCondition(Integer start, 
+			String keyword,
 			List<String> types,
 			List<String> countries,
 			List<Integer> alcohol,
