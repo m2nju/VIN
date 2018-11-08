@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hongik.vin.wine.dao.WineDao;
+import kr.ac.hongik.vin.wine.dto.RecommendedWine;
 import kr.ac.hongik.vin.wine.dto.Wine;
 import kr.ac.hongik.vin.wine.dto.WineSearchList;
 import kr.ac.hongik.vin.wine.service.WineService;
@@ -36,6 +37,11 @@ public class WineServiceImpl implements WineService {
 			List<Integer> price){
 		System.out.println("service");
 		List<WineSearchList> list = wineDao.selectWinesSearchListByConditions(start, WineService.LIMIT, keyword, types, countries, alcohol, sweetness, acidity, body, tanin, price);
+		return list;
+	}
+	
+	public List<RecommendedWine> getRecommendedWinesList(Integer start) {
+		List<RecommendedWine> list = wineDao.selectRecommendedWinesList(start, WineService.LIMIT);
 		return list;
 	}
 	

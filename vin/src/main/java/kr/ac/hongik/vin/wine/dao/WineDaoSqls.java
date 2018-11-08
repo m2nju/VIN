@@ -6,6 +6,7 @@ public class WineDaoSqls {
 	public static final String SELECT_WINE_CODE_AND_NAMES = "SELECT wine21_code, korean_name, english_name FROM wine ORDER BY wine21_code";
 	public static final String SELECT_PAGING = "SELECT wine21_code, korean_name, english_name, country, region, winary, grape_variety, vintage, capacity, type, price FROM wine ORDER BY wine21_code DESC limit :start, :limit";
 	public static final String SELECT_COUNT = "SELECT count(*) FROM wine";
+	public static final String SELECT_RECOMMEND = "SELECT wine21_code, korean_name, price FROM wine WHERE price != 0 ORDER BY rand(CURDATE()) DESC limit :start, :limit";
 	
 	public static final String SELECT_CONDITION = "SELECT wine21_code, korean_name, english_name, country, region, winary, grape_variety, vintage, capacity, type, price FROM wine";	// 여기 뒤에 WHERE 와 함꼐 조건들을 붙여보자.
 	public static final String AND = "AND";

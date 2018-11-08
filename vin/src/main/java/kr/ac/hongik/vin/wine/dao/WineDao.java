@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import kr.ac.hongik.vin.wine.dto.RecommendedWine;
 import kr.ac.hongik.vin.wine.dto.Wine;
 import kr.ac.hongik.vin.wine.dto.WineCodeAndNames;
 import kr.ac.hongik.vin.wine.dto.WineSearchList;
@@ -29,7 +30,10 @@ public class WineDao {
 			.newInstance(WineCodeAndNames.class);
 	private RowMapper<WineSearchList> rowMapper_WineSearchList = BeanPropertyRowMapper
 			.newInstance(WineSearchList.class);
+	private RowMapper<RecommendedWine> rowMapper_RecommendedWine = BeanPropertyRowMapper
+			.newInstance(RecommendedWine.class);
 
+	
 	public WineDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("notify").usingGeneratedKeyColumns("id");
@@ -215,6 +219,7 @@ public class WineDao {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
+				isAdded = true;
 				stringBuilder.append("alcohol >= ");
 				stringBuilder.append(alcohol.get(0));
 				stringBuilder.append(SPACE);
@@ -233,6 +238,7 @@ public class WineDao {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
+				isAdded = true;
 				stringBuilder.append("sweetness >= ");
 				stringBuilder.append(sweetness.get(0));
 				stringBuilder.append(SPACE);
@@ -251,6 +257,7 @@ public class WineDao {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
+				isAdded = true;
 				stringBuilder.append("acidity >= ");
 				stringBuilder.append(acidity.get(0));
 				stringBuilder.append(SPACE);
@@ -270,6 +277,7 @@ public class WineDao {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
+				isAdded = true;
 				stringBuilder.append("body >= ");
 				stringBuilder.append(body.get(0));
 				stringBuilder.append(SPACE);
@@ -288,6 +296,7 @@ public class WineDao {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
+				isAdded = true;
 				stringBuilder.append("tanin >= ");
 				stringBuilder.append(tanin.get(0));
 				stringBuilder.append(SPACE);
@@ -307,6 +316,7 @@ public class WineDao {
 					stringBuilder.append(AND);
 					stringBuilder.append(SPACE);
 				}
+				isAdded = true;
 				stringBuilder.append("price >= ");
 				stringBuilder.append(price.get(0));
 				stringBuilder.append(SPACE);
@@ -328,5 +338,12 @@ public class WineDao {
 		params.put("limit", limit);
 		System.out.println(queryStatement);
 		return jdbc.query(queryStatement, params, rowMapper_WineSearchList);
+	}
+	
+	public List<RecommendedWine> selectRecommendedWinesList(Integer start, Integer limit) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("start", start);
+		params.put("limit", limit);
+		return jdbc.query(SELECT_RECOMMEND, params, rowMapper_RecommendedWine);
 	}
 }

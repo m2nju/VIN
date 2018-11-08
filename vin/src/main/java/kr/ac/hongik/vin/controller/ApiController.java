@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.ac.hongik.vin.wine.dao.WineDao;
+import kr.ac.hongik.vin.wine.dto.RecommendedWine;
 import kr.ac.hongik.vin.wine.dto.Wine;
 import kr.ac.hongik.vin.wine.dto.WineCodeAndNames;
 import kr.ac.hongik.vin.wine.dto.WineSearchList;
@@ -163,7 +164,21 @@ public class ApiController {
 //		
 //		return "wine/wineList";
 	}
-	
-	
+	@GetMapping(path = "/api/wine/recommended") // 와인 검색
+	public void recommmendedWinesList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, 
+			ModelMap model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		int start = (page - 1) * wineService.LIMIT;
+		List<RecommendedWine> list = wineService.getRecommendedWinesList(start);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(list);
+
+		PrintWriter out = response.getWriter();
+		out.println(json);
+		out.close();
+	}
 	
 }
