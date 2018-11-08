@@ -53,8 +53,10 @@
 	
 	<br>
 	<div>
-		<input type="text" placeholder="검색어 입력">
-		<button>검색</button>
+		<form action="./search" accept-charset="utf-8" method="GET">
+		<input type="text" placeholder="검색어 입력" name="keyword">
+		<input type ="submit" value="검색"/>
+		</form>
 	</div>
 	
 	
@@ -122,15 +124,15 @@
 		
 		
 		<!-- 페이지네이션 -->
-		<%-- <c:if test="${page >= 5}">
-			<!-- <a href="search?page=${page}"> &lt; </a> -->&nbsp;&nbsp;
-		</c:if>  --%>
+		<c:if test="${page >= 5}">
+			<a href="search?page=${page}"> &lt; </a>&nbsp;&nbsp;
+		</c:if>  
 		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
 			<a href="search?page=${i}">${i}</a>&nbsp;&nbsp;
 		</c:forEach>
-		<%-- <c:if test="${page <= pageCount - 4}">
+		<c:if test="${page <= pageCount - 4}">
 			<a href="search?page=${page + 10}"> &gt; </a>&nbsp;&nbsp;
-		</c:if> --%>
+		</c:if> 
 	</div>
 
 </body>
