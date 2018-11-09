@@ -155,4 +155,8 @@ public class MainController {
 	public String chatting2(HttpServletRequest request) throws Exception {
 		return "chatting/chatting2";
 	}
+	@RequestMapping(value = "/chatbot") // 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
+	public String chatbot(HttpServletRequest request) throws Exception {
+		return "chatting/chatbot";
+	}
 }

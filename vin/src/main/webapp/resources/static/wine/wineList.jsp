@@ -48,9 +48,6 @@
 		String priceString = stringBuilder.toString();
 	%>
 
-	<a href="search?types=<%=typesString%>">type을 red, white, sparkling 세 개 선택해서 보내는 링크</a>
-	<a href="search?price=<%=priceString%>">price를 10000~50000으로 보내는 링크4</a>
-	
 	<br>
 	<div>
 		<form action="./search" accept-charset="utf-8" method="GET">
@@ -62,17 +59,71 @@
 	
 	<!-- 가격 최소값 최대값 슬라이더 -->
 	<div>
+		<form id="alcohol">
+			<div data-role="rangeslider">
+				<label for="minAlcohol">알콜도수:</label> 
+				<input type="range" name="minAlcohol" id="minAlcohol" min="0" max="25" value="10" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()> 
+					
+				<label for="maxAlcohol">알콜도수:</label>
+				<input type="range" name="maxAlcohol" id="maxAlcohol" min="0" max="25" value="18" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()>
+			</div>
+		</form>
+		<form id="sweetness">
+			<div data-role="rangeslider">
+				<label for="minSweetness">당도:</label> 
+				<input type="range" name="minSweetness" id="minSweetness" min="0" max="5" value="1" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()> 
+					
+				<label for="maxPrice">당도:</label>
+				<input type="range" name="maxSweetness" id="maxSweetness" min="0" max="5" value="4" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()>
+			</div>
+		</form>
+		<form id="acidity">
+			<div data-role="rangeslider">
+				<label for="minAcidity">산미:</label> 
+				<input type="range" name="minAcidity" id="minAcidity" min="0" max="5" value="1" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()> 
+					
+				<label for="maxPrice">산미:</label>
+				<input type="range" name="maxAcidity" id="maxAcidity" min="0" max="5" value="4" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()>
+			</div>
+		</form>
+		<form id="body">
+			<div data-role="rangeslider">
+				<label for="minBody">바디:</label> 
+				<input type="range" name="minBody" id="minBody" min="0" max="5" value="1" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()> 
+					
+				<label for="maxBody">바디:</label>
+				<input type="range" name="maxBody" id="maxBody" min="0" max="5" value="4" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()>
+			</div>
+		</form>
+		<form id="tanin">
+			<div data-role="rangeslider">
+				<label for="minTanin">타닌:</label> 
+				<input type="range" name="minTanin" id="minTanin" min="0" max="5" value="1" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()> 
+					
+				<label for="maxTanin">타닌:</label>
+				<input type="range" name="maxAcidity" id="maxTanin" min="0" max="5" value="4" 
+					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()>
+			</div>
+		</form>
 		<form id="price">
 			<div data-role="rangeslider">
-				<label for="minPrice">Rangeslider:</label> 
+				<label for="minPrice">가격:</label> 
 				<input type="range" name="minPrice" id="minPrice" min="0" max="1000000" value="10000" 
 					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()> 
 					
-				<label for="maxPrice">Rangeslider:</label>
+				<label for="maxPrice">가격:</label>
 				<input type="range" name="maxPrice" id="maxPrice" min="0" max="1000000" value="200000" 
 					data-popup-enabled="true" data-show-value="true" onchange=valueChanged()>
 			</div>
-			
 		</form>
 	</div>
 	<form>
