@@ -7,30 +7,129 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>와인 검색 화면</title>
+
 
 
 <link rel="stylesheet"
 	href="https://demos.jquerymobile.com/1.4.2/css/themes/default/jquery.mobile-1.4.2.min.css">
 
+<style>
+/* Customize the label (the container) */
+.container {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
+/* Hide the browser's default checkbox */
+.container input {
+	
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+	background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+	background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+	display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+	left: 9px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+</style>
 </head>
 <body>
 	<br>
 	<div id="searchMenu" class="navbar-nav">
 		<div>
-			<form id="keyword" action="./search" accept-charset="utf-8"
-				method="GET">
-				<input type="text" placeholder="검색어 입력" name="keyword"> <input
-					type="submit" value="검색" />
+			<form id="keyword" action="javascript:searchKeyword();"
+				accept-charset="utf-8" method="GET">
+				<input type="text" placeholder="검색어 입력" name="keywordInput"
+					id="keywordInput"> <input type="submit" value="검색" />
 			</form>
 		</div>
+		
+		<div>
+			<form id="type">
+				<label class="container" style="width: 15% !important; display: inline-block !important;">레드 
+					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="red" value="red"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">화이트 
+					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="white" value="white"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">스파클링 
+					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="sparkling" value="sparkling"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">로제 
+					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="rose" value="rose"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">기타 
+					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="etc" value="etc"> 
+					<span class="checkmark"></span>
+				</label>
+			</form>
+		</div>
+		
+		
+
+
 
 
 		<!-- 가격 최소값 최대값 슬라이더 -->
-		<div>
+		<div style="display: block">
 			<form id="alcohol">
-				<div data-role="rangeslider">
+				<div data-role="rangeslider"  >
 					<label for="minAlcohol">알콜도수:</label> <input type="range"
 						name="minAlcohol" id="minAlcohol" min="0" max="25" value="10"
 						data-popup-enabled="true" data-show-value="true"
@@ -44,8 +143,7 @@
 				<div data-role="rangeslider">
 					<label for="minSweetness">당도:</label> <input type="range"
 						name="minSweetness" id="minSweetness" min="0" max="5" value="1"
-						data-popup-enabled="true" data-show-value="true"
-						onchange=sweetnessValueChanged()> <label for="maxPrice">당도:</label>
+						data-popup-enabled="true" data-show-value="true" onchange="sweetnessValueChanged()"> <label for="maxPrice">당도:</label>
 					<input type="range" name="maxSweetness" id="maxSweetness" min="0"
 						max="5" value="4" data-popup-enabled="true" data-show-value="true"
 						onchange=sweetnessValueChanged()>
@@ -56,20 +154,20 @@
 					<label for="minAcidity">산미:</label> <input type="range"
 						name="minAcidity" id="minAcidity" min="0" max="5" value="1"
 						data-popup-enabled="true" data-show-value="true"
-						onchange=acidityValueChanged()> <label for="maxPrice">산미:</label>
+						onchange="acidityValueChanged()"> <label for="maxPrice">산미:</label>
 					<input type="range" name="maxAcidity" id="maxAcidity" min="0"
 						max="5" value="4" data-popup-enabled="true" data-show-value="true"
-						onchange=acidityValueChanged()>
+						onchange="acidityValueChanged()">
 				</div>
 			</form>
 			<form id="body">
 				<div data-role="rangeslider">
 					<label for="minBody">바디:</label> <input type="range" name="minBody"
 						id="minBody" min="0" max="5" value="1" data-popup-enabled="true"
-						data-show-value="true" onchange=bodyValueChanged()> <label
+						data-show-value="true" onchange="bodyValueChanged()"> <label
 						for="maxBody">바디:</label> <input type="range" name="maxBody"
 						id="maxBody" min="0" max="5" value="4" data-popup-enabled="true"
-						data-show-value="true" onchange=bodyValueChanged()>
+						data-show-value="true" onchange="bodyValueChanged()">
 				</div>
 			</form>
 			<form id="tanin">
@@ -77,7 +175,7 @@
 					<label for="minTanin">타닌:</label> <input type="range"
 						name="minTanin" id="minTanin" min="0" max="5" value="1"
 						data-popup-enabled="true" data-show-value="true"
-						onchange=taninValueChanged()> <label for="maxTanin">타닌:</label>
+						onchange="taninValueChanged()"> <label for="maxTanin">타닌:</label>
 					<input type="range" name="maxAcidity" id="maxTanin" min="0" max="5"
 						value="4" data-popup-enabled="true" data-show-value="true"
 						onchange=taninValueChanged()>
@@ -88,10 +186,10 @@
 					<label for="minPrice">가격:</label> <input type="range"
 						name="minPrice" id="minPrice" min="0" max="1000000" value="10000"
 						data-popup-enabled="true" data-show-value="true"
-						onchange=priceValueChanged()> <label for="maxPrice">가격:</label>
+						onchange="priceValueChanged()"> <label for="maxPrice">가격:</label>
 					<input type="range" name="maxPrice" id="maxPrice" min="0"
 						max="1000000" value="200000" data-popup-enabled="true"
-						data-show-value="true" onchange=priceValueChanged()>
+						data-show-value="true" onchange="priceValueChanged()">
 				</div>
 			</form>
 		</div>
@@ -114,9 +212,9 @@
 var html = "";
 
 var pageNum = 1;	// 기본 페이지는 1
+var keywordInput = "";
 var typeInput = "";
 var countryInput = "";
-var keywordInput = "";
 var alcoholInput = "";
 var sweetnessInput = "";
 var acidityInput = "";
@@ -128,13 +226,14 @@ var priceInput = "";
 var div = document.querySelector('#divResults');
 
 $.ajax({
-	type: "GET",
-	url: "/vin/api/wine/search",
+	//type: "GET",
+	url : "/vin/api/wine/search",		// 로컬 WAS에서 돌릴 때
+	//url: "/api/wine/search",			// 원격에서 돌릴 때
 	data: { 
 		page: pageNum,
-		type: typeInput,
-		country: countryInput,
 		keyword: keywordInput,
+		types: typeInput,
+		country: countryInput,
 		alcohol: alcoholInput,
 		sweetness: sweetnessInput,
 		acidity: acidityInput,
@@ -182,20 +281,79 @@ function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 �
     //console.log("후" + html);
 }
 	
+function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새로 갱신
+ 	console.log("searchKeyword");
+	pageNum = 1;
+	keywordInput = $('#keywordInput').val();
+	//('#divResults').html(); 
+	$.ajax({
+		url : "/vin/api/wine/search",	// 로컬에서 돌릴 떄
+		//url : "/api/wine/search",	// 원격 WAS에서 돌릴 때
+		type : "GET",
+		cache : false,
+		dataType: 'json',
+		data: { 
+			page: pageNum,
+			keyword: keywordInput,
+			types: typeInput,
+			country: countryInput,
+			alcohol: alcoholInput,
+			sweetness: sweetnessInput,
+			acidity: acidityInput,
+			body: bodyInput,
+			tanin: taninInput,
+			price: priceInput,
+		},
+		success : function(obj){
+			$('#addbtn').remove();//remove btn
+			var content="";
+			console.log("keyword");
+			console.log(keywordInput);
+			console.log("keyword2");  
+			content = '<table>';
+		    content += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
+			for (var i = 0; i < obj.length; i++) {
+				content += '<tr><td>' + obj[i].wine21Code
+            		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
+                    + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+                    + '</td><td> ' + obj[i].englishName
+                    + '</td><td> ' + obj[i].winary
+                    + '</td><td> ' + obj[i].country
+                    + '</td><td> ' + obj[i].region
+                    + '</td><td> ' + obj[i].grapeVariety
+                    + '</td><td> ' + obj[i].vintage
+                    + '</td><td> ' + obj[i].capacity
+                    + '</td><td> ' + obj[i].type
+                    + '</td><td> ' + obj[i].price + '</td></tr>'
+			}
+			//content+="<tr id='addbtn'><td colspan='5'><div class='btns'><a href='javascript:moreList();' class='btn'>더보기</a></div>  </td></tr>";
+			$('#addbtn').remove();//remove btn
+			//$(content).appendTo("#divResults");
+			div.innerHTML = content;
+		}, error:function(request,status,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+};
+	
+	
  function refreshSearchListByCondition(){		// 카테고리 조건이 변경되면 화면을 새로 갱신
 	 	console.log("리프레시 컨디션");
+	 	console.log(typeInput);
 		pageNum = 1;
+		keywordInput = $('#keywordInput').val();
 		//('#divResults').html(); 
 		$.ajax({
-			url : "/vin/api/wine/search",
+			url : "/vin/api/wine/search",	// 로컬에서 돌릴 떄
+			//url : "/api/wine/search",	// 원격 WAS에서 돌릴 때
 			type : "GET",
 			cache : false,
 			dataType: 'json',
 			data: { 
 				page: pageNum,
-				type: typeInput,
-				country: countryInput,
 				keyword: keywordInput,
+				types: typeInput,
+				country: countryInput,
 				alcohol: alcoholInput,
 				sweetness: sweetnessInput,
 				acidity: acidityInput,
@@ -208,9 +366,6 @@ function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 �
 			//console.log(data);
 				$('#addbtn').remove();//remove btn
 				var content="";
-				console.log("price 조건 변경");
-				console.log(priceInput);
-				console.log("price 조건 변경2");  
 				content = '<table>';
 			    content += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
 				for (var i = 0; i < obj.length; i++) {
@@ -240,16 +395,18 @@ function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 �
  
 	function moreList(){
 		pageNum = pageNum + 1;
+		keywordInput = $('#keywordInput').val();
 		$.ajax({
-			url : "/vin/api/wine/search",
+			url : "/vin/api/wine/search",	// 로컬에서 돌릴 때
+			//url : "/api/wine/search",		// 원격 WAS에서 돌릴 떄
 			type : "GET",
 			cache : false,
 			dataType: 'json',
 			data: { 
 				page: pageNum,
-				type: typeInput,
-				country: countryInput,
 				keyword: keywordInput,
+				types: typeInput,
+				country: countryInput,
 				alcohol: alcoholInput,
 				sweetness: sweetnessInput,
 				acidity: acidityInput,
@@ -289,13 +446,39 @@ function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 �
 		});
 	};
     
+	function Check(form)
 
+	   {
+	        var typeCheckbox = [];
+
+	        if (form.red.checked)
+	        	typeCheckbox.push(form.red.value);
+	        if (form.white.checked)
+	        	typeCheckbox.push(form.white.value);
+	        if (form.sparkling.checked)
+	        	typeCheckbox.push(form.sparkling.value);
+	        if (form.rose.checked)
+	        	typeCheckbox.push(form.rose.value);
+	        if (form.etc.checked)
+	        	typeCheckbox.push(form.etc.value);
+	        
+	     	
+			
+	        //typeInput = typeCheckbox.slice(0, -1);
+	        typeInput = typeCheckbox.toString();
+	        console.log(typeInput);
+	        refreshSearchListByCondition();
+	   }
+	
+	
 	var minAlcohol;
 	var maxAlcohol;
 	function alcoholValueChanged() {
 		var minAlcohol = $('#minAlcohol').val();
 		var maxAlcohol = $('#maxAlcohol').val();
-		
+		if(maxAlcohol == 25){
+			maxAlcohol = 100;
+		}
 		console.log(minAlcohol, maxAlcohol);
 		alcoholInput = [minAlcohol, maxAlcohol].toString();
 		console.log(alcoholInput);
@@ -355,18 +538,20 @@ function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 �
 	function priceValueChanged() {
 		var minPrice = $('#minPrice').val();
 		var maxPrice = $('#maxPrice').val();
-		
+		if (maxPrice == 1000000){
+			maxPrice = 10000000;
+		}
 		console.log(minPrice, maxPrice);	
 		priceInput = [minPrice,maxPrice].toString();
 		console.log(priceInput);
 		refreshSearchListByCondition();
-	}
+	};
 
 	var searchMenu = document.querySelector("#searchMenu");
 	searchMenu.addEventListener("change", function(evt) {
 		refreshSearchListByCondition();
 		//sendAjax("hello");
-	});
+	}	)
 </script>
 
 <script
