@@ -34,7 +34,7 @@ public class ApiController {
 	@Autowired
 	WineService wineService;
 	
-	@RequestMapping(value = "/api/wine/all")	// 전체 와인의 전체 데이터를 json형태로 제공하는 api의 기능을 하는 컨트롤러
+	@RequestMapping(value = "/api/wine/all")	// 전체 와인의 모든 데이터를 json형태로 제공하는 api의 기능을 하는 컨트롤러
 	public void wines(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -97,6 +97,7 @@ public class ApiController {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
 	
+		System.out.println("page : " + page);
 		System.out.println("keyword : " + keyword);
 		System.out.println("types : " + types + ", typeslength : " + types.size());
 		System.out.println("countries : " + countries + ", countrieslength : " + countries.size());
