@@ -72,9 +72,21 @@ public class MainController {
 
 		return "naver/logout";
 	}
+	private static final long serialVersionUID = 1L;
+	@RequestMapping(value = "/wine/search") 
+	public String wineSearch(HttpServletRequest request) throws Exception {
+		
 
-	@GetMapping(path = "/wine/search") // 와인 검색
-	public String list(@RequestParam(name = "page", required = false, defaultValue = "1") int page,
+
+		return "wine/wineSearch";
+	}
+	@RequestMapping(value = "/wine/hello") 
+	public String hello(HttpServletRequest request) throws Exception {
+		return "wine/hello";
+	}
+	
+	@GetMapping(path = "/wine/searchList") // 와인 검색
+	public String wineSearchList(@RequestParam(name = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
 			@RequestParam(name = "types", required = false, defaultValue = "") List<String> types,
 			@RequestParam(name = "countries", required = false, defaultValue = "") List<String> countries,

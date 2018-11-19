@@ -36,7 +36,7 @@ public class WineDao {
 	
 	public WineDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
-		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("notify").usingGeneratedKeyColumns("id");
+		this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("wine").usingGeneratedKeyColumns("wine21_code");
 	}
 
 	public List<Wine> selectAll() {
