@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +15,6 @@
 </head>
 
 <body>
-<img src = "img/main_image.jpg">
 <div id="searchMenu whole_container" class="navbar-nav">
   <div id="title_section">
     <p>VIN</p>
@@ -393,7 +392,7 @@
 <script>
 var html = "";
 
-var pageNum = 1;	// 기본 페이지는 1
+var pageNum = 1;   // 기본 페이지는 1
 var keywordInput = "";
 var typesInput = "";
 var countriesInput = "";
@@ -407,48 +406,48 @@ var priceInput = "";
 
 var div = document.querySelector('#divResults');
 
-$.ajax({
-	type: "GET",
-	//url : "/vin/api/wine/search",		// 로컬 WAS에서 돌릴 때
-	url : "http://viniswine.tk/api/wine/search",			// 원격에서 돌릴 때
-	data: { 
-		page: pageNum,
-		keyword: keywordInput,
-		types: typesInput,
-		countries: countriesInput,
-		alcohol: alcoholInput,
-		sweetness: sweetnessInput,
-		acidity: acidityInput,
-		body: bodyInput,
-		tanin: taninInput,
-		price: priceInput,
-		},
-	dataType : "json",
-	
-	success : function(obj) {
-		showWineTable(obj);
+/* $.ajax({
+   //type: "GET",
+   url : "/vin/api/wine/search",      // 로컬 WAS에서 돌릴 때
+   //url: "/api/wine/search",         // 원격에서 돌릴 때
+   data: {
+      page: pageNum,
+      keyword: keywordInput,
+      types: typesInput,
+      countries: countriesInput,
+      alcohol: alcoholInput,
+      sweetness: sweetnessInput,
+      acidity: acidityInput,
+      body: bodyInput,
+      tanin: taninInput,
+      price: priceInput,
+      },
+   dataType : "json",
+
+   success : function(obj) {
+      showWineTable(obj);
     },
     complete : function(xhr,status) {
-    
+
     },
     error : function(xhr, status, error) {
         console.log(error);
-    }	
-}) 
+    }
+})  */
 
-function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 만들어줌
-    
+function showWineTable(obj) {      // 맨 처음에 api를 받아와 테이블로 만들어줌
+
     console.log(obj);
     html = '<table>';
     html += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
     console.log("obj를 테이블 폼에 맞게 변형 후 출력");
     for (var i = 0; i < obj.length; i++) {
        html += '<tr><td>' + obj[i].wine21Code
-        		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
-                + '</td><td> ' + '<a href = "/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+              + '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
+                + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
                 + '</td><td> ' + obj[i].englishName
                 + '</td><td> ' + obj[i].winary
-                + '</td><td> ' + obj[i].country
+                + '</td><td> ' + obj[i].countries
                 + '</td><td> ' + obj[i].region
                 + '</td><td> ' + obj[i].grapeVariety
                 + '</td><td> ' + obj[i].vintage
@@ -462,324 +461,323 @@ function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 �
     div.innerHTML = html;
     //console.log("후" + html);
 }
-	
-function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새로 갱신
- 	console.log("searchKeyword");
-	pageNum = 1;
-	keywordInput = $('#keywordInput').val();
-	//('#divResults').html(); 
-	$.ajax({
-		//url : "/vin/api/wine/search",	// 로컬에서 돌릴 떄
-		url : "http://viniswine.tk/api/wine/search",			// 원격에서 돌릴 때
-		type : "GET",
-		cache : false,
-		dataType: 'json',
-		data: { 
-			page: pageNum,
-			keyword: keywordInput,
-			types: typesInput,
-			countries: countriesInput,
-			alcohol: alcoholInput,
-			sweetness: sweetnessInput,
-			acidity: acidityInput,
-			body: bodyInput,
-			tanin: taninInput,
-			price: priceInput,
-		},
-		success : function(obj){
-			$('#addbtn').remove();//remove btn
-			var content="";
-			console.log("keyword");
-			console.log(keywordInput);
-			console.log("keyword2");  
-			content = '<table>';
-		    content += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
-			for (var i = 0; i < obj.length; i++) {
-				content += '<tr><td>' + obj[i].wine21Code
-            		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
-                    + '</td><td> ' + '<a href = "/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+
+function searchKeyword(){      // 카테고리 조건이 변경되면 화면을 새로 갱신
+    console.log("searchKeyword");
+   pageNum = 1;
+   keywordInput = $('#keywordInput').val();
+   //('#divResults').html();
+   /* $.ajax({
+      url : "/vin/api/wine/search",   // 로컬에서 돌릴 떄
+      //url : "/api/wine/search",   // 원격 WAS에서 돌릴 때
+      type : "GET",
+      cache : false,
+      dataType: 'json',
+      data: {
+         page: pageNum,
+         keyword: keywordInput,
+         types: typesInput,
+         countries: countriesInput,
+         alcohol: alcoholInput,
+         sweetness: sweetnessInput,
+         acidity: acidityInput,
+         body: bodyInput,
+         tanin: taninInput,
+         price: priceInput,
+      },
+      success : function(obj){
+         $('#addbtn').remove();//remove btn
+         var content="";
+         console.log("keyword");
+         console.log(keywordInput);
+         console.log("keyword2");
+         content = '<table>';
+          content += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
+         for (var i = 0; i < obj.length; i++) {
+            content += '<tr><td>' + obj[i].wine21Code
+                  + '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
+                    + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
                     + '</td><td> ' + obj[i].englishName
                     + '</td><td> ' + obj[i].winary
-                    + '</td><td> ' + obj[i].country
+                    + '</td><td> ' + obj[i].countries
                     + '</td><td> ' + obj[i].region
                     + '</td><td> ' + obj[i].grapeVariety
                     + '</td><td> ' + obj[i].vintage
                     + '</td><td> ' + obj[i].capacity
                     + '</td><td> ' + obj[i].type
                     + '</td><td> ' + obj[i].price + '</td></tr>'
-			}
-			//content+="<tr id='addbtn'><td colspan='5'><div class='btns'><a href='javascript:moreList();' class='btn'>더보기</a></div>  </td></tr>";
-			$('#addbtn').remove();//remove btn
-			//$(content).appendTo("#divResults");
-			div.innerHTML = content;
-		}, error:function(request,status,error){
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
+         }
+         //content+="<tr id='addbtn'><td colspan='5'><div class='btns'><a href='javascript:moreList();' class='btn'>더보기</a></div>  </td></tr>";
+         $('#addbtn').remove();//remove btn
+         //$(content).appendTo("#divResults");
+         div.innerHTML = content;
+      }, error:function(request,status,error){
+         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+      }
+   }); */
 };
-	
-	
- function refreshSearchListByCondition(){		// 카테고리 조건이 변경되면 화면을 새로 갱신
-	 	console.log("리프레시 컨디션");
-	 	//console.log(typesInput);
-		pageNum = 1;
-		keywordInput = $('#keywordInput').val();
-		//('#divResults').html(); 
-		$.ajax({
-			//url : "/vin/api/wine/search",	// 로컬에서 돌릴 떄
-			url : "http://viniswine.tk/api/wine/search",			// 원격에서 돌릴 때
-			type : "GET",
-			cache : false,
-			dataType: 'json',
-			data: { 
-				page: pageNum,
-				keyword: keywordInput,
-				types: typesInput,
-				countries: countriesInput,
-				alcohol: alcoholInput,
-				sweetness: sweetnessInput,
-				acidity: acidityInput,
-				body: bodyInput,
-				tanin: taninInput,
-				price: priceInput,
-			},
-			//data : "conectType="+conectType +"&eDate="+eDate+"&sDate="+sDate+"&codeId="+codeId+"&limit="+limit,
-			success : function(obj){
-			//console.log(data);
-				$('#addbtn').remove();//remove btn
-				var content="";
-				content = '<table>';
-			    content += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
-				for (var i = 0; i < obj.length; i++) {
-					content += '<tr><td>' + obj[i].wine21Code
-	            		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
-	                    + '</td><td> ' + '<a href = "/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
-	                    + '</td><td> ' + obj[i].englishName
-	                    + '</td><td> ' + obj[i].winary
-	                    + '</td><td> ' + obj[i].country
-	                    + '</td><td> ' + obj[i].region
-	                    + '</td><td> ' + obj[i].grapeVariety
-	                    + '</td><td> ' + obj[i].vintage
-	                    + '</td><td> ' + obj[i].capacity
-	                    + '</td><td> ' + obj[i].type
-	                    + '</td><td> ' + obj[i].price + '</td></tr>'
-				}
-				//content+="<tr id='addbtn'><td colspan='5'><div class='btns'><a href='javascript:moreList();' class='btn'>더보기</a></div>  </td></tr>";
-				$('#addbtn').remove();//remove btn
-				//$(content).appendTo("#divResults");
-				div.innerHTML = content;
-			}, error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	};
- 
- 
-	function moreList(){
-		pageNum = pageNum + 1;
-		keywordInput = $('#keywordInput').val();
-		$.ajax({
-			//url : "/vin/api/wine/search",	// 로컬에서 돌릴 때
-			url : "http://viniswine.tk/api/wine/search",			// 원격에서 돌릴 때
-			type : "GET",
-			cache : false,
-			dataType: 'json',
-			data: { 
-				page: pageNum,
-				keyword: keywordInput,
-				types: typesInput,
-				countries: countriesInput,
-				alcohol: alcoholInput,
-				sweetness: sweetnessInput,
-				acidity: acidityInput,
-				body: bodyInput,
-				tanin: taninInput,
-				price: priceInput,
-			},
-			//data : "conectType="+conectType +"&eDate="+eDate+"&sDate="+sDate+"&codeId="+codeId+"&limit="+limit,
-			success : function(obj){
-			//console.log(data);
-				$('#addbtn').remove();//remove btn
-				var content="";
-				console.log("obj를 테이블 폼에 맞게 변형 후 출력");
-				content = '<table>';
-			    //content += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
-				
-				for (var i = 0; i < obj.length; i++) {
-					content += '<tr><td>' + obj[i].wine21Code
-	            		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
-	                    + '</td><td> ' + '<a href = "/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
-	                    + '</td><td> ' + obj[i].englishName
-	                    + '</td><td> ' + obj[i].winary
-	                    + '</td><td> ' + obj[i].country
-	                    + '</td><td> ' + obj[i].region
-	                    + '</td><td> ' + obj[i].grapeVariety
-	                    + '</td><td> ' + obj[i].vintage
-	                    + '</td><td> ' + obj[i].capacity
-	                    + '</td><td> ' + obj[i].type
-	                    + '</td><td> ' + obj[i].price + '</td></tr>'
-					}
-				//content+="<tr id='addbtn'><td colspan='5'><div class='btns'><a href='javascript:moreList();' class='btn'>더보기</a></div>  </td></tr>";
-				$('#addbtn').remove();//remove btn
-				$(content).appendTo("#divResults");
-			}, error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	};
-    
-	function typesChanged(form)
 
-	   {
-	        var typesCheckbox = [];
 
-	        if (form.red.checked)
-	        	typesCheckbox.push(form.red.value);
-	        if (form.white.checked)
-	        	typesCheckbox.push(form.white.value);
-	        if (form.sparkling.checked)
-	        	typesCheckbox.push(form.sparkling.value);
-	        if (form.rose.checked)
-	        	typesCheckbox.push(form.rose.value);
-	        if (form.etc.checked)
-	        	typesCheckbox.push(form.etc.value);
-	        
-	     	
-			
-	        //typesInput = typesCheckbox.slice(0, -1);
-	        typesInput = typesCheckbox.toString();
-	        console.log(typesInput);
-	        refreshSearchListByCondition();
-	   }
-	
-	function countriesChanged(form)
+ function refreshSearchListByCondition(){      // 카테고리 조건이 변경되면 화면을 새로 갱신
+       console.log("리프레시 컨디션");
+       //console.log(typesInput);
+      pageNum = 1;
+      keywordInput = $('#keywordInput').val();
+      //('#divResults').html();
+      /* $.ajax({
+         url : "/vin/api/wine/search",   // 로컬에서 돌릴 떄
+         //url : "/api/wine/search",   // 원격 WAS에서 돌릴 때
+         type : "GET",
+         cache : false,
+         dataType: 'json',
+         data: {
+            page: pageNum,
+            keyword: keywordInput,
+            types: typesInput,
+            countries: countriesInput,
+            alcohol: alcoholInput,
+            sweetness: sweetnessInput,
+            acidity: acidityInput,
+            body: bodyInput,
+            tanin: taninInput,
+            price: priceInput,
+         },
+         //data : "conectType="+conectType +"&eDate="+eDate+"&sDate="+sDate+"&codeId="+codeId+"&limit="+limit,
+         success : function(obj){
+         //console.log(data);
+            $('#addbtn').remove();//remove btn
+            var content="";
+            content = '<table>';
+             content += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
+            for (var i = 0; i < obj.length; i++) {
+               content += '<tr><td>' + obj[i].wine21Code
+                     + '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
+                       + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+                       + '</td><td> ' + obj[i].englishName
+                       + '</td><td> ' + obj[i].winary
+                       + '</td><td> ' + obj[i].countries
+                       + '</td><td> ' + obj[i].region
+                       + '</td><td> ' + obj[i].grapeVariety
+                       + '</td><td> ' + obj[i].vintage
+                       + '</td><td> ' + obj[i].capacity
+                       + '</td><td> ' + obj[i].type
+                       + '</td><td> ' + obj[i].price + '</td></tr>'
+            }
+            //content+="<tr id='addbtn'><td colspan='5'><div class='btns'><a href='javascript:moreList();' class='btn'>더보기</a></div>  </td></tr>";
+            $('#addbtn').remove();//remove btn
+            //$(content).appendTo("#divResults");
+            div.innerHTML = content;
+         }, error:function(request,status,error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+         }
+      }); */
+   };
 
-	   {
-	        var countriesCheckbox = [];
 
-	        if (form.ZA.checked)
-	        	countriesCheckbox.push(form.ZA.value);
-	        if (form.NZ.checked)
-	        	countriesCheckbox.push(form.NZ.value);
-	        if (form.DE.checked)
-	        	countriesCheckbox.push(form.DE.value);
-	        if (form.US.checked)
-	        	countriesCheckbox.push(form.US.value);
-	        if (form.ES.checked)
-	        	countriesCheckbox.push(form.ES.value);
-	        if (form.AR.checked)
-	        	countriesCheckbox.push(form.AR.value);
-	        if (form.AT.checked)
-	        	countriesCheckbox.push(form.AT.value);
-	        if (form.IT.checked)
-	        	countriesCheckbox.push(form.IT.value);
-	        if (form.JP.checked)
-	        	countriesCheckbox.push(form.JP.value);
-	        if (form.CL.checked)
-	        	countriesCheckbox.push(form.CL.value);
-	        if (form.CA.checked)
-	        	countriesCheckbox.push(form.CA.value);
-	        if (form.PT.checked)
-	        	countriesCheckbox.push(form.PT.value);
-	        if (form.FR.checked)
-	        	countriesCheckbox.push(form.FR.value);
-	        if (form.HU.checked)
-	        	countriesCheckbox.push(form.HU.value);
-	        if (form.AU.checked)
-	        	countriesCheckbox.push(form.AU.value);
-	        
-	        
-	     	
-			
-	        //countriesInput = typesCheckbox.slice(0, -1);
-	        countriesInput = countriesCheckbox.toString();
-	        console.log(countriesInput);
-	        refreshSearchListByCondition();
-	   }
-	
-	
-	var minAlcohol;
-	var maxAlcohol;
-	function alcoholValueChanged() {
-		var minAlcohol = $('#minAlcohol').val();
-		var maxAlcohol = $('#maxAlcohol').val();
-		if(maxAlcohol == 25){
-			maxAlcohol = 100;
-		}
-		console.log(minAlcohol, maxAlcohol);
-		alcoholInput = [minAlcohol, maxAlcohol].toString();
-		console.log(alcoholInput);
-		refreshSearchListByCondition();
-	};
-	
-	var minSweetness;
-	var maxSweetness;
-	function sweetnessValueChanged() {
-		var minSweetness = $('#minSweetness').val();
-		var maxSweetness = $('#maxSweetness').val();
-		
-		console.log(minSweetness, maxSweetness);
-		sweetnessInput = [minSweetness, maxSweetness].toString();
-		console.log(sweetnessInput);
-		refreshSearchListByCondition();
-	};
-	
-	var minAcidity;
-	var maxAcidity;
-	function acidityValueChanged() {
-		var minAcidity = $('#minAcidity').val();
-		var maxAcidity = $('#maxAcidity').val();
-		
-		console.log(minAcidity, maxAcidity);
-		acidityInput = [minAcidity, maxAcidity].toString();
-		console.log(acidityInput);
-		refreshSearchListByCondition();
-		
-	};
-	var minBody;
-	var maxBody;
-	function bodyValueChanged() {
-		var minBody = $('#minBody').val();
-		var maxBody = $('#maxBody').val();
-		
-		console.log(minBody, maxBody);
-		bodyInput = [minBody, maxBody].toString();
-		console.log(bodyInput);
-		refreshSearchListByCondition();
-	};
-	
-	var minTanin;
-	var maxTanin;
-	function taninValueChanged() {
-		var minTanin = $('#minTanin').val();
-		var maxTanin = $('#maxTanin').val();
-		
-		console.log(minTanin, maxTanin);
-		taninInput = [minTanin, maxTanin].toString();
-		console.log(taninInput);
-		refreshSearchListByCondition();
-	};
+   function moreList(){
+      pageNum = pageNum + 1;
+      keywordInput = $('#keywordInput').val();
+      /* $.ajax({
+         url : "/vin/api/wine/search",   // 로컬에서 돌릴 때
+         //url : "/api/wine/search",      // 원격 WAS에서 돌릴 떄
+         type : "GET",
+         cache : false,
+         dataType: 'json',
+         data: {
+            page: pageNum,
+            keyword: keywordInput,
+            types: typesInput,
+            countries: countriesInput,
+            alcohol: alcoholInput,
+            sweetness: sweetnessInput,
+            acidity: acidityInput,
+            body: bodyInput,
+            tanin: taninInput,
+            price: priceInput,
+         },
+         //data : "conectType="+conectType +"&eDate="+eDate+"&sDate="+sDate+"&codeId="+codeId+"&limit="+limit,
+         success : function(obj){
+         //console.log(data);
+            $('#addbtn').remove();//remove btn
+            var content="";
+            console.log("obj를 테이블 폼에 맞게 변형 후 출력");
+            content = '<table>';
+             //content += '<tr></tr><th style="background-color: #eeeeee; text-align: center;">와인코드</th><th style="background-color: #eeeeee; text-align: center;">와인라벨사진</th><th style="background-color: #eeeeee; text-align: center;">한글이름</th><th style="background-color: #eeeeee; text-align: center;">영어이름</th><th style="background-color: #eeeeee; text-align: center;">와이너리</th><th style="background-color: #eeeeee; text-align: center;">국가</th><th style="background-color: #eeeeee; text-align: center;">지역</th><th style="background-color: #eeeeee; text-align: center;">품종</th><th style="background-color: #eeeeee; text-align: center;">빈티지</th><th style="background-color: #eeeeee; text-align: center;">용량</th><th style="background-color: #eeeeee; text-align: center;">타입</th><th style="background-color: #eeeeee; text-align: center;">가격</th>';
 
-	var minPrice;
-	var maxPrice;
-	function priceValueChanged() {
-		var minPrice = $('#minPrice').val();
-		var maxPrice = $('#maxPrice').val();
-		if (maxPrice == 1000000){
-			maxPrice = 10000000;
-		}
-		console.log(minPrice, maxPrice);	
-		priceInput = [minPrice,maxPrice].toString();
-		console.log(priceInput);
-		refreshSearchListByCondition();
-	};
+            for (var i = 0; i < obj.length; i++) {
+               content += '<tr><td>' + obj[i].wine21Code
+                     + '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
+                       + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+                       + '</td><td> ' + obj[i].englishName
+                       + '</td><td> ' + obj[i].winary
+                       + '</td><td> ' + obj[i].countries
+                       + '</td><td> ' + obj[i].region
+                       + '</td><td> ' + obj[i].grapeVariety
+                       + '</td><td> ' + obj[i].vintage
+                       + '</td><td> ' + obj[i].capacity
+                       + '</td><td> ' + obj[i].type
+                       + '</td><td> ' + obj[i].price + '</td></tr>'
+               }
+            //content+="<tr id='addbtn'><td colspan='5'><div class='btns'><a href='javascript:moreList();' class='btn'>더보기</a></div>  </td></tr>";
+            $('#addbtn').remove();//remove btn
+            $(content).appendTo("#divResults");
+         }, error:function(request,status,error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+         }
+      }); */
+   };
 
-	var searchMenu = document.querySelector("#searchMenu");
-	
-	searchMenu.addEventListener("change", function(evt) {
-		refreshSearchListByCondition();
-		//sendAjax("hello");
-	})
+   function typesChanged(form)
+
+      {
+           var typesCheckbox = [];
+
+           if (form.red.checked)
+              typesCheckbox.push(form.red.value);
+           if (form.white.checked)
+              typesCheckbox.push(form.white.value);
+           if (form.sparkling.checked)
+              typesCheckbox.push(form.sparkling.value);
+           if (form.rose.checked)
+              typesCheckbox.push(form.rose.value);
+           if (form.etc.checked)
+              typesCheckbox.push(form.etc.value);
+
+
+
+           //typesInput = typesCheckbox.slice(0, -1);
+           typesInput = typesCheckbox.toString();
+           console.log(typesInput);
+           refreshSearchListByCondition();
+      }
+
+   function countriesChanged(form)
+
+      {
+           var countriesCheckbox = [];
+
+           if (form.ZA.checked)
+              countriesCheckbox.push(form.ZA.value);
+           if (form.NZ.checked)
+              countriesCheckbox.push(form.NZ.value);
+           if (form.DE.checked)
+              countriesCheckbox.push(form.DE.value);
+           if (form.US.checked)
+              countriesCheckbox.push(form.US.value);
+           if (form.ES.checked)
+              countriesCheckbox.push(form.ES.value);
+           if (form.AR.checked)
+              countriesCheckbox.push(form.AR.value);
+           if (form.AT.checked)
+              countriesCheckbox.push(form.AT.value);
+           if (form.IT.checked)
+              countriesCheckbox.push(form.IT.value);
+           if (form.JP.checked)
+              countriesCheckbox.push(form.JP.value);
+           if (form.CL.checked)
+              countriesCheckbox.push(form.CL.value);
+           if (form.CA.checked)
+              countriesCheckbox.push(form.CA.value);
+           if (form.PT.checked)
+              countriesCheckbox.push(form.PT.value);
+           if (form.FR.checked)
+              countriesCheckbox.push(form.FR.value);
+           if (form.HU.checked)
+              countriesCheckbox.push(form.HU.value);
+           if (form.AU.checked)
+              countriesCheckbox.push(form.AU.value);
+
+
+
+
+           //countriesInput = typesCheckbox.slice(0, -1);
+           countriesInput = countriesCheckbox.toString();
+           console.log(countriesInput);
+           refreshSearchListByCondition();
+      }
+
+
+   var minAlcohol;
+   var maxAlcohol;
+   function alcoholValueChanged() {
+      var minAlcohol = $('#minAlcohol').val();
+      var maxAlcohol = $('#maxAlcohol').val();
+      if(maxAlcohol == 25){
+         maxAlcohol = 100;
+      }
+      console.log(minAlcohol, maxAlcohol);
+      alcoholInput = [minAlcohol, maxAlcohol].toString();
+      console.log(alcoholInput);
+      refreshSearchListByCondition();
+   };
+
+   var minSweetness;
+   var maxSweetness;
+   function sweetnessValueChanged() {
+      var minSweetness = $('#minSweetness').val();
+      var maxSweetness = $('#maxSweetness').val();
+
+      console.log(minSweetness, maxSweetness);
+      sweetnessInput = [minSweetness, maxSweetness].toString();
+      console.log(sweetnessInput);
+      refreshSearchListByCondition();
+   };
+
+   var minAcidity;
+   var maxAcidity;
+   function acidityValueChanged() {
+      var minAcidity = $('#minAcidity').val();
+      var maxAcidity = $('#maxAcidity').val();
+
+      console.log(minAcidity, maxAcidity);
+      acidityInput = [minAcidity, maxAcidity].toString();
+      console.log(acidityInput);
+      refreshSearchListByCondition();
+
+   };
+   var minBody;
+   var maxBody;
+   function bodyValueChanged() {
+      var minBody = $('#minBody').val();
+      var maxBody = $('#maxBody').val();
+
+      console.log(minBody, maxBody);
+      bodyInput = [minBody, maxBody].toString();
+      console.log(bodyInput);
+      refreshSearchListByCondition();
+   };
+
+   var minTanin;
+   var maxTanin;
+   function taninValueChanged() {
+      var minTanin = $('#minTanin').val();
+      var maxTanin = $('#maxTanin').val();
+
+      console.log(minTanin, maxTanin);
+      taninInput = [minTanin, maxTanin].toString();
+      console.log(taninInput);
+      refreshSearchListByCondition();
+   };
+
+   var minPrice;
+   var maxPrice;
+   function priceValueChanged() {
+      var minPrice = $('#minPrice').val();
+      var maxPrice = $('#maxPrice').val();
+      if (maxPrice == 1000000){
+         maxPrice = 10000000;
+      }
+      console.log(minPrice, maxPrice);
+      priceInput = [minPrice,maxPrice].toString();
+      console.log(priceInput);
+      refreshSearchListByCondition();
+   };
+
+   var searchMenu = document.querySelector("#searchMenu");
+   searchMenu.addEventListener("change", function(evt) {
+      refreshSearchListByCondition();
+      //sendAjax("hello");
+   }   )
 </script>
 
 <script

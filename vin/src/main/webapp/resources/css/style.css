@@ -1,0 +1,175 @@
+<style>
+/* Customize the label (the container) */
+*{
+  font-family: 'Nanum Gothic', sans-serif;
+}
+#whole_container{
+  width: 88%;
+  margin: 0 auto;
+}
+#title_section{
+  position: relative;
+  background-image: url('main_image.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 64%;
+  margin: 50px auto;
+  height: 200px;
+}
+#title_section p{
+  position: absolute;
+  display: block;
+  width: 90%;
+  bottom: 0;
+  text-align: right;
+  font-size: 2rem;
+  color: #ccc;
+  text-shadow: none;
+  font-family: 'Marcellus SC', serif;
+}
+/* searchbar_section */
+#search_section{
+  width: 64%;
+  margin: 0 auto;
+}
+#menu_section{
+  display: flex;
+  flex-direction: row;
+  width: 66%;
+  margin: 0 auto;
+  justify-content: space-around;
+}
+.wine_type_section, .wine_country_section{
+  box-shadow: #ccc 0px 0px 3px 1px;
+  border-radius: 3px;
+  margin: 15px;
+  padding: 15px;
+
+}
+.wine_type_section{
+  flex: 1 1 0;
+}
+.wine_country_section{
+  flex: 3 1 0;
+}
+.wine-name{
+  text-align: center;
+  font-size: .7rem;
+}
+.ui-page-theme-a .ui-checkbox-on:after{
+  background-color: #570317;
+  color: #fff;
+}
+.wine_country_section{
+  display: flex;
+  flex-direction: column;
+}
+.ui-btn, label.ui-btn{
+  border-width: 0;
+}
+.ui-checkbox-on{
+  background: #570317 !important;
+  color: white !important;
+  text-shadow: none !important;
+}
+.wine_type_section #types{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.wine_country_section #countries{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.wine_country_section .ui-checkbox{
+  width: 30%;
+
+}
+.menu_title{
+  margin-bottom: 15px;
+  color: #570317;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+.ui-checkbox .ui-btn{
+  text-align: right;
+}
+.wine-country{
+  text-align: center;
+  font-size: .7rem;
+}
+.wine_filter_section{
+  width: 62%;
+  margin: 10px auto;
+  padding: 15px;
+  box-shadow: #ccc 0px 0px 3px 1px;
+  border-radius: 3px;
+}
+.ui-page-theme-a .ui-slider-track .ui-btn-active{
+  background-color: #570317;
+}
+/* tackgoo end */
+/* .container {
+  width: 100%;
+   display: block;
+   position: relative;
+   margin-bottom: 12px;
+   cursor: pointer;
+   font-size: 22px;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+} */
+
+/* Hide the browser's default checkbox */
+/* .container input {
+   opacity: 0;
+   cursor: pointer;
+   height: 0;
+   width: 0;
+} */
+
+/* Create a custom checkbox */
+
+/* On mouse-over, add a grey background color */
+/* .container:hover input ~ .checkmark {
+   background-color: #ccc;
+}
+.ui-checkbox input, .ui-radio input{
+  display: none;
+} */
+/* When the checkbox is checked, add a blue background */
+/* .container input:checked ~ .checkmark {
+   background-color: #2196F3;
+} */
+
+/* Create the checkmark/indicator (hidden when not checked) */
+/* .checkmark:after {
+   content: "";
+   position: absolute;
+   display: none;
+} */
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+   display: block;
+}
+/* Style the checkmark/indicator */
+/* .container .checkmark:after {
+   left: 9px;
+   top: 5px;
+   width: 5px;
+   height: 10px;
+   border: solid white;
+   border-width: 0 3px 3px 0;
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+} */
+
+</style>
