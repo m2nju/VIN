@@ -158,15 +158,12 @@ public class MainController {
 		return "wine/wineDetails";
 	}
 
-	@RequestMapping(value = "/chatting") // 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
+	@RequestMapping(value = "/chatting") // 플라스크 웹소켓 서버 기반 채팅
 	public String chatting(HttpServletRequest request) throws Exception {
 		return "chatting/chatting";
 	}
 
-	@RequestMapping(value = "/chatting2") // 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
-	public String chatting2(HttpServletRequest request) throws Exception {
-		return "chatting/chatting2";
-	}
+	
 	@RequestMapping(value = "/chatbot") // 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
 	public String chatbot(HttpServletRequest request) throws Exception {
 		return "chatting/chatbot";

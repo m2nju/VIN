@@ -97,31 +97,94 @@
 		</div>
 		
 		<div>
-			<form id="type">
+			<form id="types">
 				<label class="container" style="width: 15% !important; display: inline-block !important;">레드 
-					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="red" value="red"> 
+					<input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="red" value="red"> 
 					<span class="checkmark"></span>
 				</label> 
 				<label class="container" style="width: 15% !important; display: inline-block !important;">화이트 
-					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="white" value="white"> 
+					<input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="white" value="white"> 
 					<span class="checkmark"></span>
 				</label> 
 				<label class="container" style="width: 15% !important; display: inline-block !important;">스파클링 
-					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="sparkling" value="sparkling"> 
+					<input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="sparkling" value="sparkling"> 
 					<span class="checkmark"></span>
 				</label> 
 				<label class="container" style="width: 15% !important; display: inline-block !important;">로제 
-					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="rose" value="rose"> 
+					<input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="rose" value="rose"> 
 					<span class="checkmark"></span>
 				</label> 
 				<label class="container" style="width: 15% !important; display: inline-block !important;">기타 
-					<input type="checkbox" checked="checked" onclick="Check(this.form)" name="etc" value="etc"> 
+					<input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="etc" value="etc"> 
 					<span class="checkmark"></span>
 				</label>
 			</form>
 		</div>
 		
-		
+		<div>
+			<form id="countries">
+				<label class="container" style="width: 15% !important; display: inline-block !important;">남아프리카 
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="ZA" value="ZA"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">뉴질랜드
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="NZ" value="NZ"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">독일
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="DE" value="DE"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">미국
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="US" value="US"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">스페인 
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="ES" value="ES"> 
+					<span class="checkmark"></span>
+				</label>
+				<label class="container" style="width: 15% !important; display: inline-block !important;">아르헨티나
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AR" value="AR"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">오스트리아
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AT" value="AT"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">이탈리아
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="IT" value="IT"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">일본
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="JP" value="JP"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">칠레
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="CL" value="CL"> 
+					<span class="checkmark"></span>
+				</label>
+				<label class="container" style="width: 15% !important; display: inline-block !important;">캐나다
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="CA" value="CA"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">포루투갈
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="PT" value="PT"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">프랑스
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="FR" value="FR"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">헝가리
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="HU" value="HU"> 
+					<span class="checkmark"></span>
+				</label> 
+				<label class="container" style="width: 15% !important; display: inline-block !important;">호주
+					<input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AU" value="AU"> 
+					<span class="checkmark"></span>
+				</label>
+			</form>
+		</div>
 
 
 
@@ -213,8 +276,8 @@ var html = "";
 
 var pageNum = 1;	// 기본 페이지는 1
 var keywordInput = "";
-var typeInput = "";
-var countryInput = "";
+var typesInput = "";
+var countriesInput = "";
 var alcoholInput = "";
 var sweetnessInput = "";
 var acidityInput = "";
@@ -232,8 +295,8 @@ $.ajax({
 	data: { 
 		page: pageNum,
 		keyword: keywordInput,
-		types: typeInput,
-		country: countryInput,
+		types: typesInput,
+		countries: countriesInput,
 		alcohol: alcoholInput,
 		sweetness: sweetnessInput,
 		acidity: acidityInput,
@@ -266,7 +329,7 @@ function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 �
                 + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
                 + '</td><td> ' + obj[i].englishName
                 + '</td><td> ' + obj[i].winary
-                + '</td><td> ' + obj[i].country
+                + '</td><td> ' + obj[i].countries
                 + '</td><td> ' + obj[i].region
                 + '</td><td> ' + obj[i].grapeVariety
                 + '</td><td> ' + obj[i].vintage
@@ -295,8 +358,8 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 		data: { 
 			page: pageNum,
 			keyword: keywordInput,
-			types: typeInput,
-			country: countryInput,
+			types: typesInput,
+			countries: countriesInput,
 			alcohol: alcoholInput,
 			sweetness: sweetnessInput,
 			acidity: acidityInput,
@@ -318,7 +381,7 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
                     + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
                     + '</td><td> ' + obj[i].englishName
                     + '</td><td> ' + obj[i].winary
-                    + '</td><td> ' + obj[i].country
+                    + '</td><td> ' + obj[i].countries
                     + '</td><td> ' + obj[i].region
                     + '</td><td> ' + obj[i].grapeVariety
                     + '</td><td> ' + obj[i].vintage
@@ -339,7 +402,7 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 	
  function refreshSearchListByCondition(){		// 카테고리 조건이 변경되면 화면을 새로 갱신
 	 	console.log("리프레시 컨디션");
-	 	console.log(typeInput);
+	 	//console.log(typesInput);
 		pageNum = 1;
 		keywordInput = $('#keywordInput').val();
 		//('#divResults').html(); 
@@ -352,8 +415,8 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 			data: { 
 				page: pageNum,
 				keyword: keywordInput,
-				types: typeInput,
-				country: countryInput,
+				types: typesInput,
+				countries: countriesInput,
 				alcohol: alcoholInput,
 				sweetness: sweetnessInput,
 				acidity: acidityInput,
@@ -374,7 +437,7 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 	                    + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
 	                    + '</td><td> ' + obj[i].englishName
 	                    + '</td><td> ' + obj[i].winary
-	                    + '</td><td> ' + obj[i].country
+	                    + '</td><td> ' + obj[i].countries
 	                    + '</td><td> ' + obj[i].region
 	                    + '</td><td> ' + obj[i].grapeVariety
 	                    + '</td><td> ' + obj[i].vintage
@@ -405,8 +468,8 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 			data: { 
 				page: pageNum,
 				keyword: keywordInput,
-				types: typeInput,
-				country: countryInput,
+				types: typesInput,
+				countries: countriesInput,
 				alcohol: alcoholInput,
 				sweetness: sweetnessInput,
 				acidity: acidityInput,
@@ -429,7 +492,7 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 	                    + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
 	                    + '</td><td> ' + obj[i].englishName
 	                    + '</td><td> ' + obj[i].winary
-	                    + '</td><td> ' + obj[i].country
+	                    + '</td><td> ' + obj[i].countries
 	                    + '</td><td> ' + obj[i].region
 	                    + '</td><td> ' + obj[i].grapeVariety
 	                    + '</td><td> ' + obj[i].vintage
@@ -446,27 +509,72 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 		});
 	};
     
-	function Check(form)
+	function typesChanged(form)
 
 	   {
-	        var typeCheckbox = [];
+	        var typesCheckbox = [];
 
 	        if (form.red.checked)
-	        	typeCheckbox.push(form.red.value);
+	        	typesCheckbox.push(form.red.value);
 	        if (form.white.checked)
-	        	typeCheckbox.push(form.white.value);
+	        	typesCheckbox.push(form.white.value);
 	        if (form.sparkling.checked)
-	        	typeCheckbox.push(form.sparkling.value);
+	        	typesCheckbox.push(form.sparkling.value);
 	        if (form.rose.checked)
-	        	typeCheckbox.push(form.rose.value);
+	        	typesCheckbox.push(form.rose.value);
 	        if (form.etc.checked)
-	        	typeCheckbox.push(form.etc.value);
+	        	typesCheckbox.push(form.etc.value);
 	        
 	     	
 			
-	        //typeInput = typeCheckbox.slice(0, -1);
-	        typeInput = typeCheckbox.toString();
-	        console.log(typeInput);
+	        //typesInput = typesCheckbox.slice(0, -1);
+	        typesInput = typesCheckbox.toString();
+	        console.log(typesInput);
+	        refreshSearchListByCondition();
+	   }
+	
+	function countriesChanged(form)
+
+	   {
+	        var countriesCheckbox = [];
+
+	        if (form.ZA.checked)
+	        	countriesCheckbox.push(form.ZA.value);
+	        if (form.NZ.checked)
+	        	countriesCheckbox.push(form.NZ.value);
+	        if (form.DE.checked)
+	        	countriesCheckbox.push(form.DE.value);
+	        if (form.US.checked)
+	        	countriesCheckbox.push(form.US.value);
+	        if (form.ES.checked)
+	        	countriesCheckbox.push(form.ES.value);
+	        if (form.AR.checked)
+	        	countriesCheckbox.push(form.AR.value);
+	        if (form.AT.checked)
+	        	countriesCheckbox.push(form.AT.value);
+	        if (form.IT.checked)
+	        	countriesCheckbox.push(form.IT.value);
+	        if (form.JP.checked)
+	        	countriesCheckbox.push(form.JP.value);
+	        if (form.CL.checked)
+	        	countriesCheckbox.push(form.CL.value);
+	        if (form.CA.checked)
+	        	countriesCheckbox.push(form.CA.value);
+	        if (form.PT.checked)
+	        	countriesCheckbox.push(form.PT.value);
+	        if (form.FR.checked)
+	        	countriesCheckbox.push(form.FR.value);
+	        if (form.HU.checked)
+	        	countriesCheckbox.push(form.HU.value);
+	        if (form.AU.checked)
+	        	countriesCheckbox.push(form.AU.value);
+	        
+	        
+	     	
+			
+	        //countriesInput = typesCheckbox.slice(0, -1);
+	        countriesInput = countriesCheckbox.toString();
+	        console.log(countriesInput);
 	        refreshSearchListByCondition();
 	   }
 	
