@@ -75,9 +75,7 @@ public class MainController {
 	private static final long serialVersionUID = 1L;
 	@RequestMapping(value = "/wine/search") 
 	public String wineSearch(HttpServletRequest request) throws Exception {
-		
-
-
+		System.out.println("wine search");
 		return "wine/wineSearch";
 	}
 	@RequestMapping(value = "/wine/hello") 

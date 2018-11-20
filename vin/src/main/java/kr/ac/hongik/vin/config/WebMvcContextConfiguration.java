@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -16,16 +17,15 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages= {"kr.ac.hongik.vin.controller"})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	@Override
-	// Resource들을 handling하는 핸들러를 선언 및 세팅
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/resources/static/static/css/").setCachePeriod(31556926);
-        registry.addResourceHandler("/img/**").addResourceLocations("/resources/static/static/img/").setCachePeriod(31556926);
-        registry.addResourceHandler("/js/**").addResourceLocations("/resources/static/static/js/").setCachePeriod(31556926);
-        registry.addResourceHandler("/txt/**").addResourceLocations("/resources/static/static/txt/").setCachePeriod(31556926);
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {	// css, img, js, txt 등의 확장자들은 resource 하위의 디렉토리에서 찾도록 한다.
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/").setCachePeriod(31556926);
+        registry.addResourceHandler("/img/**").addResourceLocations("/resources/img/").setCachePeriod(31556926);
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/").setCachePeriod(31556926);
+        registry.addResourceHandler("/txt/**").addResourceLocations("/resources/txt/").setCachePeriod(31556926);
     }
 	
-    // default servlet handler를 사용하게 합니다.
-    @Override	// 아무런 핸들러가 정해지지 않았을 때, 사용하는 default servlet handler의 설정
+    // 별다른 요구가 없는 경우 default servlet handler를 사용.
+    @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
@@ -38,8 +38,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Bean	// 기본 경로는 src/main/webapp/WEB-INF/views 디렉토리이다.
     public InternalResourceViewResolver getInternalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/resources/static/");
+        resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
     } 
+ 
 }

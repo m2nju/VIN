@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>와인 상세 화면</title>
+<title>Home</title>
 </head>
 <body>
-	${wine }
+	Hello!
 </body>
 </html>

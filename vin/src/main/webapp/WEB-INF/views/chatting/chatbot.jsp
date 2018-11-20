@@ -22,13 +22,14 @@
 	
 	
 <script type="text/javascript">
-	
+	sendRequest();
 	$(document).ready(function() {
 		$('#sendbutton').on('click', function() {	// 전송 버튼이 눌렸을 때.
 			console.log("send button clicked.")
 			var input = $('#myMessage').val().toString();
 
 			if(input != ""){	// input에 값이 있다면(메세지가 비어있지 않다면)
+				$('#messages').append('나 : ' + input + '<br>');
 				sendRequest(input);
 				$('#myMessage').val('');
 				document.getElementById('sendbutton').click();	
@@ -52,20 +53,52 @@
 		console.log(message);
 		$.ajax({
 			url : "http://viniswine.tk:5001",	// 로컬에서 돌릴 떄
-			//url : "/api/wine/search",	// 원격 WAS에서 돌릴 때
+			//url : "localhost:5001",	// 원격 WAS에서 돌릴 때
 			type : "GET",
 			cache : false,
 			dataType: 'json',
 			data: { 
 				input_text: message
 			},
-			success : function(obj){
-				console.log(obj);
+			success : function(msg){
+				console.log(msg);
+				if (msg.resultCode === '0') {	//	추천이 진행 중
+					$('#messages').append('VIN : ' + msg.message + '<br>');	// 전송 받은 메세지를 append
+					//document.getElementById('sendbutton').click();	// 서버로부터 메세지가 왔을 때, 메세지가 한 줄 밑으로 내려가 있는 현상을 수정하기 위해 전송 버튼이 눌리게 함.
+				}
+				if (msg.resultCode === '1') {	//	추천이 진행 중
+					$('#messages').append('VIN : ' + msg.message + '<br>');	// 전송 받은 메세지를 append
+					//document.getElementById('sendbutton').click();	// 서버로부터 메세지가 왔을 때, 메세지가 한 줄 밑으로 내려가 있는 현상을 수정하기 위해 전송 버튼이 눌리게 함.
+				} else if ( msg.resultCode === '2'){
+					
+					$('#messages').append('VIN : ' + msg.message + '<br>');	// 전송 받은 메세지를 append
+					
+				} else if ( msg.resultCode === '3'){
+					$('#messages').append('VIN : ' + msg.message + '<br>');	// 전송 받은 메세지를 append
+					$('#messages').append('추천 내역입니다.' + '<br>');	// 전송 받은 메세지를 append
+					if(msg.resultCode[0].wine21Code != ""){	// wine21에서 받아온 데이터라면(링크 제공)
+						for (var i = 0; i < msg.response.length; i++){
+							$('#messages').append('한글 제품명 : <a href ="http://viniswine.tk/wine/details/' + msg.response[i].wine21Code +'">' + msg.response[i].koreanName + '</a><br>');
+							$('#messages').append('영문 제품명 : ' + msg.response[i].englishName + '<br>');
+							$('#messages').append('생산 국가 : ' + msg.response[i].country + '<br>');
+							$('#messages').append('생산 지역 : ' + msg.response[i].region + '<br>');
+							$('#messages').append('가격 : ' + msg.response[i].price + '</a><br><br>');
+						}
+						sendRequest();
+					} else{									// winenara에서 받아온 데이터라면
+						for (var i = 0; i < msg.response.length; i++){
+							
+						}
+					}
+				} else if ( msg.resultCode === '4'){
+					$('#messages').append('VIN : ' + msg.message + '<br>');
+				}
+				console.log('Received Message : ' + msg.type);
 			}, error:function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
-	}
+	} 
 </script>
 <ul id="messages"></ul>
 </div>

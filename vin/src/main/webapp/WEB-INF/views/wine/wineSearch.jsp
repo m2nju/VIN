@@ -290,8 +290,8 @@ var div = document.querySelector('#divResults');
 
 $.ajax({
 	//type: "GET",
-	url : "/vin/api/wine/search",		// 로컬 WAS에서 돌릴 때
-	//url: "/api/wine/search",			// 원격에서 돌릴 때
+	//url : "/vin/api/wine/search",		// 로컬 WAS에서 돌릴 때
+	url : "http://viniswine.tk/api/wine/search",			// 원격에서 돌릴 때
 	data: { 
 		page: pageNum,
 		keyword: keywordInput,
@@ -326,10 +326,10 @@ function showWineTable(obj) {		// 맨 처음에 api를 받아와 테이블로 �
     for (var i = 0; i < obj.length; i++) {
        html += '<tr><td>' + obj[i].wine21Code
         		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
-                + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+                + '</td><td> ' + '<a href = "/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
                 + '</td><td> ' + obj[i].englishName
                 + '</td><td> ' + obj[i].winary
-                + '</td><td> ' + obj[i].countries
+                + '</td><td> ' + obj[i].country
                 + '</td><td> ' + obj[i].region
                 + '</td><td> ' + obj[i].grapeVariety
                 + '</td><td> ' + obj[i].vintage
@@ -350,8 +350,8 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 	keywordInput = $('#keywordInput').val();
 	//('#divResults').html(); 
 	$.ajax({
-		url : "/vin/api/wine/search",	// 로컬에서 돌릴 떄
-		//url : "/api/wine/search",	// 원격 WAS에서 돌릴 때
+		//url : "/vin/api/wine/search",	// 로컬에서 돌릴 떄
+		url : "http://viniswine.tk/api/wine/search",			// 원격에서 돌릴 때
 		type : "GET",
 		cache : false,
 		dataType: 'json',
@@ -378,10 +378,10 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 			for (var i = 0; i < obj.length; i++) {
 				content += '<tr><td>' + obj[i].wine21Code
             		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
-                    + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+                    + '</td><td> ' + '<a href = "/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
                     + '</td><td> ' + obj[i].englishName
                     + '</td><td> ' + obj[i].winary
-                    + '</td><td> ' + obj[i].countries
+                    + '</td><td> ' + obj[i].country
                     + '</td><td> ' + obj[i].region
                     + '</td><td> ' + obj[i].grapeVariety
                     + '</td><td> ' + obj[i].vintage
@@ -407,8 +407,8 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 		keywordInput = $('#keywordInput').val();
 		//('#divResults').html(); 
 		$.ajax({
-			url : "/vin/api/wine/search",	// 로컬에서 돌릴 떄
-			//url : "/api/wine/search",	// 원격 WAS에서 돌릴 때
+			//url : "/vin/api/wine/search",	// 로컬에서 돌릴 떄
+			url : "http://viniswine.tk/api/wine/search",			// 원격에서 돌릴 때
 			type : "GET",
 			cache : false,
 			dataType: 'json',
@@ -434,10 +434,10 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 				for (var i = 0; i < obj.length; i++) {
 					content += '<tr><td>' + obj[i].wine21Code
 	            		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
-	                    + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+	                    + '</td><td> ' + '<a href = "/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
 	                    + '</td><td> ' + obj[i].englishName
 	                    + '</td><td> ' + obj[i].winary
-	                    + '</td><td> ' + obj[i].countries
+	                    + '</td><td> ' + obj[i].country
 	                    + '</td><td> ' + obj[i].region
 	                    + '</td><td> ' + obj[i].grapeVariety
 	                    + '</td><td> ' + obj[i].vintage
@@ -460,8 +460,8 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 		pageNum = pageNum + 1;
 		keywordInput = $('#keywordInput').val();
 		$.ajax({
-			url : "/vin/api/wine/search",	// 로컬에서 돌릴 때
-			//url : "/api/wine/search",		// 원격 WAS에서 돌릴 떄
+			//url : "/vin/api/wine/search",	// 로컬에서 돌릴 때
+			url : "http://viniswine.tk/api/wine/search",			// 원격에서 돌릴 때
 			type : "GET",
 			cache : false,
 			dataType: 'json',
@@ -489,10 +489,10 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 				for (var i = 0; i < obj.length; i++) {
 					content += '<tr><td>' + obj[i].wine21Code
 	            		+ '</td><td> ' + '<img src="https://s3.ap-northeast-2.amazonaws.com/vin-image/' + obj[i].wine21Code + '.jpg" width="175">'
-	                    + '</td><td> ' + '<a href = "/vin/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
+	                    + '</td><td> ' + '<a href = "/wine/details/' + obj[i].wine21Code + '">' + obj[i].koreanName
 	                    + '</td><td> ' + obj[i].englishName
 	                    + '</td><td> ' + obj[i].winary
-	                    + '</td><td> ' + obj[i].countries
+	                    + '</td><td> ' + obj[i].country
 	                    + '</td><td> ' + obj[i].region
 	                    + '</td><td> ' + obj[i].grapeVariety
 	                    + '</td><td> ' + obj[i].vintage
