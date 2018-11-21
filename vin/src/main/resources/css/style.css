@@ -1,0 +1,421 @@
+<style>
+/* Customize the label (the container) */
+*{
+  font-family: 'Nanum Gothic', sans-serif;
+}
+#whole_container{
+  width: 88%;
+  margin: 0 auto;
+}
+#title_section{
+  position: relative;
+  background-image: url('main_image.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 64%;
+  margin: 50px auto;
+  height: 200px;
+}
+#title_section p{
+  position: absolute;
+  display: block;
+  width: 90%;
+  bottom: 0;
+  text-align: right;
+  font-size: 2rem;
+  color: #ccc;
+  text-shadow: none;
+  font-family: 'Marcellus SC', serif;
+}
+/* searchbar_section */
+#search_section{
+  width: 64%;
+  margin: 0 auto;
+}
+#menu_section{
+  display: flex;
+  flex-direction: row;
+  width: 66%;
+  margin: 0 auto;
+  justify-content: space-around;
+}
+.wine_type_section, .wine_country_section{
+  box-shadow: #ccc 0px 0px 3px 1px;
+  border-radius: 3px;
+  margin: 15px;
+  padding: 15px;
+
+}
+.wine_type_section{
+  flex: 1 1 0;
+}
+.wine_country_section{
+  flex: 3 1 0;
+}
+.wine-name{
+  text-align: center;
+  font-size: .7rem;
+}
+.ui-page-theme-a .ui-checkbox-on:after{
+  background-color: #570317;
+  color: #fff;
+}
+.wine_country_section{
+  display: flex;
+  flex-direction: column;
+}
+.ui-btn, label.ui-btn{
+  border-width: 0;
+}
+.ui-checkbox-on{
+  background: #570317 !important;
+  color: white !important;
+  text-shadow: none !important;
+}
+.wine_type_section #types{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.wine_country_section #countries{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.wine_country_section .ui-checkbox{
+  width: 30%;
+
+}
+.menu_title{
+  margin-bottom: 15px;
+  color: #570317;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+.ui-checkbox .ui-btn{
+  text-align: right;
+}
+.wine-country{
+  text-align: center;
+  font-size: .7rem;
+}
+.wine_filter_section{
+  width: 62%;
+  margin: 10px auto;
+  padding: 15px;
+  box-shadow: #ccc 0px 0px 3px 1px;
+  border-radius: 3px;
+}
+.ui-page-theme-a .ui-slider-track .ui-btn-active{
+  background-color: #570317;
+}
+
+/* right nav*/
+main {
+  z-index: 11;
+  position: relative;
+  height: 100%;
+  -webkit-transition: transform .7s ease-in-out;
+  -moz-transition: transform .7s ease-in-out;
+  -ms-transition: transform .7s ease-in-out;
+  -o-transition: transform .7s ease-in-out;
+  transition: transform .7s ease-in-out;
+}
+
+.sidebar {
+  height: 100%;
+  width: 400px;
+  position: fixed;
+  top: 0;
+  z-index: 9;
+  right: -400px;
+  background: white;
+  border: 3px solid #570317;
+  box-sizing: border-box;
+}
+.bg-active{
+
+}
+.bar {
+  display: block;
+  height: 5px;
+  width: 50px;
+  background-color: #570317;
+  margin: 10px auto;
+}
+.button {
+  cursor: pointer;
+  display: inline-block;
+  width: auto;
+  margin: 0 auto;
+  -webkit-transition: all .7s ease;
+  -moz-transition: all .7s ease;
+  -ms-transition: all .7s ease;
+  -o-transition: all .7s ease;
+  transition: all .7s ease;
+}
+.nav-right {
+  position: fixed;
+  right: 40px;
+  top: 20px;
+}
+.nav-right.visible-xs {
+  z-index: 10;
+}
+.hidden-xs {
+  display: none;
+}
+
+.middle {
+  margin: 0 auto;
+}
+
+.bar {
+  -webkit-transition: all .7s ease;
+  -moz-transition: all .7s ease;
+  -ms-transition: all .7s ease;
+  -o-transition: all .7s ease;
+  transition: all .7s ease;
+}
+
+.nav-right.visible-xs .active .bar {
+  background-color: #FFF;
+  -webkit-transition: all .7s ease;
+  -moz-transition: all .7s ease;
+  -ms-transition: all .7s ease;
+  -o-transition: all .7s ease;
+  transition: all .7s ease;
+}
+
+.button.active .top {
+  -webkit-transform: translateY(15px) rotateZ(45deg);
+  -moz-transform: translateY(15px) rotateZ(45deg);
+  -ms-transform: translateY(15px) rotateZ(45deg);
+  -o-transform: translateY(15px) rotateZ(45deg);
+  transform: translateY(15px) rotateZ(45deg);
+}
+
+.button.active .bottom {
+  -webkit-transform: translateY(-15px) rotateZ(-45deg);
+  -moz-transform: translateY(-15px) rotateZ(-45deg);
+  -ms-transform: translateY(-15px) rotateZ(-45deg);
+  -o-transform: translateY(-15px) rotateZ(-45deg);
+  transform: translateY(-15px) rotateZ(-45deg);
+}
+
+.button.active .middle {
+  width: 0;
+}
+
+.move-to-left {
+  -webkit-transform: translateX(-400px);
+  -moz-transform: translateX(-400px);
+  -ms-transform: translateX(-400px);
+  -o-transform: translateX(-400px);
+  transform: translateX(-400px);
+  transition: all 0.3s ease;
+}
+
+nav {
+  padding-top: 30px;
+}
+
+.sidebar-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+  margin-top: 150px;
+  text-align: center;
+}
+
+.sidebar-item {
+  margin: 30px 0;
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  -moz-transform: translateY(-20px);
+  -ms-transform: translateY(-20px);
+  -o-transform: translateY(-20px);
+  transform: translateY(-20px);
+}
+
+.sidebar-item:first-child {
+  -webkit-transition: all .7s .2s ease-in-out;
+  -moz-transition: all .7s .2s ease-in-out;
+  -ms-transition: all .7s .2s ease-in-out;
+  -o-transition: all .7s .2s ease-in-out;
+  transition: all .7s .2s ease-in-out;
+}
+
+.sidebar-item:nth-child(2) {
+  -webkit-transition: all .7s .4s ease-in-out;
+  -moz-transition: all .7s .4s ease-in-out;
+  -ms-transition: all .7s .4s ease-in-out;
+  -o-transition: all .7s .4s ease-in-out;
+  transition: all .7s .4s ease-in-out;
+}
+
+.sidebar-item:nth-child(3) {
+  -webkit-transition: all .7s .6s ease-in-out;
+  -moz-transition: all .7s .6s ease-in-out;
+  -ms-transition: all .7s .6s ease-in-out;
+  -o-transition: all .7s .6s ease-in-out;
+  transition: all .7s .6s ease-in-out;
+}
+
+.sidebar-item:last-child {
+  -webkit-transition: all .7s .8s ease-in-out;
+  -moz-transition: all .7s .8s ease-in-out;
+  -ms-transition: all .7s .8s ease-in-out;
+  -o-transition: all .7s .8s ease-in-out;
+  transition: all .7s .6s ease-in-out;
+}
+
+.sidebar-item.active {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  transform: translateY(0px);
+}
+
+.sidebar-anchor {
+  color: black !important;
+  text-decoration: none;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 7px;
+}
+
+.sidebar-anchor:before {
+  content: "";
+  width: 0;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #FFF;
+  -webkit-transition: all .7s ease-in-out;
+  -moz-transition: all .7s ease-in-out;
+  -ms-transition: all .7s ease-in-out;
+  -o-transition: all .7s ease-in-out;
+  transition: all .7s ease-in-out;
+}
+
+.sidebar-anchor:hover:before {
+  width: 100%;
+}
+
+.ua {
+  position: absolute;
+  bottom: 20px;
+  left: 60px;
+}
+
+.fa {
+  font-size: 1.4em;
+  color: #EF8354;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.ua:hover .fa {
+  color: #FFF;
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  -o-transform: scale(1.3);
+  transform: scale(1.3);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+@media (min-width: 480px) {
+  .nav-list {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-right {
+    position: absolute;
+  }
+  .hidden-xs {
+    display: block;
+  }
+  .visible-xs {
+    display: none;
+  }
+}
+/* tackgoo end */
+/* .container {
+  width: 100%;
+   display: block;
+   position: relative;
+   margin-bottom: 12px;
+   cursor: pointer;
+   font-size: 22px;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+} */
+
+/* Hide the browser's default checkbox */
+/* .container input {
+   opacity: 0;
+   cursor: pointer;
+   height: 0;
+   width: 0;
+} */
+
+/* Create a custom checkbox */
+
+/* On mouse-over, add a grey background color */
+/* .container:hover input ~ .checkmark {
+   background-color: #ccc;
+}
+.ui-checkbox input, .ui-radio input{
+  display: none;
+} */
+/* When the checkbox is checked, add a blue background */
+/* .container input:checked ~ .checkmark {
+   background-color: #2196F3;
+} */
+
+/* Create the checkmark/indicator (hidden when not checked) */
+/* .checkmark:after {
+   content: "";
+   position: absolute;
+   display: none;
+} */
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+   display: block;
+}
+/* Style the checkmark/indicator */
+/* .container .checkmark:after {
+   left: 9px;
+   top: 5px;
+   width: 5px;
+   height: 10px;
+   border: solid white;
+   border-width: 0 3px 3px 0;
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+} */
+
+</style>

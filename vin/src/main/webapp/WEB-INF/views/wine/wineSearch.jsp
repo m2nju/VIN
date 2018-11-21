@@ -92,6 +92,7 @@
 
 .ui-btn, label.ui-btn {
    border-width: 0 !important;
+   text-decoration:none !important;
 }
 
 .ui-checkbox-on {
@@ -128,6 +129,7 @@
 
 .ui-checkbox .ui-btn {
    text-align: right !important;
+   text-decoration:none !important;
 }
 
 .wine-country {
@@ -145,7 +147,258 @@
 
 .ui-page-theme-a .ui-slider-track .ui-btn-active {
    background-color: #570317 !important;
+   text-decoration:none !important;
 }
+
+<!-- 오른쪽 nav -->
+/* right nav*/
+main {
+  z-index: 11 !important
+  position: relative !important;
+  height: 100% !important;
+  -webkit-transition: transform .7s ease-in-out !important;
+  -moz-transition: transform .7s ease-in-out !important;
+  -ms-transition: transform .7s ease-in-out !important;
+  -o-transition: transform .7s ease-in-out !important;
+  transition: transform .7s ease-in-out !important;
+}
+
+.sidebar {
+  height: 100% !important;
+  width: 400px !important;
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 9 !important;
+  right: -400px !important;
+  background: white !important;
+  border: 3px solid #570317 !important;
+  box-sizing: border-box !important;
+}
+.bg-active{
+
+}
+.bar {
+  display: block !important;
+  height: 5px !important;
+  width: 50px !important;
+  background-color: #570317 !important;
+  margin: 10px auto !important;
+}
+.button {
+  cursor: pointer !important;
+  display: inline-block !important;
+  width: auto !important;
+  margin: 0 auto !important;
+  -webkit-transition: all .7s ease !important;
+  -moz-transition: all .7s ease !important;
+  -ms-transition: all .7s ease !important;
+  -o-transition: all .7s ease !important;
+  transition: all .7s ease !important;
+}
+.nav-right {
+  position: fixed !important;
+  right: 40px !important;
+  top: 20px !important;
+}
+.nav-right.visible-xs {
+  z-index: 10 !important;
+}
+.hidden-xs {
+  display: none !important;
+}
+
+.middle {
+  margin: 0 auto !important;
+}
+
+.bar {
+  -webkit-transition: all .7s ease !important;
+  -moz-transition: all .7s ease !important;
+  -ms-transition: all .7s ease !important;
+  -o-transition: all .7s ease !important;
+  transition: all .7s ease !important;
+}
+
+.nav-right.visible-xs .active .bar {
+  background-color: #FFF !important;
+  -webkit-transition: all .7s ease !important;
+  -moz-transition: all .7s ease !important;
+  -ms-transition: all .7s ease !important;
+  -o-transition: all .7s ease !important;
+  transition: all .7s ease !important;
+}
+
+.button.active .top {
+  -webkit-transform: translateY(15px) rotateZ(45deg) !important;
+  -moz-transform: translateY(15px) rotateZ(45deg) !important;
+  -ms-transform: translateY(15px) rotateZ(45deg) !important;
+  -o-transform: translateY(15px) rotateZ(45deg) !important;
+  transform: translateY(15px) rotateZ(45deg) !important;
+}
+
+.button.active .bottom {
+  -webkit-transform: translateY(-15px) rotateZ(-45deg) !important;
+  -moz-transform: translateY(-15px) rotateZ(-45deg) !important;
+  -ms-transform: translateY(-15px) rotateZ(-45deg) !important;
+  -o-transform: translateY(-15px) rotateZ(-45deg) !important;
+  transform: translateY(-15px) rotateZ(-45deg) !important;
+}
+
+.button.active .middle {
+  width: 0 !important;
+}
+
+.move-to-left {
+  -webkit-transform: translateX(-400px) !important;
+  -moz-transform: translateX(-400px) !important;
+  -ms-transform: translateX(-400px) !important;
+  -o-transform: translateX(-400px) !important;
+  transform: translateX(-400px) !important;
+  transition: all 0.3s ease !important;
+}
+
+nav {
+  padding-top: 30px !important;
+}
+
+.sidebar-list {
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+  position: relative !important;
+  margin-top: 150px !important;
+  text-align: center !important;
+}
+
+.sidebar-item {
+  margin: 30px 0 !important;
+  opacity: 0 !important;
+  -webkit-transform: translateY(-20px) !important;
+  -moz-transform: translateY(-20px) !important;
+  -ms-transform: translateY(-20px) !important;
+  -o-transform: translateY(-20px) !important;
+  transform: translateY(-20px) !important;
+}
+
+.sidebar-item:first-child {
+  -webkit-transition: all .7s .2s ease-in-out !important;
+  -moz-transition: all .7s .2s ease-in-out !important;
+  -ms-transition: all .7s .2s ease-in-out !important;
+  -o-transition: all .7s .2s ease-in-out !important;
+  transition: all .7s .2s ease-in-out !important;
+}
+
+.sidebar-item:nth-child(2) {
+  -webkit-transition: all .7s .4s ease-in-out !important;
+  -moz-transition: all .7s .4s ease-in-out !important;
+  -ms-transition: all .7s .4s ease-in-out !important;
+  -o-transition: all .7s .4s ease-in-out !important;
+  transition: all .7s .4s ease-in-out !important;
+}
+
+.sidebar-item:nth-child(3) {
+  -webkit-transition: all .7s .6s ease-in-out !important;
+  -moz-transition: all .7s .6s ease-in-out !important;
+  -ms-transition: all .7s .6s ease-in-out !important;
+  -o-transition: all .7s .6s ease-in-out !important;
+  transition: all .7s .6s ease-in-out !important;
+}
+
+.sidebar-item:last-child {
+  -webkit-transition: all .7s .8s ease-in-out !important;
+  -moz-transition: all .7s .8s ease-in-out !important;
+  -ms-transition: all .7s .8s ease-in-out !important;
+  -o-transition: all .7s .8s ease-in-out !important;
+  transition: all .7s .6s ease-in-out !important;
+}
+
+.sidebar-item.active {
+  opacity: 1;
+  -webkit-transform: translateY(0px) !important;
+  -moz-transform: translateY(0px) !important;
+  -ms-transform: translateY(0px) !important;
+  -o-transform: translateY(0px) !important;
+  transform: translateY(0px) !important;
+}
+
+.sidebar-anchor {
+  color: black !important !important;
+  text-decoration: none !important;
+  font-size: 1.8em !important;
+  text-transform: uppercase !important;
+  position: relative !important;
+  padding-bottom: 7px !important;
+}
+
+.sidebar-anchor:before {
+  content: "" !important;
+  width: 0 !important;
+  height: 2px !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  background-color: #FFF !important;
+  -webkit-transition: all .7s ease-in-out !important;
+  -moz-transition: all .7s ease-in-out !important;
+  -ms-transition: all .7s ease-in-out !important;
+  -o-transition: all .7s ease-in-out !important;
+  transition: all .7s ease-in-out !important;
+}
+
+.sidebar-anchor:hover:before {
+  width: 100% !important;
+}
+
+.ua {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 60px !important;
+}
+
+.fa {
+  font-size: 1.4em !important;
+  color: #EF8354 !important;
+  -webkit-transition: all 1s ease !important;
+  -moz-transition: all 1s ease !important;
+  -ms-transition: all 1s ease !important;
+  -o-transition: all 1s ease !important;
+  transition: all 1s ease !important;
+}
+
+.ua:hover .fa {
+  color: #FFF !important;
+  -webkit-transform: scale(1.3) !important;
+  -moz-transform: scale(1.3) !important;
+  -ms-transform: scale(1.3) !important;
+  -o-transform: scale(1.3) !important;
+  transform: scale(1.3) !important;
+  -webkit-transition: all 1s ease !important;
+  -moz-transition: all 1s ease !important;
+  -ms-transition: all 1s ease !important;
+  -o-transition: all 1s ease !important;
+  transition: all 1s ease !important;
+}
+
+@media (min-width: 480px) {
+  .nav-list {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-right {
+    position: absolute !important;
+  }
+  .hidden-xs {
+    display: block !important;
+  }
+  .visible-xs {
+    display: none !important;
+  }
+}
+
+
+<!-- 여기까지 -->
 
 .contents_section {
    width: 63% !important;
@@ -161,11 +414,13 @@
   color: @gray-dark;
   padding: 0.5rem;
   text-transform: lowercase;
+  text-decoration:none !important;
 }
 
 .btn--block {
   display: block;
   width: 100%;
+  text-decoration:none !important;
 }
 
 .cards {
@@ -250,6 +505,14 @@
   font-size: 1.4rem;
 }
 /* tackgoo end */
+ a:link {
+ text-decoration: none !important;
+}
+ a:visited { text-decoration: none !important;}
+ a:hover { 
+ text-decoration: underline !important;
+ }
+
 /* .container {
   width: 100%;
    display: block;
@@ -313,16 +576,49 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>와인 검색 화면</title>
-<link rel="stylesheet"
-   href="https://demos.jquerymobile.com/1.4.2/css/themes/default/jquery.mobile-1.4.2.min.css">
-<!-- <link rel="stylesheet" href="/css/style.css">  -->
-<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:700"
-   rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Marcellus+SC"
-   rel="stylesheet">
+<link rel="stylesheet" href="https://demos.jquerymobile.com/1.4.2/css/themes/default/jquery.mobile-1.4.2.min.css">
+<!-- <link rel="stylesheet" href="style.css">  -->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
 </head>
 
 <body>
+  <div class="nav-right visible-xs">
+  <div class="button" id="btn">
+    <div class="bar top"></div>
+    <div class="bar middle"></div>
+    <div class="bar bottom"></div>
+  </div>
+</div>
+<!-- nav-right -->
+<main>
+  <nav>
+    <div class="nav-right hidden-xs">
+      <div class="button" id="btn">
+        <div class="bar top"></div>
+        <div class="bar middle"></div>
+        <div class="bar bottom"></div>
+      </div>
+    </div>
+    <!-- nav-right -->
+  </nav>
+
+  <a href="https://codepen.io/tonkec/" class="ua" target="_blank">
+    <i class="fa fa-user"></i>
+  </a>
+</main>
+
+<div class="sidebar">
+  <ul class="sidebar-list">
+    <li class="sidebar-item"><a href="http://viniswine.tk/chatting" class="sidebar-anchor">chatting section</a></li>
+    <li class="sidebar-item"><a href="#" class="sidebar-anchor">chatbot section</a></li>
+  </ul>
+</div>
+
    <div id="searchMenu whole_container" class="navbar-nav">
       <div id="title_section">
          <p>VIN</p>
@@ -447,7 +743,7 @@
                   onchange="acidityValueChanged()"> <label for="maxPrice">산미:</label>
                <input type="range" name="maxAcidity" id="maxAcidity" min="0"
                   max="5" value="4" data-popup-enabled="true" data-show-value="true"
-                  onchange="acidityValueChanged()">
+                  onchange="acidityValueChanged()">	
             </div>
          </form>
          <form id="body">
@@ -495,7 +791,30 @@
 </body>
 <script src="https://demos.jquerymobile.com/1.4.2/js/jquery.js"></script>
 
-<!-- 슬라이더의 최소값 최대값을 받아 처리 -->
+<script>
+
+function toggleSidebar() {
+  console.log("토글!");
+  $(".button").toggleClass("active");
+  $("main").toggleClass("move-to-left");
+  $(".navbar-nav").toggleClass("move-to-left");
+  $(".sidebar-item").toggleClass("active");
+  $(".sidebar").toggleClass("move-to-left");
+}
+
+$(".button").on("click tap", function() {
+  toggleSidebar();
+});
+
+$(document).keyup(function(e) {
+  if (e.keyCode === 27) {
+    toggleSidebar();
+  }
+});
+
+</script>
+
+
 <script>
 var html = "";
 
@@ -637,71 +956,70 @@ function moreList(){   // 이 경우는 화면을 새로고침 하는 게 아니
          content += '</ul>';
          $('#addbtn').remove();//remove btn
          $(content).appendTo("#divResults");
-      }, error:function(request,status,error){
-         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-      }
-   });
+	   }, error:function(request,status,error){
+	      alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   }
+	})
+}
+
+
+function typesChanged(form){
+	var typesCheckbox = [];
+	
+	if (form.red.checked)
+	   typesCheckbox.push(form.red.value);
+	if (form.white.checked)
+	   typesCheckbox.push(form.white.value);
+	if (form.sparkling.checked)
+	   typesCheckbox.push(form.sparkling.value);
+	if (form.rose.checked)
+	   typesCheckbox.push(form.rose.value);
+	if (form.etc.checked)
+	   typesCheckbox.push(form.etc.value);
+	
+	typesInput = typesCheckbox.toString();
+	console.log(typesInput);
+	refreshSearchListByCondition();
 };
 
-function typesChanged(form)
-   {
-        var typesCheckbox = [];
-
-        if (form.red.checked)
-           typesCheckbox.push(form.red.value);
-        if (form.white.checked)
-           typesCheckbox.push(form.white.value);
-        if (form.sparkling.checked)
-           typesCheckbox.push(form.sparkling.value);
-        if (form.rose.checked)
-           typesCheckbox.push(form.rose.value);
-        if (form.etc.checked)
-           typesCheckbox.push(form.etc.value);
-
-        typesInput = typesCheckbox.toString();
-        console.log(typesInput);
-        refreshSearchListByCondition();
-   }
-
-function countriesChanged(form)
-   {
-        var countriesCheckbox = [];
-
-        if (form.ZA.checked)
-           countriesCheckbox.push(form.ZA.value);
-        if (form.NZ.checked)
-           countriesCheckbox.push(form.NZ.value);
-        if (form.DE.checked)
-           countriesCheckbox.push(form.DE.value);
-        if (form.US.checked)
-           countriesCheckbox.push(form.US.value);
-        if (form.ES.checked)
-           countriesCheckbox.push(form.ES.value);
-        if (form.AR.checked)
-           countriesCheckbox.push(form.AR.value);
-        if (form.AT.checked)
-           countriesCheckbox.push(form.AT.value);
-        if (form.IT.checked)
-           countriesCheckbox.push(form.IT.value);
-        if (form.JP.checked)
-           countriesCheckbox.push(form.JP.value);
-        if (form.CL.checked)
-           countriesCheckbox.push(form.CL.value);
-        if (form.CA.checked)
-           countriesCheckbox.push(form.CA.value);
-        if (form.PT.checked)
-           countriesCheckbox.push(form.PT.value);
-        if (form.FR.checked)
-           countriesCheckbox.push(form.FR.value);
-        if (form.HU.checked)
-           countriesCheckbox.push(form.HU.value);
-        if (form.AU.checked)
-           countriesCheckbox.push(form.AU.value);
-
-        countriesInput = countriesCheckbox.toString();
-        console.log(countriesInput);
-        refreshSearchListByCondition();
-   }
+function countriesChanged(form){
+	var countriesCheckbox = [];
+	
+	if (form.ZA.checked)
+	   countriesCheckbox.push(form.ZA.value);
+	if (form.NZ.checked)
+	   countriesCheckbox.push(form.NZ.value);
+	if (form.DE.checked)
+	   countriesCheckbox.push(form.DE.value);
+	if (form.US.checked)
+	   countriesCheckbox.push(form.US.value);
+	if (form.ES.checked)
+	   countriesCheckbox.push(form.ES.value);
+	if (form.AR.checked)
+	   countriesCheckbox.push(form.AR.value);
+	if (form.AT.checked)
+	   countriesCheckbox.push(form.AT.value);
+	if (form.IT.checked)
+	   countriesCheckbox.push(form.IT.value);
+	if (form.JP.checked)
+	   countriesCheckbox.push(form.JP.value);
+	if (form.CL.checked)
+	   countriesCheckbox.push(form.CL.value);
+	if (form.CA.checked)
+	   countriesCheckbox.push(form.CA.value);
+	if (form.PT.checked)
+	   countriesCheckbox.push(form.PT.value);
+	if (form.FR.checked)
+	   countriesCheckbox.push(form.FR.value);
+	if (form.HU.checked)
+	   countriesCheckbox.push(form.HU.value);
+	if (form.AU.checked)
+	   countriesCheckbox.push(form.AU.value);
+	
+	countriesInput = countriesCheckbox.toString();
+	console.log(countriesInput);
+	refreshSearchListByCondition();
+};
 
 var minAlcohol;
 var maxAlcohol;
@@ -779,11 +1097,7 @@ function priceValueChanged() {
    refreshSearchListByCondition();
 };
 
-var searchMenu = document.querySelector("#searchMenu");
 
-searchMenu.addEventListener("change", function(evt) {
-   refreshSearchListByCondition();
-});
 </script>
 
 <script
