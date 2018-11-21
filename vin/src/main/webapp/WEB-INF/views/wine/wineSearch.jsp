@@ -1,390 +1,394 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
+<style>
+/* Customize the label (the container) */
+*{
+  font-family: 'Nanum Gothic', sans-serif !important;
+}
+#whole_container{
+  width: 88% !important;
+  margin: 0 auto !important;
+}
+#title_section{
+  position: relative !important;
+  background-image: url('https://s3.ap-northeast-2.amazonaws.com/vin-demo-video/main_image.jpg') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  width: 65.2% !important;
+  margin: 50px auto !important;
+  height: 200px !important;
+}
+#title_section p{
+  position: absolute !important;
+  display: block !important;
+  width: 90% !important;
+  bottom: 0 !important;
+  text-align: right !important;
+  font-size: 2rem !important;
+  color: #ccc !important;
+  text-shadow: none !important;
+  font-family: 'Marcellus SC', serif !important;
+}
+/* searchbar_section */
+#search_section{
+  width: 65.1% !important;
+  margin: 0 auto !important;
+}
+#menu_section{
+  display: flex;
+  flex-direction: row;
+  width: 67% ;
+  margin: 0 auto ;
+  justify-content: space-around;
+}
+.wine_type_section, .wine_country_section{
+  box-shadow: #ccc 0px 0px 3px 1px;
+  border-radius: 3px ;
+  margin: 15px;
+  padding: 15px;
+
+}
+.wine_type_section{
+  flex: 1 1 0 !important;
+}
+.wine_country_section{
+  flex: 3 1 0 !important;
+}
+.wine-name{
+  text-align: center !important;
+  font-size: .7rem !important;
+}
+.ui-page-theme-a .ui-checkbox-on:after{
+  background-color: #570317 !important;
+  color: #fff !important;
+}
+.wine_country_section{
+  display: flex !important;
+  flex-direction: column !important;
+}
+.ui-btn, label.ui-btn{
+  border-width: 0 !important;
+}
+.ui-checkbox-on{
+  background: #570317 !important;
+  color: white !important;
+  text-shadow: none !important;
+}
+.wine_type_section #types{
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+}
+.wine_country_section #countries{
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+}
+.wine_country_section .ui-checkbox{
+  width: 30% !important;
+
+}
+.menu_title{
+  margin-bottom: 15px !important;
+  color: #570317 !important;
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  text-align: center;
+}
+.ui-checkbox .ui-btn{
+  text-align: right !important;
+}
+.wine-country{
+  text-align: center !important;
+  font-size: .7rem !important;
+}
+.wine_filter_section{
+  width: 64% !important;
+  margin: 10px auto !important;
+  padding: 15px !important;
+  box-shadow: #ccc 0px 0px 3px 1px !important;
+  border-radius: 3px !important;
+}
+.ui-page-theme-a .ui-slider-track .ui-btn-active{
+  background-color: #570317 !important;
+}
+.contents_section{
+  width: 63% !important;
+  margin: 10px auto !important;
+  padding: 15px !important;
+  box-shadow: #ccc 0px 0px 3px 1px !important;
+  border-radius: 3px !important;
+}
+/* tackgoo end */
+/* .container {
+  width: 100%;
+   display: block;
+   position: relative;
+   margin-bottom: 12px;
+   cursor: pointer;
+   font-size: 22px;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+} */
+
+/* Hide the browser's default checkbox */
+/* .container input {
+   opacity: 0;
+   cursor: pointer;
+   height: 0;
+   width: 0;
+} */
+
+/* Create a custom checkbox */
+
+/* On mouse-over, add a grey background color */
+/* .container:hover input ~ .checkmark {
+   background-color: #ccc;
+}
+.ui-checkbox input, .ui-radio input{
+  display: none;
+} */
+/* When the checkbox is checked, add a blue background */
+/* .container input:checked ~ .checkmark {
+   background-color: #2196F3;
+} */
+
+/* Create the checkmark/indicator (hidden when not checked) */
+/* .checkmark:after {
+   content: "";
+   position: absolute;
+   display: none;
+} */
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+   display: block !important;
+}
+/* Style the checkmark/indicator */
+/* .container .checkmark:after {
+   left: 9px;
+   top: 5px;
+   width: 5px;
+   height: 10px;
+   border: solid white;
+   border-width: 0 3px 3px 0;
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+} */
+
+</style>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>와인 검색 화면</title>
-<link rel="stylesheet" href="https://demos.jquerymobile.com/1.4.2/css/themes/default/jquery.mobile-1.4.2.min.css">
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://demos.jquerymobile.com/1.4.2/css/themes/default/jquery.mobile-1.4.2.min.css">
+<!-- <link rel="stylesheet" href="/css/style.css">  -->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:700"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Marcellus+SC"
+	rel="stylesheet">
 </head>
 
 <body>
-<img src = "img/main_image.jpg">
-<div id="searchMenu whole_container" class="navbar-nav">
-  <div id="title_section">
-    <p>VIN</p>
-  </div>
-  <div id="search_section">
-    <form id="keyword" action="javascript:searchKeyword();" accept-charset="utf-8" method="GET">
-       <input type="text" placeholder="검색어 입력" name="keywordInput" id="keywordInput"> <input type="submit" value="검색" />
-    </form>
-  </div>
-  <div id="menu_section">
-    <div class="wine_type_section">
-      <div class="menu_title">와인의 종류를 선택해주세요.</div>
-      <form id="types">
-        <label class="container">
-          <span class="wine-name">레드</span>
-          <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="red" value="red">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">
-          <span class="wine-name">화이트</span>
-          <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="white" value="white">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">
-          <span class="wine-name">스파클링</span>
-          <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="sparkling" value="sparkling">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">
-          <span class="wine-name">로제</span>
-          <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="rose" value="rose">
-          <span class="checkmark"></span>
-        </label>
-        <label class="container">
-          <span class="wine-name">기타</span>
-          <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="etc" value="etc">
-          <span class="checkmark"></span>
-        </label>
-      </form>
-    </div>
-      <div class="wine_country_section">
-        <div class="menu_title">와인의 원산지를 선택해주세요.</div>
-        <form id="countries">
-           <label class="container">
-             <span class="wine-country">남아프리카</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="ZA" value="ZA">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">뉴질랜드</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="NZ" value="NZ">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">독일</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="DE" value="DE">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">미국</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="US" value="US">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">스페인</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="ES" value="ES">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">아르헨티나</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AR" value="AR">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">오스트리아</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AT" value="AT">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">이탈리아</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="IT" value="IT">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">일본</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="JP" value="JP">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">칠레</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="CL" value="CL">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">캐나다</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="CA" value="CA">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">포루투갈</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="PT" value="PT">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">프랑스</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="FR" value="FR">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">헝가리</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="HU" value="HU">
-              <span class="checkmark"></span>
-           </label>
-           <label class="container">
-             <span class="wine-country">호주</span>
-              <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AU" value="AU">
-              <span class="checkmark"></span>
-           </label>
-        </form>
-      </div>
-  </div>
-  <div class="wine_filter_section">
-    <form id="alcohol">
-        <div data-role="rangeslider"  >
-          <label for="minAlcohol">알콜도수:</label>
-          <input type="range" name="minAlcohol" id="minAlcohol" min="0" max="25" value="10" data-popup-enabled="true" data-show-value="true" onchange=alcoholValueChanged()>
-          <label for="maxAlcohol">알콜도수:</label>
-          <input type="range" name="maxAlcohol" id="maxAlcohol" min="0" max="25" value="18" data-popup-enabled="true" data-show-value="true" onchange=alcoholValueChanged()>
-        </div>
-     </form>
-     <form id="sweetness">
-        <div data-role="rangeslider">
-           <label for="minSweetness">당도:</label> <input type="range"
-              name="minSweetness" id="minSweetness" min="0" max="5" value="1"
-              data-popup-enabled="true" data-show-value="true" onchange="sweetnessValueChanged()"> <label for="maxPrice">당도:</label>
-           <input type="range" name="maxSweetness" id="maxSweetness" min="0"
-              max="5" value="4" data-popup-enabled="true" data-show-value="true"
-              onchange=sweetnessValueChanged()>
-        </div>
-     </form>
-     <form id="acidity">
-        <div data-role="rangeslider">
-           <label for="minAcidity">산미:</label> <input type="range"
-              name="minAcidity" id="minAcidity" min="0" max="5" value="1"
-              data-popup-enabled="true" data-show-value="true"
-              onchange="acidityValueChanged()"> <label for="maxPrice">산미:</label>
-           <input type="range" name="maxAcidity" id="maxAcidity" min="0"
-              max="5" value="4" data-popup-enabled="true" data-show-value="true"
-              onchange="acidityValueChanged()">
-        </div>
-     </form>
-     <form id="body">
-        <div data-role="rangeslider">
-           <label for="minBody">바디:</label> <input type="range" name="minBody"
-              id="minBody" min="0" max="5" value="1" data-popup-enabled="true"
-              data-show-value="true" onchange="bodyValueChanged()"> <label
-              for="maxBody">바디:</label> <input type="range" name="maxBody"
-              id="maxBody" min="0" max="5" value="4" data-popup-enabled="true"
-              data-show-value="true" onchange="bodyValueChanged()">
-        </div>
-     </form>
-     <form id="tanin">
-        <div data-role="rangeslider">
-           <label for="minTanin">타닌:</label> <input type="range"
-              name="minTanin" id="minTanin" min="0" max="5" value="1"
-              data-popup-enabled="true" data-show-value="true"
-              onchange="taninValueChanged()"> <label for="maxTanin">타닌:</label>
-           <input type="range" name="maxAcidity" id="maxTanin" min="0" max="5"
-              value="4" data-popup-enabled="true" data-show-value="true"
-              onchange=taninValueChanged()>
-        </div>
-     </form>
-     <form id="price">
-        <div data-role="rangeslider">
-           <label for="minPrice">가격:</label> <input type="range"
-              name="minPrice" id="minPrice" min="0" max="1000000" value="10000"
-              data-popup-enabled="true" data-show-value="true"
-              onchange="priceValueChanged()"> <label for="maxPrice">가격:</label>
-           <input type="range" name="maxPrice" id="maxPrice" min="0"
-              max="1000000" value="200000" data-popup-enabled="true"
-              data-show-value="true" onchange="priceValueChanged()">
-        </div>
-     </form>
-  </div>
-    <div id="contents_section">
-
-    </div>
-</div>
-<!--
-   <div id="searchMenu" class="navbar-nav">
-      <div>
-         <form id="keyword" action="javascript:searchKeyword();"
-            accept-charset="utf-8" method="GET">
-            <input type="text" placeholder="검색어 입력" name="keywordInput"
-               id="keywordInput"> <input type="submit" value="검색" />
-         </form>
-      </div>
-
-      <div>
-         <form id="types">
-            <label class="container">레드
-               <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="red" value="red">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container">
-              <span class="wine-name">화이트</span>
-               <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="white" value="white">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container">스파클링
-               <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="sparkling" value="sparkling">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container">로제
-               <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="rose" value="rose">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container">기타
-               <input type="checkbox" checked="checked" onclick="typesChanged(this.form)" name="etc" value="etc">
-               <span class="checkmark"></span>
-            </label>
-         </form>
-      </div>
-
-      <div>
-         <form id="countries">
-            <label class="container" style="width: 15% !important; display: inline-block !important;">남아프리카
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="ZA" value="ZA">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">뉴질랜드
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="NZ" value="NZ">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">독일
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="DE" value="DE">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">미국
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="US" value="US">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">스페인
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="ES" value="ES">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">아르헨티나
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AR" value="AR">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">오스트리아
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AT" value="AT">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">이탈리아
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="IT" value="IT">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">일본
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="JP" value="JP">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">칠레
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="CL" value="CL">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">캐나다
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="CA" value="CA">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">포루투갈
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="PT" value="PT">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">프랑스
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="FR" value="FR">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">헝가리
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="HU" value="HU">
-               <span class="checkmark"></span>
-            </label>
-            <label class="container" style="width: 15% !important; display: inline-block !important;">호주
-               <input type="checkbox" checked="checked" onclick="countriesChanged(this.form)" name="AU" value="AU">
-               <span class="checkmark"></span>
-            </label>
-         </form>
-      </div>
-
-
-
-
-      <!-- 가격 최소값 최대값 슬라이더 -->
-      <!-- <div style="display: block">
-         <form id="alcohol">
-            <div data-role="rangeslider"  >
-               <label for="minAlcohol">알콜도수:</label> <input type="range"
-                  name="minAlcohol" id="minAlcohol" min="0" max="25" value="10"
-                  data-popup-enabled="true" data-show-value="true"
-                  onchange=alcoholValueChanged()> <label for="maxAlcohol">알콜도수:</label>
-               <input type="range" name="maxAlcohol" id="maxAlcohol" min="0"
-                  max="25" value="18" data-popup-enabled="true"
-                  data-show-value="true" onchange=alcoholValueChanged()>
-            </div>
-         </form>
-         <form id="sweetness">
-            <div data-role="rangeslider">
-               <label for="minSweetness">당도:</label> <input type="range"
-                  name="minSweetness" id="minSweetness" min="0" max="5" value="1"
-                  data-popup-enabled="true" data-show-value="true" onchange="sweetnessValueChanged()"> <label for="maxPrice">당도:</label>
-               <input type="range" name="maxSweetness" id="maxSweetness" min="0"
-                  max="5" value="4" data-popup-enabled="true" data-show-value="true"
-                  onchange=sweetnessValueChanged()>
-            </div>
-         </form>
-         <form id="acidity">
-            <div data-role="rangeslider">
-               <label for="minAcidity">산미:</label> <input type="range"
-                  name="minAcidity" id="minAcidity" min="0" max="5" value="1"
-                  data-popup-enabled="true" data-show-value="true"
-                  onchange="acidityValueChanged()"> <label for="maxPrice">산미:</label>
-               <input type="range" name="maxAcidity" id="maxAcidity" min="0"
-                  max="5" value="4" data-popup-enabled="true" data-show-value="true"
-                  onchange="acidityValueChanged()">
-            </div>
-         </form>
-         <form id="body">
-            <div data-role="rangeslider">
-               <label for="minBody">바디:</label> <input type="range" name="minBody"
-                  id="minBody" min="0" max="5" value="1" data-popup-enabled="true"
-                  data-show-value="true" onchange="bodyValueChanged()"> <label
-                  for="maxBody">바디:</label> <input type="range" name="maxBody"
-                  id="maxBody" min="0" max="5" value="4" data-popup-enabled="true"
-                  data-show-value="true" onchange="bodyValueChanged()">
-            </div>
-         </form>
-         <form id="tanin">
-            <div data-role="rangeslider">
-               <label for="minTanin">타닌:</label> <input type="range"
-                  name="minTanin" id="minTanin" min="0" max="5" value="1"
-                  data-popup-enabled="true" data-show-value="true"
-                  onchange="taninValueChanged()"> <label for="maxTanin">타닌:</label>
-               <input type="range" name="maxAcidity" id="maxTanin" min="0" max="5"
-                  value="4" data-popup-enabled="true" data-show-value="true"
-                  onchange=taninValueChanged()>
-            </div>
-         </form>
-         <form id="price">
-            <div data-role="rangeslider">
-               <label for="minPrice">가격:</label> <input type="range"
-                  name="minPrice" id="minPrice" min="0" max="1000000" value="10000"
-                  data-popup-enabled="true" data-show-value="true"
-                  onchange="priceValueChanged()"> <label for="maxPrice">가격:</label>
-               <input type="range" name="maxPrice" id="maxPrice" min="0"
-                  max="1000000" value="200000" data-popup-enabled="true"
-                  data-show-value="true" onchange="priceValueChanged()">
-            </div>
-         </form>
-      </div> -->
-   </div> -->
-
-   <div id="divResults"></div>
-   <tr id='addbtn'>
-      <td colspan="5">
-         <div class="btns">
-            <a href="javascript:moreList();" class="btn btn-primary">더보기</a>
-         </div>
-      </td>
-   </tr>
+	<div id="searchMenu whole_container" class="navbar-nav">
+		<div id="title_section">
+			<p>VIN</p>
+		</div>
+		<div id="search_section">
+			<form id="keyword" action="javascript:searchKeyword();"
+				accept-charset="utf-8" method="GET">
+				<input type="text" placeholder="검색어 입력" name="keywordInput"
+					id="keywordInput"> <input type="submit" value="검색" />
+			</form>
+		</div>
+		<div id="menu_section">
+			<div class="wine_type_section">
+				<div class="menu_title">와인의 종류를 선택해주세요.</div>
+				<form id="types">
+					<label class="container"> <span class="wine-name">레드</span>
+						<input type="checkbox" checked="checked"
+						onclick="typesChanged(this.form)" name="red" value="red">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-name">화이트</span>
+						<input type="checkbox" checked="checked"
+						onclick="typesChanged(this.form)" name="white" value="white">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-name">스파클링</span>
+						<input type="checkbox" checked="checked"
+						onclick="typesChanged(this.form)" name="sparkling"
+						value="sparkling"> <span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-name">로제</span>
+						<input type="checkbox" checked="checked"
+						onclick="typesChanged(this.form)" name="rose" value="rose">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-name">기타</span>
+						<input type="checkbox" checked="checked"
+						onclick="typesChanged(this.form)" name="etc" value="etc">
+						<span class="checkmark"></span>
+					</label>
+				</form>
+			</div>
+			<div class="wine_country_section">
+				<div class="menu_title">와인의 원산지를 선택해주세요.</div>
+				<form id="countries">
+					<label class="container"> <span class="wine-country">남아프리카</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="ZA" value="ZA">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">뉴질랜드</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="NZ" value="NZ">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">독일</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="DE" value="DE">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">미국</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="US" value="US">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">스페인</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="ES" value="ES">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">아르헨티나</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="AR" value="AR">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">오스트리아</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="AT" value="AT">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">이탈리아</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="IT" value="IT">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">일본</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="JP" value="JP">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">칠레</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="CL" value="CL">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">캐나다</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="CA" value="CA">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">포루투갈</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="PT" value="PT">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">프랑스</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="FR" value="FR">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">헝가리</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="HU" value="HU">
+						<span class="checkmark"></span>
+					</label> <label class="container"> <span class="wine-country">호주</span>
+						<input type="checkbox" checked="checked"
+						onclick="countriesChanged(this.form)" name="AU" value="AU">
+						<span class="checkmark"></span>
+					</label>
+				</form>
+			</div>
+		</div>
+		<div class="wine_filter_section">
+			<form id="alcohol">
+				<div data-role="rangeslider">
+					<label for="minAlcohol">알콜도수:</label> <input type="range"
+						name="minAlcohol" id="minAlcohol" min="0" max="25" value="10"
+						data-popup-enabled="true" data-show-value="true"
+						onchange=alcoholValueChanged()> <label for="maxAlcohol">알콜도수:</label>
+					<input type="range" name="maxAlcohol" id="maxAlcohol" min="0"
+						max="25" value="18" data-popup-enabled="true"
+						data-show-value="true" onchange=alcoholValueChanged()>
+				</div>
+			</form>
+			<form id="sweetness">
+				<div data-role="rangeslider">
+					<label for="minSweetness">당도:</label> <input type="range"
+						name="minSweetness" id="minSweetness" min="0" max="5" value="1"
+						data-popup-enabled="true" data-show-value="true"
+						onchange="sweetnessValueChanged()"> <label for="maxPrice">당도:</label>
+					<input type="range" name="maxSweetness" id="maxSweetness" min="0"
+						max="5" value="4" data-popup-enabled="true" data-show-value="true"
+						onchange=sweetnessValueChanged()>
+				</div>
+			</form>
+			<form id="acidity">
+				<div data-role="rangeslider">
+					<label for="minAcidity">산미:</label> <input type="range"
+						name="minAcidity" id="minAcidity" min="0" max="5" value="1"
+						data-popup-enabled="true" data-show-value="true"
+						onchange="acidityValueChanged()"> <label for="maxPrice">산미:</label>
+					<input type="range" name="maxAcidity" id="maxAcidity" min="0"
+						max="5" value="4" data-popup-enabled="true" data-show-value="true"
+						onchange="acidityValueChanged()">
+				</div>
+			</form>
+			<form id="body">
+				<div data-role="rangeslider">
+					<label for="minBody">바디:</label> <input type="range" name="minBody"
+						id="minBody" min="0" max="5" value="1" data-popup-enabled="true"
+						data-show-value="true" onchange="bodyValueChanged()"> <label
+						for="maxBody">바디:</label> <input type="range" name="maxBody"
+						id="maxBody" min="0" max="5" value="4" data-popup-enabled="true"
+						data-show-value="true" onchange="bodyValueChanged()">
+				</div>
+			</form>
+			<form id="tanin">
+				<div data-role="rangeslider">
+					<label for="minTanin">타닌:</label> <input type="range"
+						name="minTanin" id="minTanin" min="0" max="5" value="1"
+						data-popup-enabled="true" data-show-value="true"
+						onchange="taninValueChanged()"> <label for="maxTanin">타닌:</label>
+					<input type="range" name="maxAcidity" id="maxTanin" min="0" max="5"
+						value="4" data-popup-enabled="true" data-show-value="true"
+						onchange=taninValueChanged()>
+				</div>
+			</form>
+			<form id="price">
+				<div data-role="rangeslider">
+					<label for="minPrice">가격:</label> <input type="range"
+						name="minPrice" id="minPrice" min="0" max="1000000" value="10000"
+						data-popup-enabled="true" data-show-value="true"
+						onchange="priceValueChanged()"> <label for="maxPrice">가격:</label>
+					<input type="range" name="maxPrice" id="maxPrice" min="0"
+						max="1000000" value="200000" data-popup-enabled="true"
+						data-show-value="true" onchange="priceValueChanged()">
+				</div>
+			</form>
+		</div>
+		
+	</div>
+	<div id="contents container" class="card-contents">
+		<div id="contents_section">
+			<div id="divResults">
+			
+			</div>
+			
+				
+			<div class="add-botton">
+				<a href="javascript:moreList();" class="btn btn-primary">더보기</a>
+			</div>
+		</div>
+	</div>
 
 </body>
 <script src="https://demos.jquerymobile.com/1.4.2/js/jquery.js"></script>
@@ -783,5 +787,5 @@ function searchKeyword(){		// 카테고리 조건이 변경되면 화면을 새�
 </script>
 
 <script
-   src="https://demos.jquerymobile.com/1.4.2/js/jquery.mobile-1.4.2.min.js"></script>
+	src="https://demos.jquerymobile.com/1.4.2/js/jquery.mobile-1.4.2.min.js"></script>
 </html>
