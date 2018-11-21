@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import kr.ac.hongik.vin.wine.dto.Wine;
 import kr.ac.hongik.vin.wine.dto.WineSearchList;
 import kr.ac.hongik.vin.wine.service.WineService;
 
+@CrossOrigin(origins = "*")
 @Controller
 public class MainController {
 
@@ -165,5 +167,10 @@ public class MainController {
 	@RequestMapping(value = "/chatbot") // 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
 	public String chatbot(HttpServletRequest request) throws Exception {
 		return "chatting/chatbot";
+	}
+	
+	@RequestMapping(value = "/card") // 유저의 정보를 받아 세션에 값을 저장하고, 회원으로 등록 요청
+	public String card(HttpServletRequest request) throws Exception {
+		return "wine/card";
 	}
 }
