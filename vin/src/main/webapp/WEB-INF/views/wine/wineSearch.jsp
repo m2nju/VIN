@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ page import="java.util.Random"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -151,251 +152,267 @@
 }
 
 <!-- 오른쪽 nav -->
-/* right nav*/
-main {
-  z-index: 11 !important
-  position: relative !important;
-  height: 100% !important;
-  -webkit-transition: transform .7s ease-in-out !important;
-  -moz-transition: transform .7s ease-in-out !important;
-  -ms-transition: transform .7s ease-in-out !important;
-  -o-transition: transform .7s ease-in-out !important;
-  transition: transform .7s ease-in-out !important;
-}
+ /* right nav*/
 
-.sidebar {
-  height: 100% !important;
-  width: 400px !important;
-  position: fixed !important;
-  top: 0 !important;
-  z-index: 9 !important;
-  right: -400px !important;
-  background: white !important;
-  border: 3px solid #570317 !important;
-  box-sizing: border-box !important;
-}
-.bg-active{
+            main {
+              z-index: 11 !important position: relative !important;
+              height: 100% !important;
+              -webkit-transition: transform .7s ease-in-out !important;
+              -moz-transition: transform .7s ease-in-out !important;
+              -ms-transition: transform .7s ease-in-out !important;
+              -o-transition: transform .7s ease-in-out !important;
+              transition: transform .7s ease-in-out !important;
+            }
 
-}
-.bar {
-  display: block !important;
-  height: 5px !important;
-  width: 50px !important;
-  background-color: #570317 !important;
-  margin: 10px auto !important;
-}
-.button {
-  cursor: pointer !important;
-  display: inline-block !important;
-  width: auto !important;
-  margin: 0 auto !important;
-  -webkit-transition: all .7s ease !important;
-  -moz-transition: all .7s ease !important;
-  -ms-transition: all .7s ease !important;
-  -o-transition: all .7s ease !important;
-  transition: all .7s ease !important;
-}
-.nav-right {
-  position: fixed !important;
-  right: 40px !important;
-  top: 20px !important;
-}
-.nav-right.visible-xs {
-  z-index: 10 !important;
-}
-.hidden-xs {
-  display: none !important;
-}
+            .sidebar {
+              height: 100% !important;
+              width: 400px !important;
+              position: fixed !important;
+              top: 0 !important;
+              z-index: 9 !important;
+              right: -400px !important;
+              background: white !important;
+              border: 3px solid #570317 !important;
+              box-sizing: border-box !important;
+            }
 
-.middle {
-  margin: 0 auto !important;
-}
+            .bg-active {}
 
-.bar {
-  -webkit-transition: all .7s ease !important;
-  -moz-transition: all .7s ease !important;
-  -ms-transition: all .7s ease !important;
-  -o-transition: all .7s ease !important;
-  transition: all .7s ease !important;
-}
+            .bar {
+              display: block !important;
+              height: 5px !important;
+              width: 50px !important;
+              background-color: #570317 !important;
+              margin: 10px auto !important;
+            }
 
-.nav-right.visible-xs .active .bar {
-  background-color: #FFF !important;
-  -webkit-transition: all .7s ease !important;
-  -moz-transition: all .7s ease !important;
-  -ms-transition: all .7s ease !important;
-  -o-transition: all .7s ease !important;
-  transition: all .7s ease !important;
-}
+            .button {
+              cursor: pointer !important;
+              display: inline-block !important;
+              width: auto !important;
+              margin: 0 auto !important;
+              -webkit-transition: all .7s ease !important;
+              -moz-transition: all .7s ease !important;
+              -ms-transition: all .7s ease !important;
+              -o-transition: all .7s ease !important;
+              transition: all .7s ease !important;
+            }
 
-.button.active .top {
-  -webkit-transform: translateY(15px) rotateZ(45deg) !important;
-  -moz-transform: translateY(15px) rotateZ(45deg) !important;
-  -ms-transform: translateY(15px) rotateZ(45deg) !important;
-  -o-transform: translateY(15px) rotateZ(45deg) !important;
-  transform: translateY(15px) rotateZ(45deg) !important;
-}
+            .nav-right {
+              position: fixed !important;
+              right: 40px !important;
+              top: 20px !important;
+            }
 
-.button.active .bottom {
-  -webkit-transform: translateY(-15px) rotateZ(-45deg) !important;
-  -moz-transform: translateY(-15px) rotateZ(-45deg) !important;
-  -ms-transform: translateY(-15px) rotateZ(-45deg) !important;
-  -o-transform: translateY(-15px) rotateZ(-45deg) !important;
-  transform: translateY(-15px) rotateZ(-45deg) !important;
-}
+            .nav-right.visible-xs {
+              z-index: 10 !important;
+            }
 
-.button.active .middle {
-  width: 0 !important;
-}
+            .hidden-xs {
+              display: none !important;
+            }
 
-.move-to-left {
-  -webkit-transform: translateX(-400px) !important;
-  -moz-transform: translateX(-400px) !important;
-  -ms-transform: translateX(-400px) !important;
-  -o-transform: translateX(-400px) !important;
-  transform: translateX(-400px) !important;
-  transition: all 0.3s ease !important;
-}
+            .middle {
+              margin: 0 auto !important;
+            }
 
-nav {
-  padding-top: 30px !important;
-}
+            .bar {
+              -webkit-transition: all .7s ease !important;
+              -moz-transition: all .7s ease !important;
+              -ms-transition: all .7s ease !important;
+              -o-transition: all .7s ease !important;
+              transition: all .7s ease !important;
+            }
 
-.sidebar-list {
-  padding: 0 !important;
-  margin: 0 !important;
-  list-style: none !important;
-  position: relative !important;
-  margin-top: 150px !important;
-  text-align: center !important;
-}
+            .nav-right.visible-xs .active .bar {
+              background-color: #FFF !important;
+              -webkit-transition: all .7s ease !important;
+              -moz-transition: all .7s ease !important;
+              -ms-transition: all .7s ease !important;
+              -o-transition: all .7s ease !important;
+              transition: all .7s ease !important;
+            }
 
-.sidebar-item {
-  margin: 30px 0 !important;
-  opacity: 0 !important;
-  -webkit-transform: translateY(-20px) !important;
-  -moz-transform: translateY(-20px) !important;
-  -ms-transform: translateY(-20px) !important;
-  -o-transform: translateY(-20px) !important;
-  transform: translateY(-20px) !important;
-}
+            .button.active .top {
+              -webkit-transform: translateY(15px) rotateZ(45deg) !important;
+              -moz-transform: translateY(15px) rotateZ(45deg) !important;
+              -ms-transform: translateY(15px) rotateZ(45deg) !important;
+              -o-transform: translateY(15px) rotateZ(45deg) !important;
+              transform: translateY(15px) rotateZ(45deg) !important;
+            }
 
-.sidebar-item:first-child {
-  -webkit-transition: all .7s .2s ease-in-out !important;
-  -moz-transition: all .7s .2s ease-in-out !important;
-  -ms-transition: all .7s .2s ease-in-out !important;
-  -o-transition: all .7s .2s ease-in-out !important;
-  transition: all .7s .2s ease-in-out !important;
-}
+            .button.active .bottom {
+              -webkit-transform: translateY(-15px) rotateZ(-45deg) !important;
+              -moz-transform: translateY(-15px) rotateZ(-45deg) !important;
+              -ms-transform: translateY(-15px) rotateZ(-45deg) !important;
+              -o-transform: translateY(-15px) rotateZ(-45deg) !important;
+              transform: translateY(-15px) rotateZ(-45deg) !important;
+            }
 
-.sidebar-item:nth-child(2) {
-  -webkit-transition: all .7s .4s ease-in-out !important;
-  -moz-transition: all .7s .4s ease-in-out !important;
-  -ms-transition: all .7s .4s ease-in-out !important;
-  -o-transition: all .7s .4s ease-in-out !important;
-  transition: all .7s .4s ease-in-out !important;
-}
+            .button.active .middle {
+              width: 0 !important;
+            }
 
-.sidebar-item:nth-child(3) {
-  -webkit-transition: all .7s .6s ease-in-out !important;
-  -moz-transition: all .7s .6s ease-in-out !important;
-  -ms-transition: all .7s .6s ease-in-out !important;
-  -o-transition: all .7s .6s ease-in-out !important;
-  transition: all .7s .6s ease-in-out !important;
-}
+            .move-to-left {
+              -webkit-transform: translateX(-400px) !important;
+              -moz-transform: translateX(-400px) !important;
+              -ms-transform: translateX(-400px) !important;
+              -o-transform: translateX(-400px) !important;
+              transform: translateX(-400px) !important;
+              transition: all 0.3s ease !important;
+            }
 
-.sidebar-item:last-child {
-  -webkit-transition: all .7s .8s ease-in-out !important;
-  -moz-transition: all .7s .8s ease-in-out !important;
-  -ms-transition: all .7s .8s ease-in-out !important;
-  -o-transition: all .7s .8s ease-in-out !important;
-  transition: all .7s .6s ease-in-out !important;
-}
+            nav {
+              padding-top: 30px !important;
+            }
 
-.sidebar-item.active {
-  opacity: 1;
-  -webkit-transform: translateY(0px) !important;
-  -moz-transform: translateY(0px) !important;
-  -ms-transform: translateY(0px) !important;
-  -o-transform: translateY(0px) !important;
-  transform: translateY(0px) !important;
-}
+            .sidebar-list {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-around;
+              padding: 0 !important;
+              margin: 0 !important;
+              list-style: none !important;
+              position: relative !important;
+              margin-top: 150px !important;
+              text-align: center !important;
+            }
 
-.sidebar-anchor {
-  color: black !important !important;
-  text-decoration: none !important;
-  font-size: 1.8em !important;
-  text-transform: uppercase !important;
-  position: relative !important;
-  padding-bottom: 7px !important;
-}
+            .sidebar-item a {
+              font-size: 1.2rem !important;
+              color: black !important;
+              text-decoration: none !important;
+            }
 
-.sidebar-anchor:before {
-  content: "" !important;
-  width: 0 !important;
-  height: 2px !important;
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  background-color: #FFF !important;
-  -webkit-transition: all .7s ease-in-out !important;
-  -moz-transition: all .7s ease-in-out !important;
-  -ms-transition: all .7s ease-in-out !important;
-  -o-transition: all .7s ease-in-out !important;
-  transition: all .7s ease-in-out !important;
-}
+            .sidebar-item a:hover {
+              text-decoration: none !important;
+            }
 
-.sidebar-anchor:hover:before {
-  width: 100% !important;
-}
+            .chatting-window {
+              padding: 5px;
+              margin: 10px;
+              border: 3px solid black;
+              height: 600px;
+              border-radius: 5px;
+              background-color: #eee;
+            }
 
-.ua {
-  position: absolute !important;
-  bottom: 20px !important;
-  left: 60px !important;
-}
+            .sidebar-item:first-child {
+              -webkit-transition: all .7s .2s ease-in-out !important;
+              -moz-transition: all .7s .2s ease-in-out !important;
+              -ms-transition: all .7s .2s ease-in-out !important;
+              -o-transition: all .7s .2s ease-in-out !important;
+              transition: all .7s .2s ease-in-out !important;
+            }
 
-.fa {
-  font-size: 1.4em !important;
-  color: #EF8354 !important;
-  -webkit-transition: all 1s ease !important;
-  -moz-transition: all 1s ease !important;
-  -ms-transition: all 1s ease !important;
-  -o-transition: all 1s ease !important;
-  transition: all 1s ease !important;
-}
+            .sidebar-item:nth-child(2) {
+              -webkit-transition: all .7s .4s ease-in-out !important;
+              -moz-transition: all .7s .4s ease-in-out !important;
+              -ms-transition: all .7s .4s ease-in-out !important;
+              -o-transition: all .7s .4s ease-in-out !important;
+              transition: all .7s .4s ease-in-out !important;
+            }
 
-.ua:hover .fa {
-  color: #FFF !important;
-  -webkit-transform: scale(1.3) !important;
-  -moz-transform: scale(1.3) !important;
-  -ms-transform: scale(1.3) !important;
-  -o-transform: scale(1.3) !important;
-  transform: scale(1.3) !important;
-  -webkit-transition: all 1s ease !important;
-  -moz-transition: all 1s ease !important;
-  -ms-transition: all 1s ease !important;
-  -o-transition: all 1s ease !important;
-  transition: all 1s ease !important;
-}
+            .sidebar-item:nth-child(3) {
+              -webkit-transition: all .7s .6s ease-in-out !important;
+              -moz-transition: all .7s .6s ease-in-out !important;
+              -ms-transition: all .7s .6s ease-in-out !important;
+              -o-transition: all .7s .6s ease-in-out !important;
+              transition: all .7s .6s ease-in-out !important;
+            }
 
-@media (min-width: 480px) {
-  .nav-list {
-    display: block !important;
-  }
-}
+            .sidebar-item:last-child {
+              -webkit-transition: all .7s .8s ease-in-out !important;
+              -moz-transition: all .7s .8s ease-in-out !important;
+              -ms-transition: all .7s .8s ease-in-out !important;
+              -o-transition: all .7s .8s ease-in-out !important;
+              transition: all .7s .6s ease-in-out !important;
+            }
 
-@media (min-width: 768px) {
-  .nav-right {
-    position: absolute !important;
-  }
-  .hidden-xs {
-    display: block !important;
-  }
-  .visible-xs {
-    display: none !important;
-  }
-}
+            .sidebar-item.active {
+              opacity: 1;
+              -webkit-transform: translateY(0px) !important;
+              -moz-transform: translateY(0px) !important;
+              -ms-transform: translateY(0px) !important;
+              -o-transform: translateY(0px) !important;
+              transform: translateY(0px) !important;
+            }
+
+            .sidebar-anchor {
+              color: black !important !important;
+              text-decoration: none !important;
+              font-size: 1.8em !important;
+              text-transform: uppercase !important;
+              position: relative !important;
+              padding-bottom: 7px !important;
+            }
+
+            .sidebar-anchor:before {
+              content: "" !important;
+              width: 0 !important;
+              height: 2px !important;
+              position: absolute !important;
+              bottom: 0 !important;
+              left: 0 !important;
+              background-color: #FFF !important;
+              -webkit-transition: all .7s ease-in-out !important;
+              -moz-transition: all .7s ease-in-out !important;
+              -ms-transition: all .7s ease-in-out !important;
+              -o-transition: all .7s ease-in-out !important;
+              transition: all .7s ease-in-out !important;
+            }
+
+            .sidebar-anchor:hover:before {
+              width: 100% !important;
+            }
+
+            .ua {
+              position: absolute !important;
+              bottom: 20px !important;
+              left: 60px !important;
+            }
+
+            .fa {
+              font-size: 1.4em !important;
+              color: #EF8354 !important;
+              -webkit-transition: all 1s ease !important;
+              -moz-transition: all 1s ease !important;
+              -ms-transition: all 1s ease !important;
+              -o-transition: all 1s ease !important;
+              transition: all 1s ease !important;
+            }
+
+            .ua:hover .fa {
+              color: #FFF !important;
+              -webkit-transform: scale(1.3) !important;
+              -moz-transform: scale(1.3) !important;
+              -ms-transform: scale(1.3) !important;
+              -o-transform: scale(1.3) !important;
+              transform: scale(1.3) !important;
+              -webkit-transition: all 1s ease !important;
+              -moz-transition: all 1s ease !important;
+              -ms-transition: all 1s ease !important;
+              -o-transition: all 1s ease !important;
+              transition: all 1s ease !important;
+            }
+
+            @media (min-width: 480px) {
+              .nav-list {
+                display: block !important;
+              }
+            }
+
+            @media (min-width: 768px) {
+              .nav-right {
+                position: absolute !important;
+              }
+              .hidden-xs {
+                display: block !important;
+              }
+              .visible-xs {
+                display: none !important;
+              }
+            }
 
 
 <!-- 여기까지 -->
@@ -576,6 +593,8 @@ nav {
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>와인 검색 화면</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
 <link rel="stylesheet" href="https://demos.jquerymobile.com/1.4.2/css/themes/default/jquery.mobile-1.4.2.min.css">
 <!-- <link rel="stylesheet" href="style.css">  -->
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:700" rel="stylesheet">
@@ -610,16 +629,20 @@ nav {
   <a href="https://codepen.io/tonkec/" class="ua" target="_blank">
     <i class="fa fa-user"></i>
   </a>
+  
 </main>
 
-<div class="sidebar">
-  <ul class="sidebar-list">
-    <li class="sidebar-item"><a href="http://viniswine.tk/chatting" class="sidebar-anchor">chatting section</a></li>
-    <li class="sidebar-item"><a href="#" class="sidebar-anchor">chatbot section</a></li>
-  </ul>
-</div>
+	<div class="sidebar">
+		<ul class="sidebar-list">
+			<li class="sidebar-item chatting"><a href="javascript:chatting();"
+				class="sidebar-anchor">chatting</a></li>
+			<li class="sidebar-item chatbot"><a href="javascript:chatbot();"
+				class="sidebar-anchor">chatbot</a></li>
+		</ul>
+		<div class="chatting-window"></div>
+	</div>
 
-   <div id="searchMenu whole_container" class="navbar-nav">
+	<div id="searchMenu whole_container" class="navbar-nav">
       <div id="title_section">
          <p>VIN</p>
       </div>
@@ -785,9 +808,15 @@ nav {
          <div class="add-botton">
             <a href="javascript:moreList();" class="btn btn-primary">더보기</a>
          </div>
+         
       </div>
    </div>
 
+
+<%
+		Random random = new Random();
+		String userName = "비회원"+ Integer.toString(random.nextInt(90000)+10000);	// ex:) 비회원21334 등의 형태로 임시 name이 부여된다.	 
+%>
 </body>
 <script src="https://demos.jquerymobile.com/1.4.2/js/jquery.js"></script>
 
@@ -891,6 +920,7 @@ function showWineTable(obj) {      // api에 요청한 결과를 받아와 테�
                 	html += '</p><p class="card__text">' + obj[i].price.toLocaleString() + "\\";
                 }
                 html += '</p><a href = "http://viniswine.tk/wine/details/' + obj[i].wine21Code + '"><button class="btn btn--block card__btn">' + '자세히보기'+ '</button></a>' + '</div></div></li>';
+
     }
     html += '</ul>';
     div.innerHTML = html;
@@ -898,7 +928,7 @@ function showWineTable(obj) {      // api에 요청한 결과를 받아와 테�
 
 
 function searchKeyword(){      // 카테고리 조건이 변경되면 화면을 새로 갱신
-    console.log("searchKeyword");
+   console.log("searchKeyword");
    pageNum = 1;
    searchRefresh();
 };
@@ -961,8 +991,164 @@ function moreList(){   // 이 경우는 화면을 새로고침 하는 게 아니
 	   }
 	})
 }
+var sideDiv = document.querySelector('.chatting-window');
+function chatting(){
+	var html = "";
+	html += '<div id="mydiv" style="overflow-y:auto; overflow-x:hidden; width:100%; height: 500px;">';
+	html += '<ul id="messages"></ul> </div> <input type="text" id="myMessage"> <button id="chattingSendbutton">입력</button>';
+	
+	sideDiv.innerHTML = html;
+	console.log("채팅방 form 생성");
+	connectWebSocket();
+}
+</script>
+<script type="text/javascript">
+function connectWebSocket(){
+$(document).ready(function() {
+	var sock = io.connect('http://viniswine.tk:9999');	// Flask 서버의 port 번호를 9999는 소켓 통신을 위한 port이다. 소켓 연결
+	sock.on('connect', function() {
+		var connect_string = 'new_connect';
+		sock.send(connect_string);
+	});
 
+	sock.on('hello', function(msg) {
+		$('#messages').append('<li>' + '>>Hello :' + msg + '</li>');
+		console.log('Received Hello Message');
+	});
 
+	sock.on('message', function(msg) {	// 서버로부터 메세지가 왔을 때.
+		// console.log(type(msg));
+		if (msg.type === 'normal') {	//	정상적인 채팅 메세지일 때
+			$('#messages').append('>> ' + decodeURIComponent(msg.message) + '<br>');	// 전송 받은 메세지를 URI 디코딩한다.
+			//document.getElementById('sendbutton').click();	// 서버로부터 메세지가 왔을 때, 메세지가 한 줄 밑으로 내려가 있는 현상을 수정하기 위해 전송 버튼이 눌리게 함.
+		} else {
+			$('#messages').append('<li>' + msg.message + '</li>');
+		}
+		console.log('Received Message : ' + msg.type);
+	});
+
+	$('#chattingSendbutton').on('click', function() {	// 전송 버튼이 눌렸을 때.
+		console.log("chatting click 버튼 clicked!");
+		var input = $('#myMessage').val();
+		input = String(input);
+		if(input != ""){	// input에 값이 있다면(메세지가 비어있지 않다면)
+			input = encodeURIComponent('<%=userName%>' + ' : ' + input);	// 메세지의 앞 쪽에 userName을 붙여 URI 인코딩하여 전송한다.
+
+			sock.send(input);
+			$('#myMessage').val('');
+			document.getElementById('chattingSendbutton').click();	
+		}
+		$("#mydiv").scrollTop($("#mydiv")[0].scrollHeight);
+	});
+	
+	window.onload = function() {	// 실제 채팅과 마찬가지로, Enter 키가 눌렸을 때도  전송 버튼이 눌린 것처럼 처리.
+	     document.getElementById('myMessage').onkeypress = function searchKeyPress(event) {
+	        if (event.keyCode == 13) {	// enter 키의 keyCode는 13
+	            document.getElementById('chattingSendbutton').click();	// sendbutton이 click되었다는 이벤트 발생
+	        }
+	    };
+		
+	    document.getElementById('chattingSendbutton').onclick = doSomething;
+	}
+})
+}
+</script>
+<script>
+
+function chatbot(){	
+	var html = "";
+	html += '<div id="mydiv" style="overflow-y:auto; overflow-x:hidden; width:100%; height: 500px;">';
+	html += '<ul id="chatbotMessages"></ul> </div> <input type="text" id="myChatbotMessage"> <button id="chatbotSendbutton">입력</button>';
+	
+	sideDiv.innerHTML = html;
+	console.log("채팅방 form 생성");
+	requestChatbot();
+}
+</script>
+
+<script type="text/javascript">
+function requestChatbot(){
+	sendRequest();
+	$(document).ready(function() {
+		$('#chatbotSendbutton').on('click', function() {	// 전송 버튼이 눌렸을 때.
+			console.log("send button clicked.")
+			var input = $('#myChatbotMessage').val().toString();
+	
+			if(input != ""){	// input에 값이 있다면(메세지가 비어있지 않다면)
+				$('#chatbotMessages').append('나 : ' + input + '<br>');
+				sendRequest(input);
+				$('#myChatbotMessage').val('');
+				document.getElementById('chatbotSendbutton').click();	
+			}
+			$("#mydiv").scrollTop($("#mydiv")[0].scrollHeight);
+		});
+			
+		window.onload = function() {	// 실제 채팅과 마찬가지로, Enter 키가 눌렸을 때도  전송 버튼이 눌린 것처럼 처리.
+			document.getElementById('myChatbotMessage').onkeypress = function searchKeyPress(event) {
+				if (event.keyCode == 13) {	// enter 키의 keyCode는 13
+					document.getElementById('chatbotSendbutton').click();	// sendbutton이 click되었다는 이벤트 발생
+				}
+			};
+				
+		document.getElementById('chatbotSendbutton').onclick = doSomething;
+		}	
+	});
+		 
+}	 
+function sendRequest(message){
+	console.log(message);
+	$.ajax({
+		url : "http://viniswine.tk:5001",	// 로컬에서 돌릴 떄
+		//url : "localhost:5001",	// 원격 WAS에서 돌릴 때
+		type : "GET",
+		cache : false,
+		dataType: 'json',
+		data: { 
+			input_text: message
+		},
+		success : function(msg){
+			console.log(msg);
+			if (msg.resultCode === '0') {	//	추천이 진행 중
+				$('#chatbotMessages').append('VIN : ' + msg.message + '<br>');	// 전송 받은 메세지를 append
+				//document.getElementById('sendbutton').click();	// 서버로부터 메세지가 왔을 때, 메세지가 한 줄 밑으로 내려가 있는 현상을 수정하기 위해 전송 버튼이 눌리게 함.
+			}
+			if (msg.resultCode === '1') {	//	추천이 진행 중
+				$('#chatbotMessages').append('VIN : ' + msg.message + '<br>');	// 전송 받은 메세지를 append
+				//document.getElementById('sendbutton').click();	// 서버로부터 메세지가 왔을 때, 메세지가 한 줄 밑으로 내려가 있는 현상을 수정하기 위해 전송 버튼이 눌리게 함.
+			} else if ( msg.resultCode === '2'){
+				
+				$('#chatbotMessages').append('VIN : ' + msg.message + '<br>');	// 전송 받은 메세지를 append
+				
+			} else if ( msg.resultCode === '3'){
+				$('#chatbotMessages').append('VIN : ' + msg.message + '<br>');	// 전송 받은 메세지를 append
+				$('#chatbotMessages').append('추천 내역입니다.' + '<br>');	// 전송 받은 메세지를 append
+				if(msg.resultCode[0].wine21Code != ""){	// wine21에서 받아온 데이터라면(링크 제공)
+					for (var i = 0; i < msg.response.length; i++){
+						$('#chatbotMessages').append('한글 제품명 : <a href ="http://viniswine.tk/wine/details/' + msg.response[i].wine21Code +'">' + msg.response[i].koreanName + '</a><br>');
+						$('#chatbotMessages').append('영문 제품명 : ' + msg.response[i].englishName + '<br>');
+						$('#chatbotMessages').append('생산 국가 : ' + msg.response[i].country + '<br>');
+						$('#chatbotMessages').append('생산 지역 : ' + msg.response[i].region + '<br>');
+						$('#chatbotMessages').append('가격 : ' + msg.response[i].price + '</a><br><br>');
+					}
+					sendRequest();
+				} else{									// winenara에서 받아온 데이터라면
+					for (var i = 0; i < msg.response.length; i++){
+						
+					}
+				}
+			} else if ( msg.resultCode === '4'){
+				$('#chatbotMessages').append('VIN : ' + msg.message + '<br>');
+			}
+			console.log('Received Message : ' + msg.type);
+		}, error:function(request,status,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+	
+}
+</script>
+
+<script>
 function typesChanged(form){
 	var typesCheckbox = [];
 	
