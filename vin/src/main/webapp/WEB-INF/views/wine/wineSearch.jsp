@@ -172,7 +172,7 @@
               z-index: 9 !important;
               right: -400px !important;
               background: white !important;
-              border: 3px solid #570317 !important;
+              border: 1px solid #570317 !important;
               box-sizing: border-box !important;
             }
 
@@ -291,7 +291,7 @@
             .chatting-window {
               padding: 5px;
               margin: 10px;
-              border: 3px solid black;
+              box-shadow: #ccc 0px 0px 3px 1px;
               height: 600px;
               border-radius: 5px;
               background-color: #eee;
@@ -930,6 +930,7 @@ function showWineTable(obj) {      // api에 요청한 결과를 받아와 테�
 function searchKeyword(){      // 카테고리 조건이 변경되면 화면을 새로 갱신
    console.log("searchKeyword");
    pageNum = 1;
+   keywordInput = $('#keywordInput').val();
    searchRefresh();
 };
 
