@@ -993,17 +993,22 @@ function moreList(){   // 이 경우는 화면을 새로고침 하는 게 아니
 	})
 }
 var sideDiv = document.querySelector('.chatting-window');
+
+
 function chatting(){
-	var html = "";
-	html += '<div id="mydiv" style="overflow-y:auto; overflow-x:hidden; width:100%; height: 500px;">';
-	html += '<ul id="messages"></ul> </div> <input type="text" id="myMessage"> <button id="chattingSendbutton">입력</button>';
+	var chattingHtml = "";
+	chattingHtml += '<div id="mydiv" style="overflow-y:auto; overflow-x:hidden; width:100%; height: 500px;">';
+	chattingHtml += '<ul id="messages"></ul> </div> <input type="text" id="myMessage"> <button id="chattingSendbutton" this.onclick=null;>입력</button>';
 	
-	sideDiv.innerHTML = html;
 	console.log("채팅방 form 생성");
+	
+	console.log(chattingHtml);
+	sideDiv.innerHTML = chattingHtml;
 	connectWebSocket();
 }
 </script>
 <script type="text/javascript">
+var connect = false;
 function connectWebSocket(){
 $(document).ready(function() {
 	var sock = io.connect('http://viniswine.tk:9999');	// Flask 서버의 port 번호를 9999는 소켓 통신을 위한 port이다. 소켓 연결
@@ -1021,6 +1026,7 @@ $(document).ready(function() {
 		// console.log(type(msg));
 		if (msg.type === 'normal') {	//	정상적인 채팅 메세지일 때
 			$('#messages').append('>> ' + decodeURIComponent(msg.message) + '<br>');	// 전송 받은 메세지를 URI 디코딩한다.
+			console.log("메세지 옴");
 			//document.getElementById('sendbutton').click();	// 서버로부터 메세지가 왔을 때, 메세지가 한 줄 밑으로 내려가 있는 현상을 수정하기 위해 전송 버튼이 눌리게 함.
 		} else {
 			$('#messages').append('<li>' + msg.message + '</li>');
@@ -1057,12 +1063,13 @@ $(document).ready(function() {
 <script>
 
 function chatbot(){	
-	var html = "";
-	html += '<div id="mydiv" style="overflow-y:auto; overflow-x:hidden; width:100%; height: 500px;">';
-	html += '<ul id="chatbotMessages"></ul> </div> <input type="text" id="myChatbotMessage"> <button id="chatbotSendbutton">입력</button>';
+	var chatbotHtml = "";
+	chatbotHtml += '<div id="mydiv" style="overflow-y:auto; overflow-x:hidden; width:100%; height: 500px;">';
+	chatbotHtml += '<ul id="chatbotMessages"></ul> </div> <input type="text" id="myChatbotMessage"> <button id="chatbotSendbutton">입력</button>';
 	
-	sideDiv.innerHTML = html;
+	sideDiv.innerHTML = chatbotHtml;
 	console.log("채팅방 form 생성");
+	
 	requestChatbot();
 }
 </script>
